@@ -6,15 +6,18 @@ public class UI : MonoBehaviour
 {
     //VARIABLES
     //----------------------------------------------------------------------------------
+    //Variables for Hearts  
     public int pv; //Health of the player 1 heart = 2 pv
     public int nbOfHearts; //Number of hearts that the player has
 
-
-        
     public Image[] hearts;    //Array to store all the different hearts of the player (3 hearts -> hearts.Length == 3)
     public Sprite fullHeart;  //Sprite for a full heart
     public Sprite halfHeart;  //Sprite for half a heart
     public Sprite emptyHeart; //Sprite for empty heart
+
+    //Variables for Coins
+    public Image coin; //To get the image of the coin
+
 
     //FUNCTIONS
     //-------------------------------------------------------------------------------
@@ -69,7 +72,7 @@ public class UI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        PrintPV();
+        coin.enabled = true;
     }
 
     // Update is called once per frame
