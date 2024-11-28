@@ -16,7 +16,7 @@ public class UI : MonoBehaviour
     public Sprite emptyHeart; //Sprite for empty heart
 
     //Variables for Coins
-    public Image coin; //To get the image of the coin
+    //public Image coin; //To get the image of the coin
 
 
     //FUNCTIONS
@@ -72,7 +72,8 @@ public class UI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        coin.enabled = true;
+        PrintPV();
+        //coin.enabled = true;
     }
 
     // Update is called once per frame
