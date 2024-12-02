@@ -33,42 +33,46 @@ public class Movements : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement = Input.GetAxis("Horizontal");
+        if (!PauseMenu.isPaused)
+        {
 
-        if (movement > 0 && !facingRight)
-        {
-            facingRight = true;
-            transform.eulerAngles = new Vector3(0, 0, 0);
-        }
-        else if (movement < 0 && facingRight)
-        {
-            facingRight = false;
-            transform.eulerAngles = new Vector3(0, 180, 0);
-        }
+            movement = Input.GetAxis("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (countJump == 0)
+            if (movement > 0 && !facingRight)
             {
-                Jump();
-                onGround = false;
+                facingRight = true;
+                transform.eulerAngles = new Vector3(0, 0, 0);
             }
-            else if (countJump < maxJump)
+            else if (movement < 0 && facingRight)
             {
-                Debug.Log("chaise2");
-                MultipleJump();
+                facingRight = false;
+                transform.eulerAngles = new Vector3(0, 180, 0);
             }
-        }
-        
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Debug.Log("chaise");
-            Dash();
-        }
 
-        if (Time.time - lastDashTime > dashDuration && originalGravity != 0)
-        {
-            rb.gravityScale = originalGravity;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (countJump == 0)
+                {
+                    Jump();
+                    onGround = false;
+                }
+                else if (countJump < maxJump)
+                {
+                    Debug.Log("chaise2");
+                    MultipleJump();
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                Debug.Log("chaise");
+                Dash();
+            }
+
+            if (Time.time - lastDashTime > dashDuration && originalGravity != 0)
+            {
+                rb.gravityScale = originalGravity;
+            }
         }
     }
 
