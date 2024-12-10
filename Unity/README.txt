@@ -19,3 +19,13 @@ UI (dessin moche, plus tard à faire par Charbel + Gretta):
 
 - 
 
+
+Choses utiles à retenir:
+- Utiliser des Managers (UI, Input/Keybinds, GameManager, EventsManager)
+- Singletons
+- Events
+
+
+
+
+

@@ -18,19 +18,19 @@ public class UI : MonoBehaviour
     public Sprite emptyHeart; //Sprite for empty heart
 
     //Variables for Coins
-    public int coinCounter;
-    public TextMeshProUGUI coinText;
+    public int coinCounter;           //Keeps track of the number of coins the player has
+    public TextMeshProUGUI coinText;  //Text showing the number of coins currently held
 
     //Variables for PowerFrames
     public Image[] powerImages;  //To store the two power frames at the bottom right of the UI
 
-    public Sprite noPower;
-    public Sprite bat;
-    public Sprite shield;
+    public Sprite noPower;  //Sprite for an empty frame
+    public Sprite bat;      //Sprite for the frame with the bat power
+    public Sprite shield;   //Sprite for the frame with the shield power
 
     //For the two active powers
-    private Sprite power0;
-    private Sprite power1;
+    private Sprite power0;  //Sprite shown on the bottom right corner and shows the first active power (the left one)
+    private Sprite power1;  //Sprite shown on the bottom right corner and shows the second active power (the right one)
 
     //FUNCTIONS
     //-------------------------------------------------------------------------------
@@ -39,23 +39,6 @@ public class UI : MonoBehaviour
 
     //For UI of hearts
     //-------------------------------------------------------------------------------
-
-    //To write the current health of the player in the console (For debug purposes)
-    private void PrintPV() 
-    {
-        Debug.Log(pv);
-    }
-
-    private void GainHealth(int amount)
-    {
-        pv += amount;
-    }
-
-    //To change the health of the player by taking a certain amount of damage
-    private void LoseHealth(int amount)
-    {
-        pv -= amount;
-    }
 
     //To constantly update the sprites in the UI for the hearts 
     private void HeartBar()
@@ -81,9 +64,28 @@ public class UI : MonoBehaviour
         }
     }
 
+
+    //To write the current health of the player in the console (For debug purposes)
+    private void PrintPV() 
+    {
+        Debug.Log(pv);
+    }
+
+    private void GainHealth(int amount)
+    {
+        pv += amount;
+    }
+
+    //To change the health of the player by taking a certain amount of damage
+    private void LoseHealth(int amount)
+    {
+        pv -= amount;
+    }
+
+
     //For UI of Coin
     //-------------------------------------------------------------------------------
-
+    //To constantly update the sprites in the UI for the coin counter 
     private void CoinUI()
     {
         if (coinCounter < 0) coinCounter = 0;
@@ -93,6 +95,7 @@ public class UI : MonoBehaviour
     }
 
 
+    //Functions for gaining and losing coins
     private void GainCoin(int amount)
     {
         coinCounter += amount;
@@ -105,13 +108,23 @@ public class UI : MonoBehaviour
 
     //For UI of Power Frames
     //-------------------------------------------------------------------------------
+    //To constantly update the sprites in the UI for the coin counter 
+    private void PowerFrames()
+    {
+        powerImages[0].sprite = power0;
+        powerImages[1].sprite = power1;
+    }
 
+
+    //To initialize both power frames to empty frames
     private void SetToNoPower()
     {
         power0 = noPower;
         power1 = noPower;
     }
        
+
+
     private void SetNewPower(string power)
     {
         switch (power)
@@ -135,13 +148,6 @@ public class UI : MonoBehaviour
                 power1 = noPower;
                 break;
         }
-    }
-
-    private void PowerFrames()
-    {
-        powerImages[0].sprite = power0;
-        powerImages[1].sprite = power1;
-
     }
 
 
