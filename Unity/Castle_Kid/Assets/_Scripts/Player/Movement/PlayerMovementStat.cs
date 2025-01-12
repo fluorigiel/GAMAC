@@ -26,6 +26,10 @@ public class PlayerMovementStats : ScriptableObject
     [Range(0f, 5f)] public float FastFallingStrength = 2f;
     [Space(5)]
 
+    [Header("Wall Slide")]
+    [Range(1f, 20f)] public float WallSlideMaxSpeed = 0.5f;
+    [Space(5)]
+
     [Header("Jump Cancel")]
     [Tooltip("Jump Cancel = Short Up")]
     [Range(0f, 1f)] public float JumpCancelTime = 0.1f;

@@ -41,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
     // collision check vars
     private bool _isGrounded;
     private bool _bumpedHead;
+    private bool _bodyRightWalled;
+    private bool _bodyLeftWalled;
 
     [Header("Feet box")]
     public Vector2 feetBoxSize;
@@ -50,6 +52,13 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 headBoxSize;
     public float headCastDistance;
 
+    [Header("Body box Right")]
+    public Vector2 bodyRightBoxSize;
+    public float bodyRightCastDistance;
+
+    [Header("Body box Left")]
+    public Vector2 bodyLeftBoxSize;
+    public float bodyLeftCastDistance;
 
     private void Awake()
     {
@@ -93,9 +102,10 @@ public class PlayerMovement : MonoBehaviour
 
         DashCheck();
 
-        Debug.Log("Is Grounded ? " + _isGrounded);
-        Debug.Log("Head Bumped ? " + _bumpedHead);
-        Debug.Log(InputManager.Movement);
+        //Debug.Log("Is Grounded ? " + _isGrounded);
+        //Debug.Log("Head Bumped ? " + _bumpedHead);
+        Debug.Log("Body Right Walled ? " + _bodyRightWalled);
+        Debug.Log("Body Left Walled ? " + _bodyLeftWalled);
 
         CountTimers();
     }
@@ -247,8 +257,20 @@ public class PlayerMovement : MonoBehaviour
             Vector2 targetVelocity = new Vector2(0f, -MoveStats.MaxFallSpeed);
             Vector2 airVelocity = new Vector2(0f, _rb.linearVelocity.y);
 
+            if ((_bodyRightWalled && InputManager.Movement == Vector2.right) || (_bodyLeftWalled && InputManager.Movement == Vector2.left))
+            {
+                targetVelocity = new Vector2(0f, -MoveStats.WallSlideMaxSpeed);
+                _numberOfJumpsUsed = 0;
+            }
+
             airVelocity = Vector2.Lerp(airVelocity, targetVelocity, usedGravity * Time.fixedDeltaTime);
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, airVelocity.y);
+
+            if (_bodyLeftWalled || _bodyRightWalled) // we don't want to be stopped in the middle of the wall
+            {
+                _rb.linearVelocityX = 0f;
+            }
+
         }
 
         else if (_isGrounded)
@@ -289,20 +311,52 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void UpdateWalledBodyRight()
+    {
+        if (Physics2D.BoxCast(transform.position, bodyRightBoxSize, 0f, Vector3.right, bodyRightCastDistance, groundLayer))
+        {
+            _bodyRightWalled = true;
+        }
+        else
+        {
+            _bodyRightWalled = false;
+        }
+    }
+
+    private void UpdateWalledBodyLeft()
+    {
+        if (Physics2D.BoxCast(transform.position, bodyLeftBoxSize, 0f, Vector3.left, bodyLeftCastDistance, groundLayer))
+        {
+            _bodyLeftWalled = true;
+        }
+        else
+        {
+            _bodyLeftWalled = false;
+        }
+    }
+
     private void UpdateCollision()
     {
         UpdateGrounded();
         UpdateBumpedHead();
+        UpdateWalledBodyRight();
+        UpdateWalledBodyLeft();
     }
 
     private void OnDrawGizmos() // for init and debug to see the BoxCast
     {
         // for feet box test :
-        Gizmos.color = Color.blue;
+        Gizmos.color = Color.green;
         Gizmos.DrawCube(transform.position + Vector3.down * feetCastDistance, feetBoxSize);
         // for head box test :
         Gizmos.color = Color.red;
         Gizmos.DrawCube(transform.position + Vector3.up * headCastDistance, headBoxSize);
+        // for body right box test :
+        Gizmos.color = Color.blue;
+        Gizmos.DrawCube(transform.position + Vector3.right * bodyRightCastDistance, bodyRightBoxSize);
+        // for body left box test :
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawCube(transform.position + Vector3.left * bodyLeftCastDistance, bodyLeftBoxSize);
     }
 
     #endregion

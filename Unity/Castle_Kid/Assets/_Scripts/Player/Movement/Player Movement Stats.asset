@@ -23,6 +23,7 @@ MonoBehaviour:
   NumberOfJumpsAllowed: 3
   MultipleJumpStrengthPercent: 0.7
   FastFallingStrength: 2
+  WallSlideMaxSpeed: 4
   JumpCancelTime: 0.1
   JumpCancelStremgth: 2
   JumpCancelMoment: 1.2
