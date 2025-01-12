@@ -62,6 +62,42 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PowerUp1"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0ffb6f4-ff70-44bd-abd4-30a2954a1d0a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PowerUp2"",
+                    ""type"": ""Button"",
+                    ""id"": ""833d5f64-4170-4c9a-bb71-cc503029ff05"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PowerUp3"",
+                    ""type"": ""Button"",
+                    ""id"": ""3470cf43-1c89-4850-9cdb-0734887a9d68"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f49365d-371a-4484-a18c-a01e085919ff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -218,6 +254,83 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""23938dcf-2040-4bcc-8eda-e120ce44b759"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerUp1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dff0a0ce-62bf-405d-9de9-f30c86394c3e"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerUp1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6ceef97-0693-4ff9-a2e3-cf70ee24fe19"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerUp2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1275656d-672c-4875-8cc0-4877bae104a0"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerUp2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2859d3cb-ae60-4581-9c82-1b85b88d6204"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerUp3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15498a50-e51e-49d1-9095-58abcba78fed"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerUp3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ff6fec9-6c5d-4a4c-91db-4b92e907d8fc"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -230,6 +343,10 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_PowerUp1 = m_Player.FindAction("PowerUp1", throwIfNotFound: true);
+        m_Player_PowerUp2 = m_Player.FindAction("PowerUp2", throwIfNotFound: true);
+        m_Player_PowerUp3 = m_Player.FindAction("PowerUp3", throwIfNotFound: true);
+        m_Player_PauseMenu = m_Player.FindAction("PauseMenu", throwIfNotFound: true);
     }
 
     ~@InputMap()
@@ -300,6 +417,10 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_PowerUp1;
+    private readonly InputAction m_Player_PowerUp2;
+    private readonly InputAction m_Player_PowerUp3;
+    private readonly InputAction m_Player_PauseMenu;
     public struct PlayerActions
     {
         private @InputMap m_Wrapper;
@@ -308,6 +429,10 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @PowerUp1 => m_Wrapper.m_Player_PowerUp1;
+        public InputAction @PowerUp2 => m_Wrapper.m_Player_PowerUp2;
+        public InputAction @PowerUp3 => m_Wrapper.m_Player_PowerUp3;
+        public InputAction @PauseMenu => m_Wrapper.m_Player_PauseMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -329,6 +454,18 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @PowerUp1.started += instance.OnPowerUp1;
+            @PowerUp1.performed += instance.OnPowerUp1;
+            @PowerUp1.canceled += instance.OnPowerUp1;
+            @PowerUp2.started += instance.OnPowerUp2;
+            @PowerUp2.performed += instance.OnPowerUp2;
+            @PowerUp2.canceled += instance.OnPowerUp2;
+            @PowerUp3.started += instance.OnPowerUp3;
+            @PowerUp3.performed += instance.OnPowerUp3;
+            @PowerUp3.canceled += instance.OnPowerUp3;
+            @PauseMenu.started += instance.OnPauseMenu;
+            @PauseMenu.performed += instance.OnPauseMenu;
+            @PauseMenu.canceled += instance.OnPauseMenu;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -345,6 +482,18 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @PowerUp1.started -= instance.OnPowerUp1;
+            @PowerUp1.performed -= instance.OnPowerUp1;
+            @PowerUp1.canceled -= instance.OnPowerUp1;
+            @PowerUp2.started -= instance.OnPowerUp2;
+            @PowerUp2.performed -= instance.OnPowerUp2;
+            @PowerUp2.canceled -= instance.OnPowerUp2;
+            @PowerUp3.started -= instance.OnPowerUp3;
+            @PowerUp3.performed -= instance.OnPowerUp3;
+            @PowerUp3.canceled -= instance.OnPowerUp3;
+            @PauseMenu.started -= instance.OnPauseMenu;
+            @PauseMenu.performed -= instance.OnPauseMenu;
+            @PauseMenu.canceled -= instance.OnPauseMenu;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -368,5 +517,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnPowerUp1(InputAction.CallbackContext context);
+        void OnPowerUp2(InputAction.CallbackContext context);
+        void OnPowerUp3(InputAction.CallbackContext context);
+        void OnPauseMenu(InputAction.CallbackContext context);
     }
 }
