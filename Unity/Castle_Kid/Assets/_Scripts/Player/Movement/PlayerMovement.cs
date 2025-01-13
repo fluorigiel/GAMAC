@@ -1,8 +1,9 @@
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
 
     [Header("References")] // Header is an organizer when we look at the values from unity (like to change them from debug)
@@ -75,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!IsOwner)
+            return;
         Jump();
 
         Dash();
@@ -98,6 +101,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!IsOwner)
+            return;
+
         JumpCheck();
         
         DashCheck();
