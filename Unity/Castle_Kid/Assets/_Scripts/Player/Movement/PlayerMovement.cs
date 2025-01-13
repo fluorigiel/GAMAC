@@ -266,7 +266,7 @@ public class PlayerMovement : MonoBehaviour
             airVelocity = Vector2.Lerp(airVelocity, targetVelocity, usedGravity * Time.fixedDeltaTime);
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, airVelocity.y);
 
-            if (_bodyLeftWalled || _bodyRightWalled) // we don't want to be stopped in the middle of the wall
+            if ((_bodyLeftWalled && InputManager.Movement == Vector2.left) || (_bodyRightWalled && InputManager.Movement == Vector2.right)) // we don't want to be stopped in the middle of the wall
             {
                 _rb.linearVelocityX = 0f;
             }
