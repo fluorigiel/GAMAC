@@ -42,7 +42,10 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+
+        Debug.Log(InputManager.PauseMenuWasPressed);
+
+        if (InputManager.PauseMenuWasPressed)
         {
             Debug.Log("Escape Key Pressed");
             if (isPaused)

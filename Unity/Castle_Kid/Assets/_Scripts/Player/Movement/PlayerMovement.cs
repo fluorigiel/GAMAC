@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayerMovementStats MoveStats; // Name to access the stats that we defined in PlayerMovemetStats
 
     // SerializeField : it's like when in python we hide the variable of a parent to a child but instead do method like get to obtain / access those.
-    //                  ( : so it's making varibale only accessible to the parent object and not the childrens (not private since we can
+    //                  ( : so it's making variable only accessible to the parent object and not the childrens (not private since we can
     //                  still modify those in unity debug))
     // ( https://www.youtube.com/watch?v=_9LJqhAj-FU )
     [SerializeField] private LayerMask groundLayer;
@@ -20,25 +20,25 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _moveVelocity;
     private bool _isFacingRight;
 
-    // jump vars 
+    // Jump vars 
     private bool _isJumping;
     private int _numberOfJumpsUsed;
-    private bool _initJumpCanceled;
+    private bool _initJumpCanceled; //For short hops
     private bool _isJumpCanceled;
-    private float _jumpCancelTime;
+    private float _jumpCancelTimer;
     private float _jumpCancelMoment;
 
-    // dash vars
+    // Dash vars
     private bool _isDashing;
     private bool _initDashing;
     private float _dashTimer;
     private float _dashDuration;
 
-    // jump buffer and coyote vars // explain coyote and buffer: https://www.youtube.com/watch?v=RFix_Kg2Di0 
+    // Jump buffer and Coyote vars // Explain coyote and buffer: https://www.youtube.com/watch?v=RFix_Kg2Di0 
     private float _jumpBufferTimer;
     private float _coyoteTimer;
 
-    // collision check vars
+    // Collision check vars
     private bool _isGrounded;
     private bool _bumpedHead;
     private bool _bodyRightWalled;
@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         JumpCheck();
-
+        
         DashCheck();
 
         //Debug.Log("Is Grounded ? " + _isGrounded);
@@ -121,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
             TurnCheck(moveInput);//check if he needs to turn around
 
             Vector2 targetVelocity = Vector2.zero;
+            //For running
             if (InputManager.RunIsHeld)
             {
                 targetVelocity = new Vector2(moveInput.x * MoveStats.MaxRunSpeed, 0f);
@@ -146,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
     private void TurnCheck(Vector2 moveInput)
     {
         if (_isFacingRight && moveInput.x < 0) // moveInput is returning a Vector2 (= 2 value stored together) of x and y 
-                                               // to understand them image a joystick, full left is -1 for the first paramether (x) and 0 for the second (y)
+                                               // to understand them imagine a joystick, full left is -1 for the first paramether (x) and 0 for the second (y)
                                                // and so on for every direction (like in a circle)
         {
             _isFacingRight = false;
@@ -175,9 +176,9 @@ public class PlayerMovement : MonoBehaviour
             _isJumping = true;
         }
 
-        if (InputManager.JumpWasReleased && _jumpCancelTime > 0)
+        if (InputManager.JumpWasReleased && _jumpCancelTimer > 0)
         {
-            _jumpCancelTime = 0;
+            _jumpCancelTimer = 0;
             _initJumpCanceled = true;
         }
     }
@@ -197,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
             if (_numberOfJumpsUsed == 0)
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, MoveStats.JumpHeight);
-                _jumpCancelTime = MoveStats.JumpCancelTime;
+                _jumpCancelTimer = MoveStats.JumpCancelTime;
             }
             else
             {
@@ -257,6 +258,7 @@ public class PlayerMovement : MonoBehaviour
             Vector2 targetVelocity = new Vector2(0f, -MoveStats.MaxFallSpeed);
             Vector2 airVelocity = new Vector2(0f, _rb.linearVelocity.y);
 
+            //Interactions with walls (wall slide)
             if ((_bodyRightWalled && InputManager.Movement == Vector2.right) || (_bodyLeftWalled && InputManager.Movement == Vector2.left))
             {
                 targetVelocity = new Vector2(0f, -MoveStats.WallSlideMaxSpeed);
@@ -371,9 +373,9 @@ public class PlayerMovement : MonoBehaviour
         {
             _jumpCancelMoment -= deltaTime;
         }
-        if (_jumpCancelTime > 0)
+        if (_jumpCancelTimer > 0)
         {
-            _jumpCancelTime -= deltaTime;
+            _jumpCancelTimer -= deltaTime;
         }
         if (_jumpBufferTimer > 0)
         {
