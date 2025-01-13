@@ -48,7 +48,7 @@ public class PlayerMovementStats : ScriptableObject
 
     [Header("Dash")]
     [Range(0f, 5f)] public float DashStrength = 1.2f;
-    [Range(0f, 5f)] public float DashTime = 2f;
+    [Range(0f, 5f)] public float DashTimer = 2f;
     [Range(0f, 5f)] public float DashDuration = 0.3f;
     [Space(5)]
 
