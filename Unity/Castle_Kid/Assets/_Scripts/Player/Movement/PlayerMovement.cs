@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayerMovementStats MoveStats; // Name to access the stats that we defined in PlayerMovemetStats
 
     // SerializeField : it's like when in python we hide the variable of a parent to a child but instead do method like get to obtain / access those.
-    //                  ( : so it's making varibale only accessible to the parent object and not the childrens (not private since we can
+    //                  ( : so it's making variable only accessible to the parent object and not the childrens (not private since we can
     //                  still modify those in unity debug))
     // ( https://www.youtube.com/watch?v=_9LJqhAj-FU )
     [SerializeField] private LayerMask groundLayer;
@@ -20,27 +20,33 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _moveVelocity;
     private bool _isFacingRight;
 
-    // jump vars 
+    // Jump vars 
     private bool _isJumping;
     private int _numberOfJumpsUsed;
-    private bool _initJumpCanceled;
+    private bool _initJumpCanceled; //For short hops
     private bool _isJumpCanceled;
-    private float _jumpCancelTime;
+    private float _jumpCancelTimer;
     private float _jumpCancelMoment;
 
-    // dash vars
+    // Wall slide and Wall jump vars
+    private bool _isWallSliding;
+    private float _wallJumpTime;
+
+    // Dash vars
     private bool _isDashing;
     private bool _initDashing;
     private float _dashTimer;
     private float _dashDuration;
 
-    // jump buffer and coyote vars // explain coyote and buffer: https://www.youtube.com/watch?v=RFix_Kg2Di0 
+    // Jump buffer and Coyote vars // Explain coyote and buffer: https://www.youtube.com/watch?v=RFix_Kg2Di0 
     private float _jumpBufferTimer;
     private float _coyoteTimer;
 
-    // collision check vars
+    // Collision check vars
     private bool _isGrounded;
     private bool _bumpedHead;
+    private bool _bodyRightWalled;
+    private bool _bodyLeftWalled;
 
     [Header("Feet box")]
     public Vector2 feetBoxSize;
@@ -50,6 +56,13 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 headBoxSize;
     public float headCastDistance;
 
+    [Header("Body box Right")]
+    public Vector2 bodyRightBoxSize;
+    public float bodyRightCastDistance;
+
+    [Header("Body box Left")]
+    public Vector2 bodyLeftBoxSize;
+    public float bodyLeftCastDistance;
 
     private void Awake()
     {
@@ -90,11 +103,16 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         JumpCheck();
-
+        
         DashCheck();
 
-        Debug.Log("Is Grounded ? " + _isGrounded);
-        Debug.Log("Head Bumped ? " + _bumpedHead);
+        //Debug.Log("Is Grounded ? " + _isGrounded);
+        //Debug.Log("Head Bumped ? " + _bumpedHead);
+        /*        Debug.Log("Body Right Walled ? " + _bodyRightWalled);
+                Debug.Log("Body Left Walled ? " + _bodyLeftWalled);*/
+
+        //Debug.Log("Is wall Sliding ? " + _isWallSliding);
+
         Debug.Log(InputManager.Movement);
 
         CountTimers();
@@ -106,21 +124,24 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveVelocity = _rb.linearVelocity;
 
-        if (moveInput != Vector2.zero) // if our player moved 
+        if (moveInput != Vector2.zero) // if our player moves
         {
+
             TurnCheck(moveInput);//check if he needs to turn around
 
             Vector2 targetVelocity = Vector2.zero;
-            if (InputManager.RunIsHeld)
+            //For running
+
+            if (InputManager.RunIsHeld) // if the player is holding the run key
             {
                 targetVelocity = new Vector2(moveInput.x * MoveStats.MaxRunSpeed, 0f);
             }
-            else
+            else // if the player isn't holding the run key
             {
                 targetVelocity = new Vector2(moveInput.x * MoveStats.MaxWalkSpeed, 0f);
             }
 
-            _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+            _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime); // to accelerate
             // Simply, Lerp is linear interpollation (~ it's taking our current velocity, the objective velocity and it's reaching a
             // (:like we learned in algo taa)           middle value based on the passed time, to not go max speed instantly) 
         }
@@ -136,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
     private void TurnCheck(Vector2 moveInput)
     {
         if (_isFacingRight && moveInput.x < 0) // moveInput is returning a Vector2 (= 2 value stored together) of x and y 
-                                               // to understand them image a joystick, full left is -1 for the first paramether (x) and 0 for the second (y)
+                                               // to understand them imagine a joystick, full left is -1 for the first paramether (x) and 0 for the second (y)
                                                // and so on for every direction (like in a circle)
         {
             _isFacingRight = false;
@@ -164,10 +185,10 @@ public class PlayerMovement : MonoBehaviour
         {
             _isJumping = true;
         }
-
-        if (InputManager.JumpWasReleased && _jumpCancelTime > 0)
+        
+        if (InputManager.JumpWasReleased && _jumpCancelTimer > 0)
         {
-            _jumpCancelTime = 0;
+            _jumpCancelTimer = 0;
             _initJumpCanceled = true;
         }
     }
@@ -180,20 +201,34 @@ public class PlayerMovement : MonoBehaviour
             _isJumpCanceled = true;
         }
 
-        if (_isJumping)
+        if (_isJumping && !_isWallSliding)
         {
             _isJumping = false;
             _jumpBufferTimer = 0;
             if (_numberOfJumpsUsed == 0)
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, MoveStats.JumpHeight);
-                _jumpCancelTime = MoveStats.JumpCancelTime;
+                _jumpCancelTimer = MoveStats.JumpCancelTime;
             }
             else
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, MoveStats.JumpHeight * MoveStats.MultipleJumpStrengthPercent);
             }
             _numberOfJumpsUsed++;
+        }
+        else if (_isJumping && _isWallSliding)
+        {
+            if (_bodyRightWalled)
+            {
+                _rb.linearVelocity = new Vector2(-MoveStats.WallJumpStrength, MoveStats.JumpHeight);
+            }
+            else if (_bodyLeftWalled)
+            {
+                _rb.linearVelocity = new Vector2(MoveStats.WallJumpStrength, MoveStats.JumpHeight);
+            }
+            _numberOfJumpsUsed++;
+            _isJumping = false;
+            _jumpBufferTimer = 0;
         }
     }
 
@@ -220,7 +255,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _initDashing = false;
             _isDashing = true;
-            _dashTimer = MoveStats.DashTime;
+            _dashTimer = MoveStats.DashTimer;
             _dashDuration = MoveStats.DashDuration;
             _rb.linearVelocity = InputManager.Movement * MoveStats.MaxWalkSpeed * MoveStats.DashStrength;
         }
@@ -236,7 +271,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Gravity()
     {
-        if (!_isGrounded)
+        if (!_isGrounded || _isWallSliding) // _isWallSliding is there so that we can wall jump while being on the ground
         {
             float usedGravity = MoveStats.GravityForce;
             if (_rb.linearVelocity.y <= 0 || _bumpedHead || _isJumpCanceled)
@@ -245,6 +280,23 @@ public class PlayerMovement : MonoBehaviour
             }
 
             Vector2 targetVelocity = new Vector2(0f, -MoveStats.MaxFallSpeed);
+
+            //Interactions with walls (wall slide)
+
+            if ((_bodyRightWalled && InputManager.Movement == Vector2.right && _rb.linearVelocityX >= 0) || (_bodyLeftWalled && InputManager.Movement == Vector2.left && _rb.linearVelocityX <= 0)) // we don't want to be stopped in the middle of the wall
+            {
+                if (_rb.linearVelocityY > 0f) { _rb.linearVelocity = new Vector2(_rb.linearVelocityX, 0f); }
+                _rb.linearVelocityX = 0f;
+
+                targetVelocity = new Vector2(0f, -MoveStats.WallSlideMaxSpeed);
+                _numberOfJumpsUsed = 0;
+                _isWallSliding = true;
+            }
+            else
+            {
+                _isWallSliding = false;
+            }
+
             Vector2 airVelocity = new Vector2(0f, _rb.linearVelocity.y);
 
             airVelocity = Vector2.Lerp(airVelocity, targetVelocity, usedGravity * Time.fixedDeltaTime);
@@ -254,6 +306,7 @@ public class PlayerMovement : MonoBehaviour
         else if (_isGrounded)
         {
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
+            _isWallSliding = false;
         }
     }
 
@@ -269,6 +322,7 @@ public class PlayerMovement : MonoBehaviour
             _isGrounded = true;
             _numberOfJumpsUsed = 0;
             _isJumpCanceled = false;
+            _isWallSliding = false;
         }
         else
         {
@@ -289,20 +343,68 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void UpdateWalledBodyRight()
+    {
+        if (Physics2D.BoxCast(transform.position, bodyRightBoxSize, 0f, Vector3.right, bodyRightCastDistance, groundLayer))
+        {
+            _bodyRightWalled = true;
+            if (InputManager.Movement == Vector2.right)
+            {
+                _isWallSliding = true;
+            }
+        }
+        else
+        {
+            _bodyRightWalled = false;
+            if (!_bodyLeftWalled)
+            {
+                _isWallSliding = false;
+            }
+        }
+    }
+
+    private void UpdateWalledBodyLeft()
+    {
+        if (Physics2D.BoxCast(transform.position, bodyLeftBoxSize, 0f, Vector3.left, bodyLeftCastDistance, groundLayer))
+        {
+            _bodyLeftWalled = true;
+            if (InputManager.Movement == Vector2.left)
+            {
+                _isWallSliding = true;
+            }
+        }
+        else
+        {
+            _bodyLeftWalled = false;
+            if (!_bodyRightWalled)
+            {
+                _isWallSliding = false;
+            }
+        }
+    }
+
     private void UpdateCollision()
     {
         UpdateGrounded();
         UpdateBumpedHead();
+        UpdateWalledBodyRight();
+        UpdateWalledBodyLeft();
     }
 
     private void OnDrawGizmos() // for init and debug to see the BoxCast
     {
         // for feet box test :
-        Gizmos.color = Color.blue;
+        Gizmos.color = Color.green;
         Gizmos.DrawCube(transform.position + Vector3.down * feetCastDistance, feetBoxSize);
         // for head box test :
         Gizmos.color = Color.red;
         Gizmos.DrawCube(transform.position + Vector3.up * headCastDistance, headBoxSize);
+        // for body right box test :
+        Gizmos.color = Color.blue;
+        Gizmos.DrawCube(transform.position + Vector3.right * bodyRightCastDistance, bodyRightBoxSize);
+        // for body left box test :
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawCube(transform.position + Vector3.left * bodyLeftCastDistance, bodyLeftBoxSize);
     }
 
     #endregion
@@ -317,9 +419,9 @@ public class PlayerMovement : MonoBehaviour
         {
             _jumpCancelMoment -= deltaTime;
         }
-        if (_jumpCancelTime > 0)
+        if (_jumpCancelTimer > 0)
         {
-            _jumpCancelTime -= deltaTime;
+            _jumpCancelTimer -= deltaTime;
         }
         if (_jumpBufferTimer > 0)
         {

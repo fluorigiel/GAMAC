@@ -21,15 +21,18 @@ MonoBehaviour:
   JumpHeight: 20
   MaxFallSpeed: 26
   NumberOfJumpsAllowed: 3
-  MultipleJumpStrengthPercent: 0.7
+  MultipleJumpStrengthPercent: 0.85
   FastFallingStrength: 2
+  WallSlideMaxSpeed: 4
+  WallJumpStrength: 15
+  WallJumpTime: 0.2
   JumpCancelTime: 0.1
   JumpCancelStremgth: 2
   JumpCancelMoment: 1.2
   JumpBufferTime: 0.125
   JumpCoyoteTime: 0.1
   DashStrength: 1.2
-  DashTime: 1
+  DashTimer: 2
   DashDuration: 0.2
   GravityForce: 1.5
   GravityFallForce: 3

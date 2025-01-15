@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 2689031093843466770}
   - component: {fileID: 2222076944084023404}
   - component: {fileID: 2620097423459688118}
-  - component: {fileID: 2182873297432609738}
   - component: {fileID: 6793277788636534874}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Test_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,21 +163,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.98328435, y: 1.7945609}
   m_EdgeRadius: 0
---- !u!114 &2182873297432609738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088877142213743431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 245a25da7aba6ec4eb045ff1942c558f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 2222076944084023404}
-  jumpHeight: 11
-  moveSpeed: 7
 --- !u!95 &6793277788636534874
 Animator:
   serializedVersion: 7

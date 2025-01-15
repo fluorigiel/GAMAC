@@ -26,6 +26,12 @@ public class PlayerMovementStats : ScriptableObject
     [Range(0f, 5f)] public float FastFallingStrength = 2f;
     [Space(5)]
 
+    [Header("Wall Slide and Wall Jump")]
+    [Range(1f, 20f)] public float WallSlideMaxSpeed = 0.5f;
+    [Range(1f, 20f)] public float WallJumpStrength = 7f;
+    [Range(0f, 2f)] public float WallJumpTime = 0.2f; // the player can't decide of where to go just after doing a wall jump
+    [Space(5)]
+
     [Header("Jump Cancel")]
     [Tooltip("Jump Cancel = Short Up")]
     [Range(0f, 1f)] public float JumpCancelTime = 0.1f;
@@ -44,7 +50,7 @@ public class PlayerMovementStats : ScriptableObject
 
     [Header("Dash")]
     [Range(0f, 5f)] public float DashStrength = 1.2f;
-    [Range(0f, 5f)] public float DashTime = 2f;
+    [Range(0f, 5f)] public float DashTimer = 2f;
     [Range(0f, 5f)] public float DashDuration = 0.3f;
     [Space(5)]
 
