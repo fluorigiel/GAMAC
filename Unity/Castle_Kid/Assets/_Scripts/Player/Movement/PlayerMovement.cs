@@ -28,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpCancelTimer;
     private float _jumpCancelMoment;
 
+    // Wall slide and Wall jump vars
+    private bool _isWallSliding;
+    private float _wallJumpTime;
+
     // Dash vars
     private bool _isDashing;
     private bool _initDashing;
@@ -104,8 +108,12 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug.Log("Is Grounded ? " + _isGrounded);
         //Debug.Log("Head Bumped ? " + _bumpedHead);
-        Debug.Log("Body Right Walled ? " + _bodyRightWalled);
-        Debug.Log("Body Left Walled ? " + _bodyLeftWalled);
+        /*        Debug.Log("Body Right Walled ? " + _bodyRightWalled);
+                Debug.Log("Body Left Walled ? " + _bodyLeftWalled);*/
+
+        //Debug.Log("Is wall Sliding ? " + _isWallSliding);
+
+        Debug.Log(InputManager.Movement);
 
         CountTimers();
     }
@@ -116,22 +124,24 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveVelocity = _rb.linearVelocity;
 
-        if (moveInput != Vector2.zero) // if our player moved 
+        if (moveInput != Vector2.zero) // if our player moves
         {
+
             TurnCheck(moveInput);//check if he needs to turn around
 
             Vector2 targetVelocity = Vector2.zero;
             //For running
-            if (InputManager.RunIsHeld)
+
+            if (InputManager.RunIsHeld) // if the player is holding the run key
             {
                 targetVelocity = new Vector2(moveInput.x * MoveStats.MaxRunSpeed, 0f);
             }
-            else
+            else // if the player isn't holding the run key
             {
                 targetVelocity = new Vector2(moveInput.x * MoveStats.MaxWalkSpeed, 0f);
             }
 
-            _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+            _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime); // to accelerate
             // Simply, Lerp is linear interpollation (~ it's taking our current velocity, the objective velocity and it's reaching a
             // (:like we learned in algo taa)           middle value based on the passed time, to not go max speed instantly) 
         }
@@ -175,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _isJumping = true;
         }
-
+        
         if (InputManager.JumpWasReleased && _jumpCancelTimer > 0)
         {
             _jumpCancelTimer = 0;
@@ -191,7 +201,7 @@ public class PlayerMovement : MonoBehaviour
             _isJumpCanceled = true;
         }
 
-        if (_isJumping)
+        if (_isJumping && !_isWallSliding)
         {
             _isJumping = false;
             _jumpBufferTimer = 0;
@@ -205,6 +215,20 @@ public class PlayerMovement : MonoBehaviour
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, MoveStats.JumpHeight * MoveStats.MultipleJumpStrengthPercent);
             }
             _numberOfJumpsUsed++;
+        }
+        else if (_isJumping && _isWallSliding)
+        {
+            if (_bodyRightWalled)
+            {
+                _rb.linearVelocity = new Vector2(-MoveStats.WallJumpStrength, MoveStats.JumpHeight);
+            }
+            else if (_bodyLeftWalled)
+            {
+                _rb.linearVelocity = new Vector2(MoveStats.WallJumpStrength, MoveStats.JumpHeight);
+            }
+            _numberOfJumpsUsed++;
+            _isJumping = false;
+            _jumpBufferTimer = 0;
         }
     }
 
@@ -247,7 +271,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Gravity()
     {
-        if (!_isGrounded)
+        if (!_isGrounded || _isWallSliding) // _isWallSliding is there so that we can wall jump while being on the ground
         {
             float usedGravity = MoveStats.GravityForce;
             if (_rb.linearVelocity.y <= 0 || _bumpedHead || _isJumpCanceled)
@@ -256,28 +280,33 @@ public class PlayerMovement : MonoBehaviour
             }
 
             Vector2 targetVelocity = new Vector2(0f, -MoveStats.MaxFallSpeed);
-            Vector2 airVelocity = new Vector2(0f, _rb.linearVelocity.y);
 
             //Interactions with walls (wall slide)
-            if ((_bodyRightWalled && InputManager.Movement == Vector2.right) || (_bodyLeftWalled && InputManager.Movement == Vector2.left))
+
+            if ((_bodyRightWalled && InputManager.Movement == Vector2.right && _rb.linearVelocityX >= 0) || (_bodyLeftWalled && InputManager.Movement == Vector2.left && _rb.linearVelocityX <= 0)) // we don't want to be stopped in the middle of the wall
             {
+                if (_rb.linearVelocityY > 0f) { _rb.linearVelocity = new Vector2(_rb.linearVelocityX, 0f); }
+                _rb.linearVelocityX = 0f;
+
                 targetVelocity = new Vector2(0f, -MoveStats.WallSlideMaxSpeed);
                 _numberOfJumpsUsed = 0;
+                _isWallSliding = true;
             }
+            else
+            {
+                _isWallSliding = false;
+            }
+
+            Vector2 airVelocity = new Vector2(0f, _rb.linearVelocity.y);
 
             airVelocity = Vector2.Lerp(airVelocity, targetVelocity, usedGravity * Time.fixedDeltaTime);
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, airVelocity.y);
-
-            if ((_bodyLeftWalled && InputManager.Movement == Vector2.left) || (_bodyRightWalled && InputManager.Movement == Vector2.right)) // we don't want to be stopped in the middle of the wall
-            {
-                _rb.linearVelocityX = 0f;
-            }
-
         }
 
         else if (_isGrounded)
         {
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
+            _isWallSliding = false;
         }
     }
 
@@ -293,6 +322,7 @@ public class PlayerMovement : MonoBehaviour
             _isGrounded = true;
             _numberOfJumpsUsed = 0;
             _isJumpCanceled = false;
+            _isWallSliding = false;
         }
         else
         {
@@ -318,10 +348,18 @@ public class PlayerMovement : MonoBehaviour
         if (Physics2D.BoxCast(transform.position, bodyRightBoxSize, 0f, Vector3.right, bodyRightCastDistance, groundLayer))
         {
             _bodyRightWalled = true;
+            if (InputManager.Movement == Vector2.right)
+            {
+                _isWallSliding = true;
+            }
         }
         else
         {
             _bodyRightWalled = false;
+            if (!_bodyLeftWalled)
+            {
+                _isWallSliding = false;
+            }
         }
     }
 
@@ -330,10 +368,18 @@ public class PlayerMovement : MonoBehaviour
         if (Physics2D.BoxCast(transform.position, bodyLeftBoxSize, 0f, Vector3.left, bodyLeftCastDistance, groundLayer))
         {
             _bodyLeftWalled = true;
+            if (InputManager.Movement == Vector2.left)
+            {
+                _isWallSliding = true;
+            }
         }
         else
         {
             _bodyLeftWalled = false;
+            if (!_bodyRightWalled)
+            {
+                _isWallSliding = false;
+            }
         }
     }
 
