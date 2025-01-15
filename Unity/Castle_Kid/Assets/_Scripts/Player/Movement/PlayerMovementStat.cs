@@ -28,7 +28,7 @@ public class PlayerMovementStats : ScriptableObject
 
     [Header("Wall Slide and Wall Jump")]
     [Range(1f, 20f)] public float WallSlideMaxSpeed = 0.5f;
-    [Range(1f, 20f)] public float WallJumpStrength = 7f;
+    [Range(1f, 50f)] public float WallJumpStrength = 7f;
     [Range(0f, 2f)] public float WallJumpTime = 0.2f; // the player can't decide of where to go just after doing a wall jump
     [Space(5)]
 
