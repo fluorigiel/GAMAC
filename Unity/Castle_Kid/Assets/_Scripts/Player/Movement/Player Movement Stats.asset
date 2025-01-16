@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxWalkSpeed: 8.5
   GroundAcceleration: 5
-  GroundDeceleration: 20
+  GroundDeceleration: 15
   AirAcceleration: 7
   AirDeceleration: 5
   MaxRunSpeed: 15
@@ -32,7 +32,8 @@ MonoBehaviour:
   JumpBufferTime: 0.125
   JumpCoyoteTime: 0.1
   DashStrength: 3
-  DashTimer: 2
+  DashTimer: 0.55
   DashDuration: 0.1
+  DashBufferTime: 0.125
   GravityForce: 1.5
   GravityFallForce: 3

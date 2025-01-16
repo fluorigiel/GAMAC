@@ -5,7 +5,7 @@ public class FollowScript : MonoBehaviour
 
     public float cameraSpeed = 7;
     public float yOffset = 3;
-    public GameObject player;
+    private GameObject player;
     public int numPlayer = 1;
 
     private void Awake()
