@@ -35,8 +35,10 @@ public class PlayerMovement : MonoBehaviour
     // Dash vars
     private bool _isDashing;
     private bool _initDashing;
+    private bool _canDash;
     private float _dashTimer;
     private float _dashDuration;
+    private float _dashBuffer;
 
     // Jump buffer and Coyote vars // Explain coyote and buffer: https://www.youtube.com/watch?v=RFix_Kg2Di0 
     private float _jumpBufferTimer;
@@ -113,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug.Log("Is wall Sliding ? " + _isWallSliding);
 
-        Debug.Log(InputManager.Movement);
+        //Debug.Log(InputManager.Movement);
 
         CountTimers();
     }
@@ -238,7 +240,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void DashCheck()
     {
-        if (InputManager.DashWasPressed && _dashTimer <= 0)
+        if (InputManager.DashWasPressed)
+        {
+            _dashBuffer = MoveStats.DashBufferTime;
+        }
+
+        if (_dashBuffer > 0 && _canDash && !_isDashing && _dashTimer <= 0)
         {
             _initDashing = true;
         }
@@ -253,11 +260,28 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_initDashing && InputManager.Movement != Vector2.zero)
         {
+            _dashBuffer = 0;
             _initDashing = false;
             _isDashing = true;
             _dashTimer = MoveStats.DashTimer;
             _dashDuration = MoveStats.DashDuration;
             _rb.linearVelocity = InputManager.Movement * MoveStats.MaxWalkSpeed * MoveStats.DashStrength;
+            _canDash = false;
+        }
+        else if(_initDashing)
+        {
+            _dashBuffer = 0;
+            _initDashing = false;
+            _isDashing = true;
+            _dashTimer = MoveStats.DashTimer;
+            _dashDuration = MoveStats.DashDuration;
+            Vector2 direction = new Vector2(1,0); // if he is facing right
+            if (!_isFacingRight) // if he is facing left 
+            {
+                direction = new Vector2(-1, 0);
+            }
+            _rb.linearVelocity = direction * MoveStats.MaxWalkSpeed * MoveStats.DashStrength;
+            _canDash = false;
         }
         else
         {
@@ -323,6 +347,7 @@ public class PlayerMovement : MonoBehaviour
             _numberOfJumpsUsed = 0;
             _isJumpCanceled = false;
             _isWallSliding = false;
+            _canDash = true;
         }
         else
         {
@@ -350,6 +375,7 @@ public class PlayerMovement : MonoBehaviour
             _bodyRightWalled = true;
             if (InputManager.Movement == Vector2.right)
             {
+                _canDash = true;
                 _isWallSliding = true;
             }
         }
@@ -370,6 +396,7 @@ public class PlayerMovement : MonoBehaviour
             _bodyLeftWalled = true;
             if (InputManager.Movement == Vector2.left)
             {
+                _canDash = true;
                 _isWallSliding = true;
             }
         }
@@ -434,6 +461,10 @@ public class PlayerMovement : MonoBehaviour
         if (_dashDuration > 0)
         {
             _dashDuration -= deltaTime;
+        }
+        if (_dashBuffer > 0)
+        {
+            _dashBuffer -= deltaTime;
         }
     }
 

@@ -12,27 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad612dbc65853447919f126dd8474dd, type: 3}
   m_Name: Player Movement Stats
   m_EditorClassIdentifier: 
-  MaxWalkSpeed: 12.5
+  MaxWalkSpeed: 8.5
   GroundAcceleration: 5
-  GroundDeceleration: 20
-  AirAcceleration: 5
+  GroundDeceleration: 15
+  AirAcceleration: 7
   AirDeceleration: 5
-  MaxRunSpeed: 20
+  MaxRunSpeed: 15
   JumpHeight: 20
   MaxFallSpeed: 26
   NumberOfJumpsAllowed: 3
   MultipleJumpStrengthPercent: 0.85
   FastFallingStrength: 2
   WallSlideMaxSpeed: 4
-  WallJumpStrength: 15
+  WallJumpStrength: 20
   WallJumpTime: 0.2
   JumpCancelTime: 0.1
   JumpCancelStremgth: 2
   JumpCancelMoment: 1.2
   JumpBufferTime: 0.125
   JumpCoyoteTime: 0.1
-  DashStrength: 1.2
-  DashTimer: 2
-  DashDuration: 0.2
+  DashStrength: 3
+  DashTimer: 0.55
+  DashDuration: 0.1
+  DashBufferTime: 0.125
   GravityForce: 1.5
   GravityFallForce: 3

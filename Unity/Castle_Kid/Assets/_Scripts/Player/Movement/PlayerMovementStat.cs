@@ -19,16 +19,16 @@ public class PlayerMovementStats : ScriptableObject
     [Space(5)]
 
     [Header("Jump")]
-    [Range(0f, 100f)] public float JumpHeight = 6.5f;
+    [Range(0f, 100f)] public float JumpHeight = 20f;
     [Range(5f, 50f)] public float MaxFallSpeed = 26f;
     [Range(0f, 10f)] public int NumberOfJumpsAllowed = 3;
-    [Range(0f, 1f)] public float MultipleJumpStrengthPercent = 0.7f;
+    [Range(0f, 1f)] public float MultipleJumpStrengthPercent = 0.85f;
     [Range(0f, 5f)] public float FastFallingStrength = 2f;
     [Space(5)]
 
     [Header("Wall Slide and Wall Jump")]
-    [Range(1f, 20f)] public float WallSlideMaxSpeed = 0.5f;
-    [Range(1f, 20f)] public float WallJumpStrength = 7f;
+    [Range(1f, 20f)] public float WallSlideMaxSpeed = 4f;
+    [Range(1f, 50f)] public float WallJumpStrength = 20f;
     [Range(0f, 2f)] public float WallJumpTime = 0.2f; // the player can't decide of where to go just after doing a wall jump
     [Space(5)]
 
@@ -49,13 +49,14 @@ public class PlayerMovementStats : ScriptableObject
     [Space(5)]
 
     [Header("Dash")]
-    [Range(0f, 5f)] public float DashStrength = 1.2f;
-    [Range(0f, 5f)] public float DashTimer = 2f;
-    [Range(0f, 5f)] public float DashDuration = 0.3f;
+    [Range(0f, 5f)] public float DashStrength = 3f;
+    [Range(0f, 5f)] public float DashTimer = 0.3f;
+    [Range(0f, 5f)] public float DashDuration = 0.1f;
+    [Range(0f, 3f)] public float DashBufferTime = 0.125f;
     [Space(5)]
 
     [Header("Player Gravity")]
-    [Range(0f, 50f)] public float GravityForce = 1f;
-    [Range(0f, 50f)] public float GravityFallForce = 1f;
+    [Range(0f, 50f)] public float GravityForce = 1.5f;
+    [Range(0f, 50f)] public float GravityFallForce = 3f;
 
 }
