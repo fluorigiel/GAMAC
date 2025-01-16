@@ -31,8 +31,8 @@ MonoBehaviour:
   JumpCancelMoment: 1.2
   JumpBufferTime: 0.125
   JumpCoyoteTime: 0.1
-  DashStrength: 1.2
+  DashStrength: 3
   DashTimer: 2
-  DashDuration: 0.2
+  DashDuration: 0.1
   GravityForce: 1.5
   GravityFallForce: 3

@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug.Log("Is wall Sliding ? " + _isWallSliding);
 
-        Debug.Log(InputManager.Movement);
+        //Debug.Log(InputManager.Movement);
 
         CountTimers();
     }
@@ -258,6 +258,19 @@ public class PlayerMovement : MonoBehaviour
             _dashTimer = MoveStats.DashTimer;
             _dashDuration = MoveStats.DashDuration;
             _rb.linearVelocity = InputManager.Movement * MoveStats.MaxWalkSpeed * MoveStats.DashStrength;
+        }
+        else if(_initDashing)
+        {
+            _initDashing = false;
+            _isDashing = true;
+            _dashTimer = MoveStats.DashTimer;
+            _dashDuration = MoveStats.DashDuration;
+            Vector2 direction = new Vector2(1,0); // if he is facing right
+            if (!_isFacingRight) // if he is facing left 
+            {
+                direction = new Vector2(-1, 0);
+            }
+            _rb.linearVelocity = direction * MoveStats.MaxWalkSpeed * MoveStats.DashStrength;
         }
         else
         {
