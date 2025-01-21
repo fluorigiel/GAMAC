@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor;
 using UnityEngine;
 
@@ -78,7 +79,9 @@ public class PlayerMovement : MonoBehaviour
 
         _rb = GetComponent<Rigidbody2D>(); // it's like when we linked the camera to the player but automaticly, with the rigid body
     }
-
+    //============================================================================================
+    //UPDATES
+    //--------------------------------------------------------------------------------------------
     private void FixedUpdate()
     {
         Jump();
@@ -101,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
             Gravity();
         }
     }
-
+    
     private void Update()
     {
         JumpCheck();
@@ -119,7 +122,11 @@ public class PlayerMovement : MonoBehaviour
 
         CountTimers();
     }
+    //============================================================================================
 
+    //============================================================================================
+    //REGIONS
+    //--------------------------------------------------------------------------------------------
     #region Movement
 
     private void Move(float acceleration, float deceleration, Vector2 moveInput)
@@ -238,10 +245,11 @@ public class PlayerMovement : MonoBehaviour
 
     #region Dash
 
-    private void DashCheck()
+    private void DashCheck() // The one in Update
     {
         if (InputManager.DashWasPressed)
         {
+            //Debug.Log("Dash");
             _dashBuffer = MoveStats.DashBufferTime;
         }
 
@@ -258,33 +266,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void Dash()
     {
-        if (_initDashing && InputManager.Movement != Vector2.zero)
+        if (_initDashing)
         {
+            //Debug.Log("Start Dashing");
             _dashBuffer = 0;
-            _initDashing = false;
             _isDashing = true;
             _dashTimer = MoveStats.DashTimer;
             _dashDuration = MoveStats.DashDuration;
-            _rb.linearVelocity = InputManager.Movement * MoveStats.MaxWalkSpeed * MoveStats.DashStrength;
             _canDash = false;
-        }
-        else if(_initDashing)
-        {
-            _dashBuffer = 0;
-            _initDashing = false;
-            _isDashing = true;
-            _dashTimer = MoveStats.DashTimer;
-            _dashDuration = MoveStats.DashDuration;
-            Vector2 direction = new Vector2(1,0); // if he is facing right
-            if (!_isFacingRight) // if he is facing left 
+
+            if (InputManager.Movement != Vector2.zero)
             {
-                direction = new Vector2(-1, 0);
+                _rb.linearVelocity = InputManager.Movement * MoveStats.MaxWalkSpeed * MoveStats.DashStrength;
             }
-            _rb.linearVelocity = direction * MoveStats.MaxWalkSpeed * MoveStats.DashStrength;
-            _canDash = false;
-        }
-        else
-        {
+            else
+            {
+                Vector2 direction = new Vector2(1,0); // if he is facing right
+                if (!_isFacingRight) // if he is facing left 
+                {
+                    direction = new Vector2(-1, 0);
+                }
+                _rb.linearVelocity = direction * MoveStats.MaxWalkSpeed * MoveStats.DashStrength;
+            }
+
             _initDashing = false;
         }
     }
@@ -469,4 +473,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #endregion
+    //============================================================================================
+
 }
+
