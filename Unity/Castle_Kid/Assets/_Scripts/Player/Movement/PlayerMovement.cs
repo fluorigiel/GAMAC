@@ -210,7 +210,37 @@ public class PlayerMovement : MonoBehaviour
             _isJumpCanceled = true;
         }
 
-        if (_isJumping && !_isWallSliding)
+        if (_isJumping)
+        {
+            _isJumping = false;
+            _jumpBufferTimer = 0;
+            if (_isWallSliding)
+            {
+                if (_bodyRightWalled)
+                    _rb.linearVelocity = new Vector2(-MoveStats.WallJumpStrength, MoveStats.JumpHeight);
+
+                else if (_bodyLeftWalled)
+                    _rb.linearVelocity = new Vector2(MoveStats.WallJumpStrength, MoveStats.JumpHeight);
+            }
+
+            else
+            {
+                if (_numberOfJumpsUsed == 0)
+                {
+                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, MoveStats.JumpHeight);
+                    _jumpCancelTimer = MoveStats.JumpCancelTime;
+                }
+                else
+                {
+                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, MoveStats.JumpHeight * MoveStats.MultipleJumpStrengthPercent);
+                }
+            }
+
+            _numberOfJumpsUsed++;
+        }
+
+        //Previous code :
+        /*if (_isJumping && !_isWallSliding)
         {
             _isJumping = false;
             _jumpBufferTimer = 0;
@@ -239,6 +269,7 @@ public class PlayerMovement : MonoBehaviour
             _isJumping = false;
             _jumpBufferTimer = 0;
         }
+        */
     }
 
     #endregion
@@ -282,7 +313,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 Vector2 direction = new Vector2(1,0); // if he is facing right
-                if (!_isFacingRight) // if he is facing left 
+                if (!_isFacingRight ) // if he is facing left 
                 {
                     direction = new Vector2(-1, 0);
                 }
@@ -311,7 +342,7 @@ public class PlayerMovement : MonoBehaviour
 
             //Interactions with walls (wall slide)
 
-            if ((_bodyRightWalled && InputManager.Movement == Vector2.right && _rb.linearVelocityX >= 0) || (_bodyLeftWalled && InputManager.Movement == Vector2.left && _rb.linearVelocityX <= 0)) // we don't want to be stopped in the middle of the wall
+            if (_isWallSliding && ((_bodyRightWalled /* && InputManager.Movement == Vector2.right */ && _rb.linearVelocityX >= 0) || (_bodyLeftWalled /* && InputManager.Movement == Vector2.left */ && _rb.linearVelocityX <= 0))) // we don't want to be stopped in the middle of the wall
             {
                 if (_rb.linearVelocityY > 0f) { _rb.linearVelocity = new Vector2(_rb.linearVelocityX, 0f); }
                 _rb.linearVelocityX = 0f;
@@ -355,6 +386,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            if (_numberOfJumpsUsed == 0)
+                _numberOfJumpsUsed++;
             _isGrounded = false;
         }
     }
@@ -377,6 +410,7 @@ public class PlayerMovement : MonoBehaviour
         if (Physics2D.BoxCast(transform.position, bodyRightBoxSize, 0f, Vector3.right, bodyRightCastDistance, groundLayer))
         {
             _bodyRightWalled = true;
+            _isFacingRight = false; // To be able to dash in the opposite direction
             if (InputManager.Movement == Vector2.right)
             {
                 _canDash = true;
@@ -398,6 +432,7 @@ public class PlayerMovement : MonoBehaviour
         if (Physics2D.BoxCast(transform.position, bodyLeftBoxSize, 0f, Vector3.left, bodyLeftCastDistance, groundLayer))
         {
             _bodyLeftWalled = true;
+            _isFacingRight = true; // To be able to dash in the opposite direction
             if (InputManager.Movement == Vector2.left)
             {
                 _canDash = true;
