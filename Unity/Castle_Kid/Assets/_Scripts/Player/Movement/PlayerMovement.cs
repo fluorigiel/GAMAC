@@ -362,7 +362,7 @@ public class PlayerMovement : NetworkBehaviour
             _numberOfJumpsUsed = 0;
             _isJumpCanceled = false;
             _isWallSliding = false;
-            _canDash = true; 
+            _canDash = true;
         }
         else
         {

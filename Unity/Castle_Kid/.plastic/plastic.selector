@@ -1,0 +1,4 @@
+repository "Castle_Kid@fluorigiel@cloud"
+  path "/"
+    br "/main"
+    co "/main"
