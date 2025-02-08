@@ -693,10 +693,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 1d794708-d8f6-4de5-bde0-0104b434f420
+  cloudProjectId: 80e2c6bf-657d-4b3a-91d2-423789122b4c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Castle_Kid (1)
+  projectName: Castle_Kid
   organizationId: fluorigiel
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
