@@ -131,6 +131,14 @@ public class PlayerMovement : NetworkBehaviour
 
         //Debug.Log(InputManager.Movement);
 
+                if (_isFacingRight){
+            Debug.Log("Facing right");
+        }
+        else{
+            Debug.Log("Facing left");
+        }
+
+
         CountTimers();
     }
     //============================================================================================
@@ -176,18 +184,37 @@ public class PlayerMovement : NetworkBehaviour
 
     private void TurnCheck(Vector2 moveInput)
     {
-        if (_isFacingRight && moveInput.x < 0) // moveInput is returning a Vector2 (= 2 value stored together) of x and y 
-                                               // to understand them imagine a joystick, full left is -1 for the first paramether (x) and 0 for the second (y)
-                                               // and so on for every direction (like in a circle)
+        if (_isWallSliding)
         {
-            _isFacingRight = false;
-            transform.Rotate(0f, -180f, 0f);
+            if (_bodyRightWalled)
+            {
+                _isFacingRight = false;
+                // annimation wall sliding
+                transform.Rotate(0f, -180f, 0f);
+            }
+            else if (_bodyLeftWalled)
+            {
+                _isFacingRight = true;
+                // annimation wall sliding
+                transform.Rotate(0f, 180f, 0f);
+            }
         }
-        else if (!_isFacingRight && moveInput.x > 0)
+        else
         {
-            _isFacingRight = true;
-            transform.Rotate(0f, 180f, 0f);  // rotating the ~rigidBody, not the sprite (so that walking/... remain positive values to go in front of us)
+            if (_isFacingRight && moveInput.x < 0) // moveInput is returning a Vector2 (= 2 value stored together) of x and y 
+                                                // to understand them imagine a joystick, full left is -1 for the first paramether (x) and 0 for the second (y)
+                                                // and so on for every direction (like in a circle)
+            {
+                _isFacingRight = false;
+                transform.Rotate(0f, -180f, 0f);
+            }
+            else if (!_isFacingRight && moveInput.x > 0)
+            {
+                _isFacingRight = true;
+                transform.Rotate(0f, 180f, 0f);  // rotating the ~rigidBody, not the sprite (so that walking/... remain positive values to go in front of us)
+            }
         }
+
     }
 
     #endregion
@@ -507,10 +534,10 @@ public class PlayerMovement : NetworkBehaviour
         UpdateWalledBodyRight();
         UpdateWalledBodyLeft();
 
-        Debug.Log("Num of colision right : " + Physics2D.BoxCastAll(transform.position, bodyRightBoxSize, 0f, Vector3.right, bodyRightCastDistance).Length);
-        Debug.Log("Num of colision left : " + Physics2D.BoxCastAll(transform.position, bodyLeftBoxSize, 0f, Vector3.left, bodyLeftCastDistance).Length);
-        Debug.Log("Num of colision up : " + Physics2D.BoxCastAll(transform.position, headBoxSize, 0f, Vector3.up, headCastDistance).Length);
-        Debug.Log("Num of colision down : " + Physics2D.BoxCastAll(transform.position, feetBoxSize, 0f, Vector3.down, feetCastDistance).Length);
+        // Debug.Log("Num of colision right : " + Physics2D.BoxCastAll(transform.position, bodyRightBoxSize, 0f, Vector3.right, bodyRightCastDistance).Length);
+        // Debug.Log("Num of colision left : " + Physics2D.BoxCastAll(transform.position, bodyLeftBoxSize, 0f, Vector3.left, bodyLeftCastDistance).Length);
+        // Debug.Log("Num of colision up : " + Physics2D.BoxCastAll(transform.position, headBoxSize, 0f, Vector3.up, headCastDistance).Length);
+        // Debug.Log("Num of colision down : " + Physics2D.BoxCastAll(transform.position, feetBoxSize, 0f, Vector3.down, feetCastDistance).Length);
     }
 
     private void OnDrawGizmos() // for init and debug to see the BoxCast
