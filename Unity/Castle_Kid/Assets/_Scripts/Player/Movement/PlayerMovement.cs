@@ -131,13 +131,14 @@ public class PlayerMovement : NetworkBehaviour
 
         //Debug.Log(InputManager.Movement);
 
-                if (_isFacingRight){
+        /*
+        if (_isFacingRight){
             Debug.Log("Facing right");
         }
         else{
             Debug.Log("Facing left");
         }
-
+        */
 
         CountTimers();
     }
@@ -188,15 +189,25 @@ public class PlayerMovement : NetworkBehaviour
         {
             if (_bodyRightWalled)
             {
-                _isFacingRight = false;
-                // annimation wall sliding
-                transform.Rotate(0f, -180f, 0f);
+                if (_isFacingRight)
+                {
+                    _isFacingRight = false;
+                    // annimation wall sliding
+                    transform.Rotate(0f, -180f, 0f);
+                    _moveVelocity.x = 0;
+                    _rb.linearVelocityX = 0;
+                }
             }
             else if (_bodyLeftWalled)
             {
-                _isFacingRight = true;
-                // annimation wall sliding
-                transform.Rotate(0f, 180f, 0f);
+                if (!_isFacingRight)
+                {
+                    _isFacingRight = true;
+                    // annimation wall sliding
+                    transform.Rotate(0f, 180f, 0f);
+                    _moveVelocity.x = 0;
+                    _rb.linearVelocityX = 0;
+                }
             }
         }
         else
@@ -349,10 +360,11 @@ public class PlayerMovement : NetworkBehaviour
 
             //Interactions with walls (wall slide)
 
-            if ((_bodyRightWalled && InputManager.Movement == Vector2.right && _rb.linearVelocityX >= 0) || (_bodyLeftWalled && InputManager.Movement == Vector2.left && _rb.linearVelocityX <= 0)) // we don't want to be stopped in the middle of the wall
+            if ((_bodyRightWalled && _rb.linearVelocityX >= 0 /*&& InputManager.Movement == Vector2.right*/) || 
+            (_bodyLeftWalled && _rb.linearVelocityX <= 0 /*&& InputManager.Movement == Vector2.left*/)) // we don't want to be stopped in the middle of the wall
             {
                 if (_rb.linearVelocityY > 0f) { _rb.linearVelocity = new Vector2(_rb.linearVelocityX, 0f); }
-                _rb.linearVelocityX = 0f;
+                _rb.linearVelocityX = 0;
 
                 targetVelocity = new Vector2(0f, -MoveStats.WallSlideMaxSpeed);
                 _numberOfJumpsUsed = 0;
