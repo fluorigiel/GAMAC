@@ -16,7 +16,7 @@ MonoBehaviour:
   GroundAcceleration: 5
   GroundDeceleration: 15
   AirAcceleration: 7
-  AirDeceleration: 5
+  AirDeceleration: 15
   MaxRunSpeed: 15
   JumpHeight: 20
   MaxFallSpeed: 26
@@ -35,4 +35,4 @@ MonoBehaviour:
   DashDuration: 0.1
   DashBufferTime: 0.125
   GravityForce: 1.5
-  GravityFallForce: 2
+  GravityFallForce: 2.5
