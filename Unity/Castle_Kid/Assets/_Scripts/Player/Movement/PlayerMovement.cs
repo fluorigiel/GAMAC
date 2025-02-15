@@ -1,9 +1,9 @@
+using System;
 using JetBrains.Annotations;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor;
 using UnityEngine;
 using Unity.Netcode;
-using NUnit.Framework;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -20,8 +20,8 @@ public class PlayerMovement : NetworkBehaviour
     private Rigidbody2D _rb;
 
     //Movement vars 
-    private Vector2 _moveVelocity;
-    private bool _isFacingRight;
+    public Vector2 _moveVelocity;
+    public bool _isFacingRight;
 
     // Jump vars 
     private bool _isJumping;
@@ -52,6 +52,7 @@ public class PlayerMovement : NetworkBehaviour
     private bool _bumpedHead;
     private bool _bodyRightWalled;
     private bool _bodyLeftWalled;
+    //private bool _onCollisionVal;
 
     [Header("Feet box")]
     public Vector2 feetBoxSize;
@@ -83,6 +84,7 @@ public class PlayerMovement : NetworkBehaviour
         _isGrounded = false;
         _bumpedHead = false;
         _isDashing = false;
+
 
         _numberOfJumpsUsed = 0;
 
@@ -134,7 +136,7 @@ public class PlayerMovement : NetworkBehaviour
         CountTimers();
     }
     //============================================================================================
-
+    
     //============================================================================================
     //REGIONS
     //--------------------------------------------------------------------------------------------
@@ -168,10 +170,15 @@ public class PlayerMovement : NetworkBehaviour
         else // if the player stopped
         {
             _moveVelocity = Vector2.Lerp(_moveVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime); // same as before but to decelerate
+            if (Abs(_moveVelocity.x) < 0.001f) _moveVelocity.x = 0f; // to make it to zero fast
         }
 
-
         _rb.linearVelocity = new Vector2(_moveVelocity.x, _rb.linearVelocity.y); // we change the velocity of the player with new x velocity and current y velocity
+    }
+
+    private float Abs(float num)
+    {
+        return num < 0f ? -num : num;
     }
 
     private void TurnCheck(Vector2 moveInput)
@@ -288,7 +295,7 @@ public class PlayerMovement : NetworkBehaviour
 
             if (InputManager.Movement != Vector2.zero)
             {
-                _rb.linearVelocity = InputManager.Movement * MoveStats.MaxWalkSpeed * MoveStats.DashStrength;
+                _rb.linearVelocity = InputManager.Movement * (MoveStats.MaxWalkSpeed * MoveStats.DashStrength);
             }
             else
             {
@@ -297,7 +304,7 @@ public class PlayerMovement : NetworkBehaviour
                 {
                     direction = new Vector2(-1, 0);
                 }
-                _rb.linearVelocity = direction * MoveStats.MaxWalkSpeed * MoveStats.DashStrength;
+                _rb.linearVelocity = direction * (MoveStats.MaxWalkSpeed * MoveStats.DashStrength);
             }
 
             _initDashing = false;
@@ -310,7 +317,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Gravity()
     {
-        if (!_isGrounded || _isWallSliding) // _isWallSliding is there so that we can wall jump while being on the ground
+        if (!_isGrounded || (_isWallSliding && !_isGrounded)) // _isWallSliding is there so that we can wall jump while being on the ground
         {
             float usedGravity = MoveStats.GravityForce;
             if (_rb.linearVelocity.y <= 0 || _bumpedHead || _isJumpCanceled)
@@ -322,7 +329,7 @@ public class PlayerMovement : NetworkBehaviour
 
             //Interactions with walls (wall slide)
 
-            if ((_bodyRightWalled && InputManager.Movement == Vector2.right && _rb.linearVelocityX >= 0) || (_bodyLeftWalled && InputManager.Movement == Vector2.left && _rb.linearVelocityX <= 0)) // we don't want to be stopped in the middle of the wall
+            if (_isWallSliding && !_isGrounded  && ((_bodyRightWalled && InputManager.Movement == Vector2.right) || (_bodyLeftWalled && InputManager.Movement == Vector2.left))) // we don't want to be stopped in the middle of the wall
             {
                 if (_rb.linearVelocityY > 0f) { _rb.linearVelocity = new Vector2(_rb.linearVelocityX, 0f); }
                 _rb.linearVelocityX = 0f;
@@ -337,7 +344,7 @@ public class PlayerMovement : NetworkBehaviour
             }
 
             Vector2 airVelocity = new Vector2(0f, _rb.linearVelocity.y);
-
+    
             airVelocity = Vector2.Lerp(airVelocity, targetVelocity, usedGravity * Time.fixedDeltaTime);
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, airVelocity.y);
         }
@@ -353,10 +360,40 @@ public class PlayerMovement : NetworkBehaviour
 
     #region Collision
 
+    private bool IsGroundUnder()
+    {
+        return Physics2D.BoxCastAll(transform.position, feetBoxSize, 0f, Vector3.down, feetCastDistance).Length > 1;
+    }
+
+    /*private bool IsTouchingGround()
+    {
+        return _onCollisionVal;
+    }
+    
+    #region OnCollision
+
+    private void OnCollisionEnter(Collision touching)
+    {
+        _onCollisionVal = (touching.gameObject.layer == groundLayer || touching.gameObject.CompareTag("Player"));
+    }
+
+    private void OnCollisionExit(Collision touching)
+    {
+        if (touching.gameObject.layer == groundLayer || touching.gameObject.CompareTag("Player") && _onCollisionVal)
+            _onCollisionVal = false;
+    }
+
+    #endregion*/
+
     private void UpdateGrounded()
     {
         // BoxCast is quite ugly but simply projecting a box to see if there is an object
-        if (Physics2D.BoxCastAll(transform.position, feetBoxSize, 0f, Vector3.down, feetCastDistance).Length > 1 && _rb.linearVelocity.y <= 0)
+        if (_rb.linearVelocityY > 0)
+        {
+            Debug.Log(_rb.linearVelocityY);
+            Debug.Log("Is wall sliding ?" + _isWallSliding);
+        }
+        if (IsGroundUnder() && _rb.linearVelocity.y <= 0)
         {
             _isGrounded = true;
             _numberOfJumpsUsed = 0;
@@ -389,7 +426,7 @@ public class PlayerMovement : NetworkBehaviour
         if (Physics2D.BoxCastAll(transform.position, bodyRightBoxSize, 0f, Vector3.right, bodyRightCastDistance).Length > 1)
         {
             _bodyRightWalled = true;
-            if (InputManager.Movement == Vector2.right)
+            if (InputManager.Movement == Vector2.right && !IsGroundUnder())
             {
                 _canDash = true;
                 _isWallSliding = true;
@@ -411,7 +448,7 @@ public class PlayerMovement : NetworkBehaviour
         if (Physics2D.BoxCastAll(transform.position, bodyLeftBoxSize, 0f, Vector3.left, bodyLeftCastDistance).Length > 1)
         {
             _bodyLeftWalled = true;
-            if (InputManager.Movement == Vector2.left)
+            if (InputManager.Movement == Vector2.left && !IsGroundUnder())
             {
                 _canDash = true;
                 _isWallSliding = true;
@@ -507,10 +544,10 @@ public class PlayerMovement : NetworkBehaviour
         UpdateWalledBodyRight();
         UpdateWalledBodyLeft();
 
-        Debug.Log("Num of colision right : " + Physics2D.BoxCastAll(transform.position, bodyRightBoxSize, 0f, Vector3.right, bodyRightCastDistance).Length);
+        /*Debug.Log("Num of colision right : " + Physics2D.BoxCastAll(transform.position, bodyRightBoxSize, 0f, Vector3.right, bodyRightCastDistance).Length);
         Debug.Log("Num of colision left : " + Physics2D.BoxCastAll(transform.position, bodyLeftBoxSize, 0f, Vector3.left, bodyLeftCastDistance).Length);
         Debug.Log("Num of colision up : " + Physics2D.BoxCastAll(transform.position, headBoxSize, 0f, Vector3.up, headCastDistance).Length);
-        Debug.Log("Num of colision down : " + Physics2D.BoxCastAll(transform.position, feetBoxSize, 0f, Vector3.down, feetCastDistance).Length);
+        Debug.Log("Num of colision down : " + Physics2D.BoxCastAll(transform.position, feetBoxSize, 0f, Vector3.down, feetCastDistance).Length);*/
     }
 
     private void OnDrawGizmos() // for init and debug to see the BoxCast
