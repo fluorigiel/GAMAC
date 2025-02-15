@@ -756,6 +756,7 @@ namespace _Scripts.Player.Movement
         void OnFeetTriggerExited(Collider2D item)
         {
             _isGrounded = false;
+            if (_numberOfJumpsUsed == 0) _numberOfJumpsUsed = 1;
         }
     
         void OnHeadTriggerEntered(Collider2D item)
