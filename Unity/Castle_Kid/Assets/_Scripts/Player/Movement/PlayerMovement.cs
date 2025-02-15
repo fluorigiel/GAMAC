@@ -1,4 +1,5 @@
 using System;
+using _Scripts.Player.Trigger;
 using JetBrains.Annotations;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor;
@@ -52,23 +53,12 @@ public class PlayerMovement : NetworkBehaviour
     private bool _bumpedHead;
     private bool _bodyRightWalled;
     private bool _bodyLeftWalled;
-    //private bool _onCollisionVal;
-
-    [Header("Feet box")]
-    public Vector2 feetBoxSize;
-    public float feetCastDistance;
-
-    [Header("Head box")]
-    public Vector2 headBoxSize;
-    public float headCastDistance;
-
-    [Header("Body box Right")]
-    public Vector2 bodyRightBoxSize;
-    public float bodyRightCastDistance;
-
-    [Header("Body box Left")]
-    public Vector2 bodyLeftBoxSize;
-    public float bodyLeftCastDistance;
+    
+    // Trigger 
+    public CustomTrigger feetTriger;
+    public CustomTrigger headTriger;
+    public CustomTrigger bodyRightTriger;
+    public CustomTrigger bodyLeftTriger;
 
     public override void OnNetworkSpawn()
     {
@@ -81,10 +71,21 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Awake()
     {
+        feetTriger.EnteredTrigger += OnFeetTriggerEntered;
+        feetTriger.ExitedTrigger += OnFeetTriggerExited;
+        
+        headTriger.EnteredTrigger += OnHeadTriggerEntered;
+        headTriger.ExitedTrigger += OnHeadTriggerExited;
+        
+        bodyRightTriger.EnteredTrigger += OnBodyRightTriggerEntered;
+        bodyRightTriger.ExitedTrigger += OnBodyRightTriggerExited;
+        
+        bodyLeftTriger.EnteredTrigger += OnBodyLeftTriggerEntered;
+        bodyLeftTriger.ExitedTrigger += OnBodyLeftTriggerExited;
+        
         _isGrounded = false;
         _bumpedHead = false;
         _isDashing = false;
-
 
         _numberOfJumpsUsed = 0;
 
@@ -101,7 +102,7 @@ public class PlayerMovement : NetworkBehaviour
 
         Dash();
 
-        UpdateCollision();
+        //UpdateCollision();
 
         if (!_isDashing) // we don't want to change the velocity during a dash
         {
@@ -150,10 +151,9 @@ public class PlayerMovement : NetworkBehaviour
         {
 
             TurnCheck(moveInput);//check if he needs to turn around
-
-            Vector2 targetVelocity = Vector2.zero;
+            
             //For running
-
+            Vector2 targetVelocity;
             if (InputManager.RunIsHeld) // if the player is holding the run key
             {
                 targetVelocity = new Vector2(moveInput.x * MoveStats.MaxRunSpeed, 0f);
@@ -187,13 +187,25 @@ public class PlayerMovement : NetworkBehaviour
                                                // to understand them imagine a joystick, full left is -1 for the first paramether (x) and 0 for the second (y)
                                                // and so on for every direction (like in a circle)
         {
-            _isFacingRight = false;
-            transform.Rotate(0f, -180f, 0f);
+            TurnRight(false);
         }
         else if (!_isFacingRight && moveInput.x > 0)
         {
+            TurnRight(true);
+        }
+    }
+
+    private void TurnRight(bool turnRight)
+    {
+        if (turnRight)
+        {
             _isFacingRight = true;
-            transform.Rotate(0f, 180f, 0f);  // rotating the ~rigidBody, not the sprite (so that walking/... remain positive values to go in front of us)
+            transform.Rotate(0f, 180f, 0f); // ~~ rotating the ~rigidBody, not the sprite (so that walking/... remain positive values to go in front of us)
+        }
+        else
+        {
+            _isFacingRight = false;
+            transform.Rotate(0f, -180f, 0f);
         }
     }
 
@@ -360,7 +372,7 @@ public class PlayerMovement : NetworkBehaviour
 
     #region Collision
 
-    private bool IsGroundUnder()
+    /*private bool IsGroundUnder()
     {
         return Physics2D.BoxCastAll(transform.position, feetBoxSize, 0f, Vector3.down, feetCastDistance).Length > 1;
     }
@@ -383,7 +395,7 @@ public class PlayerMovement : NetworkBehaviour
             _onCollisionVal = false;
     }
 
-    #endregion*/
+    #endregion#1#
 
     private void UpdateGrounded()
     {
@@ -462,8 +474,8 @@ public class PlayerMovement : NetworkBehaviour
                 _isWallSliding = false;
             }
         }
-    }
-/*
+    }*/
+    /*
     private void UpdateGrounded()
     {
         // BoxCast is quite ugly but simply projecting a box to see if there is an object
@@ -537,20 +549,59 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 */
-    private void UpdateCollision()
+
+    void OnFeetTriggerEntered(Collider item)
+    {
+        Debug.Log("Item entered :" + item.name);
+        _isGrounded = true;
+    }
+
+    void OnFeetTriggerExited(Collider item)
+    {
+        _isGrounded = false;
+    }
+    
+    void OnHeadTriggerEntered(Collider item)
+    {
+        _bumpedHead = true;
+    }
+
+    void OnHeadTriggerExited(Collider item)
+    {
+        _bumpedHead = false;
+    }
+    
+    void OnBodyRightTriggerEntered(Collider item)
+    {
+        _bodyRightWalled = true;
+    }
+
+    void OnBodyRightTriggerExited(Collider item)
+    {
+        _bodyRightWalled = false;
+    }
+    
+    void OnBodyLeftTriggerEntered(Collider item)
+    {
+        _bodyLeftWalled = true;
+    }
+
+    void OnBodyLeftTriggerExited(Collider item)
+    {
+        _bodyLeftWalled = false;
+    }
+    
+    
+    
+    /*private void UpdateCollision()
     {
         UpdateGrounded();
         UpdateBumpedHead();
         UpdateWalledBodyRight();
         UpdateWalledBodyLeft();
+    }*/
 
-        /*Debug.Log("Num of colision right : " + Physics2D.BoxCastAll(transform.position, bodyRightBoxSize, 0f, Vector3.right, bodyRightCastDistance).Length);
-        Debug.Log("Num of colision left : " + Physics2D.BoxCastAll(transform.position, bodyLeftBoxSize, 0f, Vector3.left, bodyLeftCastDistance).Length);
-        Debug.Log("Num of colision up : " + Physics2D.BoxCastAll(transform.position, headBoxSize, 0f, Vector3.up, headCastDistance).Length);
-        Debug.Log("Num of colision down : " + Physics2D.BoxCastAll(transform.position, feetBoxSize, 0f, Vector3.down, feetCastDistance).Length);*/
-    }
-
-    private void OnDrawGizmos() // for init and debug to see the BoxCast
+    /*private void OnDrawGizmos() // for init and debug to see the BoxCast
     {
         // for feet box test :
         Gizmos.color = Color.green;
@@ -564,7 +615,7 @@ public class PlayerMovement : NetworkBehaviour
         // for body left box test :
         Gizmos.color = Color.cyan;
         Gizmos.DrawCube(transform.position + Vector3.left * bodyLeftCastDistance, bodyLeftBoxSize);
-    }
+    }*/
 
     #endregion
 
