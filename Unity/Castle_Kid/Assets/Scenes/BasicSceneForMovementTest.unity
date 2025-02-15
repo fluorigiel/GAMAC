@@ -533,6 +533,7 @@ GameObject:
   - component: {fileID: 544861904}
   - component: {fileID: 544861902}
   - component: {fileID: 544861905}
+  - component: {fileID: 544861906}
   m_Layer: 0
   m_Name: GAME_MANAGER
   m_TagString: Untagged
@@ -611,6 +612,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 2057317607}
+--- !u!114 &544861906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544861901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd2ebe62f6b448d49a23b58ebee661b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &548863100
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,6 +635,7 @@ GameObject:
   - component: {fileID: 548863103}
   - component: {fileID: 548863102}
   - component: {fileID: 548863101}
+  - component: {fileID: 548863104}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -715,6 +729,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &548863104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548863100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a9128b8cac40e74ca1aae9fd8bf2efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &873690848
 GameObject:
   m_ObjectHideFlags: 0

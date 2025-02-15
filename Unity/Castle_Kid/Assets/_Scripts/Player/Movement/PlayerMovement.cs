@@ -543,28 +543,8 @@ public class PlayerMovement : NetworkBehaviour
         UpdateBumpedHead();
         UpdateWalledBodyRight();
         UpdateWalledBodyLeft();
-
-        /*Debug.Log("Num of colision right : " + Physics2D.BoxCastAll(transform.position, bodyRightBoxSize, 0f, Vector3.right, bodyRightCastDistance).Length);
-        Debug.Log("Num of colision left : " + Physics2D.BoxCastAll(transform.position, bodyLeftBoxSize, 0f, Vector3.left, bodyLeftCastDistance).Length);
-        Debug.Log("Num of colision up : " + Physics2D.BoxCastAll(transform.position, headBoxSize, 0f, Vector3.up, headCastDistance).Length);
-        Debug.Log("Num of colision down : " + Physics2D.BoxCastAll(transform.position, feetBoxSize, 0f, Vector3.down, feetCastDistance).Length);*/
     }
 
-    private void OnDrawGizmos() // for init and debug to see the BoxCast
-    {
-        // for feet box test :
-        Gizmos.color = Color.green;
-        Gizmos.DrawCube(transform.position + Vector3.down * feetCastDistance, feetBoxSize);
-        // for head box test :
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position + Vector3.up * headCastDistance, headBoxSize);
-        // for body right box test :
-        Gizmos.color = Color.blue;
-        Gizmos.DrawCube(transform.position + Vector3.right * bodyRightCastDistance, bodyRightBoxSize);
-        // for body left box test :
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawCube(transform.position + Vector3.left * bodyLeftCastDistance, bodyLeftBoxSize);
-    }
 
     #endregion
 
