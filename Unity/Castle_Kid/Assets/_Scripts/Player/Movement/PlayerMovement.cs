@@ -1,6 +1,9 @@
+using System.Numerics;
 using _Scripts.Player.Trigger;
 using Unity.Netcode;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
 
 namespace _Scripts.Player.Movement
 {
@@ -32,6 +35,8 @@ namespace _Scripts.Player.Movement
 
         // Wall slide and Wall jump vars
         private bool _isWallSliding;
+        private bool _isWallSlidingRight;
+        private bool _isWallSlidingLeft;
         private float _wallJumpTime;
 
         // Dash vars
@@ -57,6 +62,7 @@ namespace _Scripts.Player.Movement
         public CustomTrigger headTriger;
         public CustomTrigger bodyRightTriger;
         public CustomTrigger bodyLeftTriger;
+        public Transform colliders;
 
         public override void OnNetworkSpawn()
         {
@@ -96,26 +102,48 @@ namespace _Scripts.Player.Movement
         //--------------------------------------------------------------------------------------------
         private void FixedUpdate()
         {
-
-
-            Dash();
-
-            MoveHandler();
-            
             if (!_isDashing) // we don't want to change the velocity during a dash
             {
                 Gravity();
             }
             
+            Dash();
+
+            MoveHandler();
+            
             Jump();
+        }
+
+        private void DebugCollision()
+        {
+            if (_bumpedHead)
+            {
+                Debug.Log("Bumbed Head");
+            }
+            if (_isGrounded)
+            {
+                Debug.Log("Grounded");
+            }
+            if (_bodyLeftWalled)
+            {
+                Debug.Log("Left Walled");
+            }
+            if (_bodyRightWalled)
+            {
+                Debug.Log("Right Walled");
+            }
         }
     
         private void Update()
         {
+            //DebugCollision();
+            
             JumpCheck();
         
             DashCheck();
 
+            CheckWallSliding();
+            
             CountTimers();
         }
         //============================================================================================
@@ -165,7 +193,7 @@ namespace _Scripts.Player.Movement
                 _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime); // to accelerate
                 // Simply, Lerp is linear interpollation (~ it's taking our current velocity, the objective velocity and it's reaching a
                 // (:like we learned in algo taa)           middle value based on the passed time, to not go max speed instantly) 
-            }
+            }   
             else // if the player stopped
             {
                 _moveVelocity = Vector2.Lerp(_moveVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime); // same as before but to decelerate
@@ -182,6 +210,8 @@ namespace _Scripts.Player.Movement
 
         private void TurnCheck(Vector2 moveInput)
         {
+            FixChildRotation();
+            
             if (_isFacingRight && moveInput.x < 0) // moveInput is returning a Vector2 (= 2 value stored together) of x and y 
                 // to understand them imagine a joystick, full left is -1 for the first paramether (x) and 0 for the second (y)
                 // and so on for every direction (like in a circle)
@@ -196,10 +226,75 @@ namespace _Scripts.Player.Movement
             }
         }
 
+        private void FixChildRotation()
+        {
+            colliders.transform.rotation = Quaternion.Euler (0.0f, 0.0f, gameObject.transform.rotation.z * -1.0f);
+        }
+
         #endregion
 
         #region Jump
+        
+        private void JumpCheck()
+        {
+            if (InputManager.JumpWasPressed)
+            {
+                _jumpBufferTimer = MoveStats.JumpBufferTime;
+            }
 
+            if (_jumpBufferTimer > 0 && _numberOfJumpsUsed < MoveStats.NumberOfJumpsAllowed && !_isJumping && !_bumpedHead)
+            {
+                _isJumping = true;
+            }
+            
+            if (InputManager.JumpWasReleased && _jumpCancelTimer > 0)
+            {
+                _jumpCancelTimer = 0;
+                _initJumpCanceled = true;
+            }
+        }
+        
+        private void Jump()
+        {
+            if (_initJumpCanceled && _jumpCancelMoment <= 0)
+            {
+                _initJumpCanceled = false;
+                _isJumpCanceled = true;
+            }
+            
+            if (_isJumping && !_isWallSliding)
+            {
+                _isJumping = false;
+                _jumpBufferTimer = 0;
+                if (_numberOfJumpsUsed == 0)
+                {
+                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, MoveStats.JumpHeight);
+                    _jumpCancelTimer = MoveStats.JumpCancelTime;
+                }
+                else
+                {
+                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, MoveStats.JumpHeight * MoveStats.MultipleJumpStrengthPercent);
+                }
+                _numberOfJumpsUsed++;
+            }
+            
+            else if (_isJumping && _isWallSliding)
+            {
+                if (_isWallSlidingRight)
+                {
+                    _rb.linearVelocity = new Vector2(-MoveStats.WallJumpStrength, MoveStats.JumpHeight);
+                }
+                else if (_isWallSlidingLeft)
+                {
+                    _rb.linearVelocity = new Vector2(MoveStats.WallJumpStrength, MoveStats.JumpHeight);
+                }
+                _numberOfJumpsUsed++;
+                _isJumping = false;
+                _jumpBufferTimer = 0;
+            }
+        }
+        
+        /*
         private void JumpCheck()
         {
             if (InputManager.JumpWasPressed)
@@ -256,7 +351,7 @@ namespace _Scripts.Player.Movement
                 _isJumping = false;
                 _jumpBufferTimer = 0;
             }
-        }
+        }*/
 
         #endregion
 
@@ -327,8 +422,41 @@ namespace _Scripts.Player.Movement
                 Vector2 targetVelocity = new Vector2(0f, -MoveStats.MaxFallSpeed);
 
                 //Interactions with walls (wall slide)
+                if (_isWallSliding)
+                {
+                    if (_rb.linearVelocityY > 0f) { _rb.linearVelocity = new Vector2(_rb.linearVelocityX, 0f); }
+                    _rb.linearVelocityX = 0f;
+                    
+                    targetVelocity = new Vector2(0f, -MoveStats.WallSlideMaxSpeed);
+                }
 
-                /*if (_isWallSliding && !_isGrounded  && ((_bodyRightWalled && InputManager.Movement == Vector2.right) || (_bodyLeftWalled && InputManager.Movement == Vector2.left))) // we don't want to be stopped in the middle of the wall
+                Vector2 airVelocity = new Vector2(0f, _rb.linearVelocity.y);
+    
+                airVelocity = Vector2.Lerp(airVelocity, targetVelocity, usedGravity * Time.fixedDeltaTime);
+                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, airVelocity.y);
+            }
+
+            else if (_isGrounded)
+            {
+                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
+            }
+        }
+        
+        /*private void Gravity()
+        {
+            if (!_isGrounded || (_isWallSliding && !_isGrounded)) // _isWallSliding is there so that we can wall jump while being on the ground
+            {
+                float usedGravity = MoveStats.GravityForce;
+                if (_rb.linearVelocity.y <= 0 || _bumpedHead || _isJumpCanceled)
+                {
+                    usedGravity = MoveStats.GravityFallForce; // to make a beautiful jump curve
+                }
+
+                Vector2 targetVelocity = new Vector2(0f, -MoveStats.MaxFallSpeed);
+
+                //Interactions with walls (wall slide)
+
+                if (_isWallSliding && !_isGrounded  && ((_bodyRightWalled && InputManager.Movement == Vector2.right) || (_bodyLeftWalled && InputManager.Movement == Vector2.left))) // we don't want to be stopped in the middle of the wall
                 {
                     if (_rb.linearVelocityY > 0f) { _rb.linearVelocity = new Vector2(_rb.linearVelocityX, 0f); }
                     _rb.linearVelocityX = 0f;
@@ -340,7 +468,7 @@ namespace _Scripts.Player.Movement
                 else
                 {
                     _isWallSliding = false;
-                }*/
+                }
 
                 Vector2 airVelocity = new Vector2(0f, _rb.linearVelocity.y);
     
@@ -351,12 +479,50 @@ namespace _Scripts.Player.Movement
             else if (_isGrounded)
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
-                //_isWallSliding = false;
+                _isWallSliding = false;
             }
-        }
+        }*/
 
         #endregion
 
+        #region Wall Sliding
+
+        private void ResetWallSliding()
+        {
+            _isWallSliding = false;
+            _isWallSlidingRight = false;
+            _isWallSlidingLeft = false;
+        }
+        
+        private void CheckWallSliding()
+        {
+            if (_bodyRightWalled && InputManager.Movement.x > 0 && !_isGrounded)
+            {
+                _isWallSlidingRight = true;
+            }
+            else if (_bodyLeftWalled && InputManager.Movement.x < 0 && !_isGrounded)
+            {
+                _isWallSlidingLeft = true;
+            }
+            
+            _isWallSliding = _isWallSlidingRight || _isWallSlidingLeft;
+
+            if (_isWallSliding)
+            {
+                if (_isGrounded) ResetWallSliding();
+                else if (_isWallSlidingRight && InputManager.Movement.x < 0) ResetWallSliding();
+                else if (_isWallSlidingLeft && InputManager.Movement.x > 0) ResetWallSliding();
+                else if (!_bodyLeftWalled && !_bodyRightWalled) ResetWallSliding();
+                else
+                {
+                    _canDash = true;
+                    _numberOfJumpsUsed = 0;
+                }
+            }
+        }
+        
+        #endregion
+        
         #region Collision
 
         /*private bool IsGroundUnder()
@@ -549,7 +715,6 @@ namespace _Scripts.Player.Movement
             _isGrounded = true;
             _numberOfJumpsUsed = 0;
             _isJumpCanceled = false;
-            _isWallSliding = false;
             _canDash = true;
         }
 
