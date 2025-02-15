@@ -96,23 +96,18 @@ namespace _Scripts.Player.Movement
         //--------------------------------------------------------------------------------------------
         private void FixedUpdate()
         {
-            Jump();
+
 
             Dash();
 
+            MoveHandler();
+            
             if (!_isDashing) // we don't want to change the velocity during a dash
             {
-                if (_isGrounded)
-                {
-                    Move(MoveStats.GroundAcceleration, MoveStats.GroundDeceleration, InputManager.Movement); // change the velocity of our player based on the
-                }
-                else // if not on the ground (in the air)
-                {
-                    Move(MoveStats.AirAcceleration, MoveStats.AirDeceleration, InputManager.Movement); // same that above but for in the air
-                }
-
                 Gravity();
             }
+            
+            Jump();
         }
     
         private void Update()
@@ -120,15 +115,6 @@ namespace _Scripts.Player.Movement
             JumpCheck();
         
             DashCheck();
-
-            //Debug.Log("Is Grounded ? " + _isGrounded);
-            //Debug.Log("Head Bumped ? " + _bumpedHead);
-            /*        Debug.Log("Body Right Walled ? " + _bodyRightWalled);
-                Debug.Log("Body Left Walled ? " + _bodyLeftWalled);*/
-
-            //Debug.Log("Is wall Sliding ? " + _isWallSliding);
-
-            //Debug.Log(InputManager.Movement);
 
             CountTimers();
         }
@@ -139,16 +125,32 @@ namespace _Scripts.Player.Movement
         //--------------------------------------------------------------------------------------------
         #region Movement
 
+        private void MoveHandler()
+        {
+            if (!_isDashing) // we don't want to change the velocity during a dash
+            {
+                if (_isGrounded)
+                {
+                    Move(MoveStats.GroundAcceleration, MoveStats.GroundDeceleration,
+                        InputManager.Movement); // change the velocity of our player based on the
+                }
+                else // if not on the ground (in the air)
+                {
+                    Move(MoveStats.AirAcceleration, MoveStats.AirDeceleration,
+                        InputManager.Movement); // same that above but for in the air
+                }
+            }
+        }
+        
         private void Move(float acceleration, float deceleration, Vector2 moveInput)
         {
             _moveVelocity = _rb.linearVelocity;
 
             if (moveInput != Vector2.zero) // if our player moves
             {
-
                 TurnCheck(moveInput);//check if he needs to turn around
 
-                Vector2 targetVelocity = Vector2.zero;
+                Vector2 targetVelocity;
                 //For running
 
                 if (InputManager.RunIsHeld) // if the player is holding the run key
@@ -314,7 +316,7 @@ namespace _Scripts.Player.Movement
 
         private void Gravity()
         {
-            if (!_isGrounded || (_isWallSliding && !_isGrounded)) // _isWallSliding is there so that we can wall jump while being on the ground
+            if (!_isGrounded) // _isWallSliding is there so that we can wall jump while being on the ground
             {
                 float usedGravity = MoveStats.GravityForce;
                 if (_rb.linearVelocity.y <= 0 || _bumpedHead || _isJumpCanceled)
@@ -326,7 +328,7 @@ namespace _Scripts.Player.Movement
 
                 //Interactions with walls (wall slide)
 
-                if (_isWallSliding && !_isGrounded  && ((_bodyRightWalled && InputManager.Movement == Vector2.right) || (_bodyLeftWalled && InputManager.Movement == Vector2.left))) // we don't want to be stopped in the middle of the wall
+                /*if (_isWallSliding && !_isGrounded  && ((_bodyRightWalled && InputManager.Movement == Vector2.right) || (_bodyLeftWalled && InputManager.Movement == Vector2.left))) // we don't want to be stopped in the middle of the wall
                 {
                     if (_rb.linearVelocityY > 0f) { _rb.linearVelocity = new Vector2(_rb.linearVelocityX, 0f); }
                     _rb.linearVelocityX = 0f;
@@ -338,7 +340,7 @@ namespace _Scripts.Player.Movement
                 else
                 {
                     _isWallSliding = false;
-                }
+                }*/
 
                 Vector2 airVelocity = new Vector2(0f, _rb.linearVelocity.y);
     
@@ -349,7 +351,7 @@ namespace _Scripts.Player.Movement
             else if (_isGrounded)
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
-                _isWallSliding = false;
+                //_isWallSliding = false;
             }
         }
 
@@ -545,7 +547,10 @@ namespace _Scripts.Player.Movement
         void OnFeetTriggerEntered(Collider2D item)
         {
             _isGrounded = true;
-            _bumpedHead = false;
+            _numberOfJumpsUsed = 0;
+            _isJumpCanceled = false;
+            _isWallSliding = false;
+            _canDash = true;
         }
 
         void OnFeetTriggerExited(Collider2D item)
@@ -560,7 +565,7 @@ namespace _Scripts.Player.Movement
 
         void OnHeadTriggerExited(Collider2D item)
         {
-            //nothing I think 
+            _bumpedHead = false;
         }
     
         void OnBodyRightTriggerEntered(Collider2D item)
