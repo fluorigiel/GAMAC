@@ -211,7 +211,13 @@ namespace _Scripts.Player.Movement
         private void TurnCheck(Vector2 moveInput)
         {
             FixChildRotation();
-            
+
+            if (_isWallSliding) TurnOnWallSlide();
+            else TurnNormal(moveInput);
+        }
+
+        private void TurnNormal(Vector2 moveInput)
+        {
             if (_isFacingRight && moveInput.x < 0) // moveInput is returning a Vector2 (= 2 value stored together) of x and y 
                 // to understand them imagine a joystick, full left is -1 for the first paramether (x) and 0 for the second (y)
                 // and so on for every direction (like in a circle)
@@ -223,6 +229,20 @@ namespace _Scripts.Player.Movement
             {
                 _isFacingRight = true;
                 transform.Rotate(0f, 180f, 0f);  // rotating the ~rigidBody, not the sprite (so that walking/... remain positive values to go in front of us)
+            }
+        }
+
+        private void TurnOnWallSlide()
+        {
+            if (_isFacingRight && _isWallSlidingRight)
+            {
+                _isFacingRight = false;
+                transform.Rotate(0f, -180f, 0f);
+            }
+            if (!_isFacingRight && _isWallSlidingLeft)
+            {
+                _isFacingRight = true;
+                transform.Rotate(0f, 180f, 0f);
             }
         }
 
@@ -380,7 +400,6 @@ namespace _Scripts.Player.Movement
         {
             if (_initDashing)
             {
-                //Debug.Log("Start Dashing");
                 _dashBuffer = 0;
                 _isDashing = true;
                 _dashTimer = MoveStats.DashTimer;
@@ -418,18 +437,9 @@ namespace _Scripts.Player.Movement
                 {
                     usedGravity = MoveStats.GravityFallForce; // to make a beautiful jump curve
                 }
-
-                Vector2 targetVelocity = new Vector2(0f, -MoveStats.MaxFallSpeed);
-
-                //Interactions with walls (wall slide)
-                if (_isWallSliding)
-                {
-                    if (_rb.linearVelocityY > 0f) { _rb.linearVelocity = new Vector2(_rb.linearVelocityX, 0f); }
-                    _rb.linearVelocityX = 0f;
-                    
-                    targetVelocity = new Vector2(0f, -MoveStats.WallSlideMaxSpeed);
-                }
-
+                
+                Vector2 targetVelocity = _isWallSliding ? GravityWallSlide() : GravityNormal();
+                
                 Vector2 airVelocity = new Vector2(0f, _rb.linearVelocity.y);
     
                 airVelocity = Vector2.Lerp(airVelocity, targetVelocity, usedGravity * Time.fixedDeltaTime);
@@ -440,6 +450,31 @@ namespace _Scripts.Player.Movement
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
             }
+        }
+
+        private Vector2 GravityNormal()
+        {
+            // may help when we want to change his gravity in some area.
+            
+            return new Vector2(0f, -MoveStats.MaxFallSpeed);
+        }
+
+        private Vector2 GravityWallSlide()
+        {
+            Vector2 targetVelocity;
+            
+            _rb.linearVelocityX = 0f;
+            if (_rb.linearVelocityY > 0f)
+            {
+                targetVelocity = new Vector2(0f, -MoveStats.MaxFallSpeed);
+                //_rb.linearVelocity = new Vector2(_rb.linearVelocityX, 0f);
+            }
+            else
+            {
+                targetVelocity = new Vector2(0f, -MoveStats.WallSlideMaxSpeed);
+            }
+
+            return targetVelocity;
         }
         
         /*private void Gravity()
