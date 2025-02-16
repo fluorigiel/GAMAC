@@ -6,7 +6,9 @@ public class PauseMenu : MonoBehaviour
     //----------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------
 
-    public GameObject pauseMenu;
+    public GameObject pauseMenuUI;
+    public GameObject optionsMenuUI;
+
     public static bool isPaused;
 
 
@@ -14,21 +16,47 @@ public class PauseMenu : MonoBehaviour
     //-------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------
 
-    private void Pause()
+    void Pause()
     {
-        pauseMenu.SetActive(true);
+        //Debug.Log("Pause Pressed");
+        pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
     }
 
-    private void Resume()
+    public void Resume()
     {
-        pauseMenu.SetActive(false);
+        //Debug.Log("Resume Pressed");
+        pauseMenuUI.SetActive(false);
+        optionsMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
 
+    public void Multiplayer()
+    {
+        Debug.Log("Multiplayer Pressed");
+    }
 
+    public void Options()
+    {
+        Debug.Log("Options Pressed");
+        pauseMenuUI.SetActive(false);
+        optionsMenuUI.SetActive(true);
+    }
+
+    public void Back()
+    {
+        Debug.Log("Back Pressed");
+        pauseMenuUI.SetActive(true);
+        optionsMenuUI.SetActive(false);
+    }
+
+    public void Quit()
+    {
+        Debug.Log("Quit Pressed");
+        Application.Quit(); //Doesn't do anything in the Unity editor
+    }
 
     //START AND UPDATE
     //-------------------------------------------------------------------------------------
@@ -36,7 +64,8 @@ public class PauseMenu : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        pauseMenu.SetActive(false);
+        pauseMenuUI.SetActive(false);
+        optionsMenuUI.SetActive(false);
     }
 
     // Update is called once per frame
