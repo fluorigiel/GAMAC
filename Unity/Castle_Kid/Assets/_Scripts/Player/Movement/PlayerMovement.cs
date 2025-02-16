@@ -133,10 +133,36 @@ namespace _Scripts.Player.Movement
                 Debug.Log("Right Walled");
             }
         }
+        private void DebugShortUp()
+        {
+            if (InputManager.JumpWasReleased && _jumpCancelTimer > 0)
+            {
+                Debug.Log("Jump Should be Canceled");
+            }
+            if (_initJumpCanceled && _jumpCancelMoment <= 0)
+            {
+                Debug.Log("Jump just canceled");
+                if (_rb.linearVelocityY < 0)
+                {
+                    Debug.Log("Too late was already falling");
+                }
+            }
+        }
     
         private void Update()
         {
             //DebugCollision();
+            //DebugShortUp();
+            
+            /*if (InputManager.JumpWasReleased)
+            {
+                Debug.Log("Jump Released");
+            }
+
+            if (_jumpCancelTimer > 0)
+            {
+                Debug.Log(_jumpCancelTimer);
+            }*/
             
             JumpCheck();
         
@@ -280,6 +306,7 @@ namespace _Scripts.Player.Movement
             {
                 _initJumpCanceled = false;
                 _isJumpCanceled = true;
+                _jumpCancelMoment = 0;
             }
             
             if (_isJumping && !_isWallSliding)
@@ -290,6 +317,7 @@ namespace _Scripts.Player.Movement
                 {
                     _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, MoveStats.JumpHeight);
                     _jumpCancelTimer = MoveStats.JumpCancelTime;
+                    _jumpCancelMoment = MoveStats.JumpCancelMoment;
                 }
                 else
                 {
@@ -385,6 +413,11 @@ namespace _Scripts.Player.Movement
                 _dashBuffer = MoveStats.DashBufferTime;
             }
 
+            if (_isGrounded)
+            {
+                _canDash = true;
+            }
+
             if (_dashBuffer > 0 && _canDash && !_isDashing && _dashTimer <= 0)
             {
                 _initDashing = true;
@@ -438,6 +471,8 @@ namespace _Scripts.Player.Movement
                     usedGravity = MoveStats.GravityFallForce; // to make a beautiful jump curve
                 }
                 
+                if (_isJumpCanceled) ApplyJumpCancelStrength();
+                
                 Vector2 targetVelocity = _isWallSliding ? GravityWallSlide() : GravityNormal();
                 
                 Vector2 airVelocity = new Vector2(0f, _rb.linearVelocity.y);
@@ -450,6 +485,15 @@ namespace _Scripts.Player.Movement
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
             }
+        }
+
+        private void ApplyJumpCancelStrength()
+        {
+            if (_rb.linearVelocity.y > 0)
+            {
+                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _rb.linearVelocity.y * MoveStats.JumpCancelStrength);
+            }
+            _isJumpCanceled = false;
         }
 
         private Vector2 GravityNormal()
@@ -745,11 +789,20 @@ namespace _Scripts.Player.Movement
             UpdateWalledBodyLeft();
         }*/
 
+        void ResetJumpValues()
+        {
+            _numberOfJumpsUsed = 0;
+            _isJumpCanceled = false;
+            _isJumping = false;
+            _jumpCancelMoment = 0;
+            _jumpCancelTimer = 0;
+            _initJumpCanceled = false;
+        }
+
         void OnFeetTriggerEntered(Collider2D item)
         {
             _isGrounded = true;
-            _numberOfJumpsUsed = 0;
-            _isJumpCanceled = false;
+            ResetJumpValues();
             _canDash = true;
         }
 

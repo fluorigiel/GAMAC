@@ -25,30 +25,30 @@ namespace _Scripts.Player.Movement
         [Range(5f, 50f)] public float MaxFallSpeed = 26f; // Maximum speed at which you fall
         [Range(0f, 10f)] public int NumberOfJumpsAllowed = 3; // Number of jump you can perfom (Total of grounded and aerial jumps)
         [Range(0f, 1f)] public float MultipleJumpStrengthPercent = 0.85f; // Height of the jump in the air compared to the grounded one
-        [Range(0f, 5f)] public float FastFallingStrength = 2f; 
+        //[Range(0f, 5f)] public float FastFallingStrength = 2f; 
         [Space(5)]
 
         [Header("Wall Slide and Wall Jump")]
         [Range(1f, 20f)] public float WallSlideMaxSpeed = 4f; // Maximum speed at which you slide from walls
         [Range(1f, 50f)] public float WallJumpStrength = 20f; // Strength of the jump perfomed from a wall
-        [Range(0f, 2f)] public float WallJumpTime = 0.2f; // the player can't decide of where to go just after doing a wall jump
+        //[Range(0f, 2f)] public float WallJumpTime = 0.2f; // the player can't decide of where to go just after doing a wall jump
         [Space(5)]
 
-        [Header("Jump Cancel")]
+        [Header("Short Up / Jump Cancel")]
         [Tooltip("Jump Cancel = Short Up")]
         [Range(0f, 1f)] public float JumpCancelTime = 0.1f;
-        /*[Range(0f, 10f)] public float JumpCancelStrength = 2f;
-    [Tooltip("Need to be superior to JumpCancelTime")]*/
-        [Range(0f, 2f)] public float JumpCancelMoment = 1.2f;
+        [Range(0f, 1f)] public float JumpCancelStrength = 0.5f;
+        [Tooltip("Need to be superior to JumpCancelTime")]
+        [Range(0f, 1f)] public float JumpCancelMoment = 0.15f;
         [Space(5)]
 
         [Header("Jump Buffer")]
-        [Range(0f, 3f)] public float JumpBufferTime = 0.125f; // to store jump input just before the player touch ground to not need to do frame perfect jump when landing
+        [Range(0f, 1.5f)] public float JumpBufferTime = 0.125f; // to store jump input just before the player touch ground to not need to do frame perfect jump when landing
         [Space(5)]
 
-        [Header("Jump Coyote Time")]
+        /*[Header("Jump Coyote Time")]
         [Range(0f, 5f)] public float JumpCoyoteTime = 0.1f; // time after you leave a platform when you are still refered as on the platform
-        [Space(5)]
+        [Space(5)]*/
 
         [Header("Dash")]
         [Range(0f, 5f)] public float DashStrength = 3f;
