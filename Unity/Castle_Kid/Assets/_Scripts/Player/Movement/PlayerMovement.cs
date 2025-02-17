@@ -124,6 +124,9 @@ namespace _Scripts.Player.Movement
             // Animation
             animator.SetFloat("xVelocity", Abs(_rb.linearVelocity.x));
             animator.SetFloat("yVelocity", _moveVelocity.y);
+            animator.SetFloat("xWallVelocity", Abs(_moveVelocity.x));
+            animator.SetBool("NoxInputMove", InputManager.Movement.x == 0);
+            animator.SetBool("Running", InputManager.RunIsHeld);
         }
 
         private void DebugCollision()
@@ -217,7 +220,7 @@ namespace _Scripts.Player.Movement
                 {
                     targetVelocity = new Vector2(moveInput.x * MoveStats.MaxWalkSpeed, 0f);
                 }
-                animator.SetBool("Running", InputManager.RunIsHeld);
+                
 
                 _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime); // to accelerate
                 // Simply, Lerp is linear interpollation (~ it's taking our current velocity, the objective velocity and it's reaching a
@@ -589,6 +592,7 @@ namespace _Scripts.Player.Movement
             }
             
             _isWallSliding = _isWallSlidingRight || _isWallSlidingLeft;
+            animator.SetBool("IsWallSliding", _isWallSliding);
 
             if (_isWallSliding)
             {
