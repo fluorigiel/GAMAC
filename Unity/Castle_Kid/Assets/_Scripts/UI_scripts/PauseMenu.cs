@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
@@ -23,6 +24,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         isPaused = true;
     }
+    
 
     public void Resume()
     {
@@ -33,9 +35,16 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
-    public void Multiplayer()
+    public void Host()
     {
-        Debug.Log("Multiplayer Pressed");
+        Debug.Log("Host Pressed");
+        NetworkManager.Singleton.StartHost();
+    }
+
+    public void Join()
+    {
+        Debug.Log("Join Pressed");
+        NetworkManager.Singleton.StartClient();
     }
 
     public void Options()
