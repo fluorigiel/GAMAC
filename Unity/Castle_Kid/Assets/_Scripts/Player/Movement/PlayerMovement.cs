@@ -22,7 +22,7 @@ namespace _Scripts.Player.Movement
         private Rigidbody2D _rb;
 
         //Movement vars 
-        public Vector2 _moveVelocity;
+        private Vector2 _moveVelocity;
         private bool _isFacingRight;
 
         // Jump vars 
@@ -32,6 +32,8 @@ namespace _Scripts.Player.Movement
         private bool _isJumpCanceled;
         private float _jumpCancelTimer;
         private float _jumpCancelMoment;
+        //private bool _wasJumping; // to know if he is jumping for the animator
+        private bool _isLanding;
 
         // Wall slide and Wall jump vars
         private bool _isWallSliding;
@@ -58,11 +60,15 @@ namespace _Scripts.Player.Movement
         private bool _bodyLeftWalled;
 
         // Trigger 
-        public CustomTrigger feetTriger;
-        public CustomTrigger headTriger;
-        public CustomTrigger bodyRightTriger;
-        public CustomTrigger bodyLeftTriger;
+        public CustomTrigger feetTrigger;
+        public CustomTrigger headTrigger;
+        public CustomTrigger bodyRightTrigger;
+        public CustomTrigger bodyLeftTrigger;
+        public CustomTrigger landingTrigger;
         public Transform colliders;
+        
+        // Animation
+        public Animator animator;
 
         public override void OnNetworkSpawn()
         {
@@ -75,17 +81,19 @@ namespace _Scripts.Player.Movement
 
         private void Awake()
         {
-            feetTriger.EnteredTrigger += OnFeetTriggerEntered;
-            feetTriger.ExitedTrigger += OnFeetTriggerExited;
+            feetTrigger.EnteredTrigger += OnFeetTriggerEntered;
+            feetTrigger.ExitedTrigger += OnFeetTriggerExited;
         
-            headTriger.EnteredTrigger += OnHeadTriggerEntered;
-            headTriger.ExitedTrigger += OnHeadTriggerExited;
+            headTrigger.EnteredTrigger += OnHeadTriggerEntered;
+            headTrigger.ExitedTrigger += OnHeadTriggerExited;
         
-            bodyRightTriger.EnteredTrigger += OnBodyRightTriggerEntered;
-            bodyRightTriger.ExitedTrigger += OnBodyRightTriggerExited;
+            bodyRightTrigger.EnteredTrigger += OnBodyRightTriggerEntered;
+            bodyRightTrigger.ExitedTrigger += OnBodyRightTriggerExited;
         
-            bodyLeftTriger.EnteredTrigger += OnBodyLeftTriggerEntered;
-            bodyLeftTriger.ExitedTrigger += OnBodyLeftTriggerExited;
+            bodyLeftTrigger.EnteredTrigger += OnBodyLeftTriggerEntered;
+            bodyLeftTrigger.ExitedTrigger += OnBodyLeftTriggerExited;
+            
+            landingTrigger.EnteredTrigger += OnLandingTriggerEntered;
             
             _isGrounded = false;
             _bumpedHead = false;
@@ -112,6 +120,10 @@ namespace _Scripts.Player.Movement
             MoveHandler();
             
             Jump();
+            
+            // Animation
+            animator.SetFloat("xVelocity", Abs(_rb.linearVelocity.x));
+            animator.SetFloat("yVelocity", _moveVelocity.y);
         }
 
         private void DebugCollision()
@@ -153,16 +165,6 @@ namespace _Scripts.Player.Movement
         {
             //DebugCollision();
             //DebugShortUp();
-            
-            /*if (InputManager.JumpWasReleased)
-            {
-                Debug.Log("Jump Released");
-            }
-
-            if (_jumpCancelTimer > 0)
-            {
-                Debug.Log(_jumpCancelTimer);
-            }*/
             
             JumpCheck();
         
@@ -215,6 +217,7 @@ namespace _Scripts.Player.Movement
                 {
                     targetVelocity = new Vector2(moveInput.x * MoveStats.MaxWalkSpeed, 0f);
                 }
+                animator.SetBool("Running", InputManager.RunIsHeld);
 
                 _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime); // to accelerate
                 // Simply, Lerp is linear interpollation (~ it's taking our current velocity, the objective velocity and it's reaching a
@@ -312,6 +315,7 @@ namespace _Scripts.Player.Movement
             if (_isJumping && !_isWallSliding)
             {
                 _isJumping = false;
+                //_wasJumping = true;
                 _jumpBufferTimer = 0;
                 if (_numberOfJumpsUsed == 0)
                 {
@@ -797,6 +801,7 @@ namespace _Scripts.Player.Movement
             _jumpCancelMoment = 0;
             _jumpCancelTimer = 0;
             _initJumpCanceled = false;
+            //_wasJumping = false;
         }
 
         void OnFeetTriggerEntered(Collider2D item)
@@ -804,12 +809,18 @@ namespace _Scripts.Player.Movement
             _isGrounded = true;
             ResetJumpValues();
             _canDash = true;
+            animator.SetBool("IsJumping", !_isGrounded);
+            animator.SetBool("IsGrounded", _isGrounded);
         }
 
         void OnFeetTriggerExited(Collider2D item)
         {
             _isGrounded = false;
             if (_numberOfJumpsUsed == 0) _numberOfJumpsUsed = 1;
+            _isLanding = false;
+            animator.SetBool("IsGrounded", _isGrounded);
+            animator.SetBool("IsJumping", !_isGrounded);
+            animator.SetBool("IsLanding", _isLanding);
         }
     
         void OnHeadTriggerEntered(Collider2D item)
@@ -825,6 +836,7 @@ namespace _Scripts.Player.Movement
         void OnBodyRightTriggerEntered(Collider2D item)
         {
             _bodyRightWalled = true;
+            //_wasJumping = false;
         }
 
         void OnBodyRightTriggerExited(Collider2D item)
@@ -835,13 +847,20 @@ namespace _Scripts.Player.Movement
         void OnBodyLeftTriggerEntered(Collider2D item)
         {
             _bodyLeftWalled = true;
+            //_wasJumping = false;
         }
 
         void OnBodyLeftTriggerExited(Collider2D item)
         {
             _bodyLeftWalled = false;
         }
-
+        
+        void OnLandingTriggerEntered(Collider2D item)
+        {
+            _isLanding = true;
+            animator.SetBool("IsLanding", _isLanding);
+        }
+        
         #endregion
 
         #region Timer
