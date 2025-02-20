@@ -1,16 +1,21 @@
 using Unity.Netcode;
 using UnityEngine;
-
+using TMPro;
 public class PauseMenu : MonoBehaviour
 {
     //VARIABLES
     //----------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------
 
+    //Variables for the different panels
     public GameObject pauseMenuUI;
     public GameObject optionsMenuUI;
+    public GameObject multiplayerMenuUI;
 
-    public static bool isPaused;
+    public TMP_InputField HostInputField;
+    public TMP_InputField JoinInputField;
+
+    public static bool isPaused; //To check if the game is paused or not
 
 
     //FUNCTIONS
@@ -35,30 +40,37 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
+    public void Multiplayer()
+    {
+        Debug.Log("Multiplayer Pressed");
+        SetPanel(multiplayerMenuUI);
+    }
+
     public void Host()
     {
         Debug.Log("Host Pressed");
-        NetworkManager.Singleton.StartHost();
+        Debug.Log($"Input: {HostInputField.text}");
+        HostInputField.text = "";
+        
     }
 
     public void Join()
     {
         Debug.Log("Join Pressed");
-        NetworkManager.Singleton.StartClient();
+        Debug.Log($"Input: {JoinInputField.text}");
+        JoinInputField.text = "";
     }
 
     public void Options()
     {
         Debug.Log("Options Pressed");
-        pauseMenuUI.SetActive(false);
-        optionsMenuUI.SetActive(true);
+        SetPanel(optionsMenuUI);
     }
 
     public void Back()
     {
         Debug.Log("Back Pressed");
-        pauseMenuUI.SetActive(true);
-        optionsMenuUI.SetActive(false);
+        SetPanel(pauseMenuUI);
     }
 
     public void Quit()
@@ -67,6 +79,17 @@ public class PauseMenu : MonoBehaviour
         Application.Quit(); //Doesn't do anything in the Unity editor
     }
 
+
+
+    private void SetPanel(GameObject MenuUI)
+    {
+        pauseMenuUI.SetActive(false);
+        optionsMenuUI.SetActive(false);
+        multiplayerMenuUI.SetActive(false);
+
+        MenuUI.SetActive(true);
+    }
+    
     //START AND UPDATE
     //-------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------
@@ -75,6 +98,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         optionsMenuUI.SetActive(false);
+        multiplayerMenuUI.SetActive(false);
     }
 
     // Update is called once per frame
