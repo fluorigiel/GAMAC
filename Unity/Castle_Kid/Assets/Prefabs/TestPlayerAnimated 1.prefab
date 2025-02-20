@@ -374,12 +374,12 @@ GameObject:
   - component: {fileID: 2719074043682362550}
   - component: {fileID: 4770929379789347835}
   - component: {fileID: 1662947158602630737}
-  - component: {fileID: -2032460980340778766}
+  - component: {fileID: 2552630017527679660}
   - component: {fileID: 8460779684271987065}
   - component: {fileID: 8569773332329524971}
   - component: {fileID: 5694143812840908137}
   m_Layer: 0
-  m_Name: TestPlayerAnimated
+  m_Name: TestPlayerAnimated 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -530,7 +530,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &-2032460980340778766
+--- !u!114 &2552630017527679660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -542,8 +542,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2471435133
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1832870500
+  InScenePlacedSourceGlobalObjectIdHash: 3722307553
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -568,7 +568,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  MoveStats: {fileID: 11400000, guid: 87f994f59212b944fb51c5d67a128f89, type: 2}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
