@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
     
     public static bool PauseMenuWasPressed;
 
+    public static bool AttackWasPressed;
 
     private InputAction _moveAction;
     private InputAction _jumpAction;
@@ -34,6 +35,8 @@ public class InputManager : MonoBehaviour
     private InputAction _power3Action;
 
     private InputAction _pauseMenuAction;
+
+    private InputAction _attackAction;
 
     void Awake()
     {
@@ -49,6 +52,8 @@ public class InputManager : MonoBehaviour
         _power3Action = PlayerInput.actions["PowerUp3"];
 
         _pauseMenuAction = PlayerInput.actions["PauseMenu"];
+
+        _attackAction = PlayerInput.actions["Attack"];
     }
 
     void Update()
@@ -71,5 +76,7 @@ public class InputManager : MonoBehaviour
         PowerUp3WasReleased = _power3Action.WasReleasedThisFrame();
 
         PauseMenuWasPressed = _pauseMenuAction.WasPressedThisFrame();
+
+        AttackWasPressed = _attackAction.WasPressedThisFrame();
     }
 }
