@@ -1,4 +1,5 @@
 using System.Numerics;
+using _Scripts.Player.Animation;
 using _Scripts.Player.Trigger;
 using Unity.Netcode;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace _Scripts.Player.Movement
         private Rigidbody2D _rb;
 
         //Movement vars 
-        public Vector2 _moveVelocity;
+        private Vector2 _moveVelocity;
         private bool _isFacingRight;
 
         // Jump vars 
@@ -32,9 +33,11 @@ namespace _Scripts.Player.Movement
         private bool _isJumpCanceled;
         private float _jumpCancelTimer;
         private float _jumpCancelMoment;
+        private bool _isLanding;
 
         // Wall slide and Wall jump vars
         private bool _isWallSliding;
+        private bool _initWallSliding; // for animation : WallSlideInit
         private bool _isWallSlidingRight;
         private bool _isWallSlidingLeft;
         private float _wallJumpTime;
@@ -58,11 +61,18 @@ namespace _Scripts.Player.Movement
         private bool _bodyLeftWalled;
 
         // Trigger 
-        public CustomTrigger feetTriger;
-        public CustomTrigger headTriger;
-        public CustomTrigger bodyRightTriger;
-        public CustomTrigger bodyLeftTriger;
+        public CustomTrigger feetTrigger;
+        public CustomTrigger headTrigger;
+        public CustomTrigger bodyRightTrigger;
+        public CustomTrigger bodyLeftTrigger;
+        public CustomTrigger landingTrigger;
         public Transform colliders;
+        
+        // Animation
+        private Animator _animator;
+        private AnimationEnum _curAnimationState;
+        private float _animationTime;
+        
 
         public override void OnNetworkSpawn()
         {
@@ -75,17 +85,19 @@ namespace _Scripts.Player.Movement
 
         private void Awake()
         {
-            feetTriger.EnteredTrigger += OnFeetTriggerEntered;
-            feetTriger.ExitedTrigger += OnFeetTriggerExited;
+            feetTrigger.EnteredTrigger += OnFeetTriggerEntered;
+            feetTrigger.ExitedTrigger += OnFeetTriggerExited;
         
-            headTriger.EnteredTrigger += OnHeadTriggerEntered;
-            headTriger.ExitedTrigger += OnHeadTriggerExited;
+            headTrigger.EnteredTrigger += OnHeadTriggerEntered;
+            headTrigger.ExitedTrigger += OnHeadTriggerExited;
         
-            bodyRightTriger.EnteredTrigger += OnBodyRightTriggerEntered;
-            bodyRightTriger.ExitedTrigger += OnBodyRightTriggerExited;
+            bodyRightTrigger.EnteredTrigger += OnBodyRightTriggerEntered;
+            bodyRightTrigger.ExitedTrigger += OnBodyRightTriggerExited;
         
-            bodyLeftTriger.EnteredTrigger += OnBodyLeftTriggerEntered;
-            bodyLeftTriger.ExitedTrigger += OnBodyLeftTriggerExited;
+            bodyLeftTrigger.EnteredTrigger += OnBodyLeftTriggerEntered;
+            bodyLeftTrigger.ExitedTrigger += OnBodyLeftTriggerExited;
+            
+            landingTrigger.EnteredTrigger += OnLandingTriggerEntered;
             
             _isGrounded = false;
             _bumpedHead = false;
@@ -96,6 +108,9 @@ namespace _Scripts.Player.Movement
             _isFacingRight = true;
 
             _rb = GetComponent<Rigidbody2D>(); // it's like when we linked the camera to the player but automaticly, with the rigid body
+            _animator = GetComponent<Animator>();
+
+            _animationTime = 0;
         }
         //============================================================================================
         //UPDATES
@@ -118,7 +133,7 @@ namespace _Scripts.Player.Movement
         {
             if (_bumpedHead)
             {
-                Debug.Log("Bumbed Head");
+                Debug.Log("Bumped Head");
             }
             if (_isGrounded)
             {
@@ -154,16 +169,6 @@ namespace _Scripts.Player.Movement
             //DebugCollision();
             //DebugShortUp();
             
-            /*if (InputManager.JumpWasReleased)
-            {
-                Debug.Log("Jump Released");
-            }
-
-            if (_jumpCancelTimer > 0)
-            {
-                Debug.Log(_jumpCancelTimer);
-            }*/
-            
             JumpCheck();
         
             DashCheck();
@@ -171,6 +176,8 @@ namespace _Scripts.Player.Movement
             CheckWallSliding();
             
             CountTimers();
+            
+            CheckAnimation();
         }
         //============================================================================================
     
@@ -215,6 +222,7 @@ namespace _Scripts.Player.Movement
                 {
                     targetVelocity = new Vector2(moveInput.x * MoveStats.MaxWalkSpeed, 0f);
                 }
+                
 
                 _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime); // to accelerate
                 // Simply, Lerp is linear interpollation (~ it's taking our current velocity, the objective velocity and it's reaching a
@@ -312,6 +320,7 @@ namespace _Scripts.Player.Movement
             if (_isJumping && !_isWallSliding)
             {
                 _isJumping = false;
+                //_wasJumping = true;
                 _jumpBufferTimer = 0;
                 if (_numberOfJumpsUsed == 0)
                 {
@@ -583,6 +592,15 @@ namespace _Scripts.Player.Movement
             {
                 _isWallSlidingLeft = true;
             }
+
+            if ((_isWallSlidingRight || _isWallSlidingLeft) && !_isWallSliding && !_initWallSliding) // just so that the value initWallSliding is well updated
+            {
+                _initWallSliding = true;
+            }
+            else if (_initWallSliding)
+            {
+                _initWallSliding = false;
+            }
             
             _isWallSliding = _isWallSlidingRight || _isWallSlidingLeft;
 
@@ -810,6 +828,7 @@ namespace _Scripts.Player.Movement
         {
             _isGrounded = false;
             if (_numberOfJumpsUsed == 0) _numberOfJumpsUsed = 1;
+            _isLanding = false;
         }
     
         void OnHeadTriggerEntered(Collider2D item)
@@ -841,7 +860,117 @@ namespace _Scripts.Player.Movement
         {
             _bodyLeftWalled = false;
         }
+        
+        void OnLandingTriggerEntered(Collider2D item)
+        {
+            _isLanding = true;
+        }
+        
+        #endregion
+        
+        #region Animation
 
+        private string GetEnumName(AnimationEnum parameter)
+        {
+            switch (parameter)
+            {
+                case AnimationEnum.Idle:
+                    return "Idle";
+                case AnimationEnum.Walk:
+                    return "Walk";
+                case AnimationEnum.Run:
+                    return "Run";
+                case AnimationEnum.JumpInit:
+                    return "JumpInit";
+                case AnimationEnum.JumpIdle:
+                    return "JumpIdle";
+                case AnimationEnum.MultipleJump:
+                    return "MultipleJump";
+                case AnimationEnum.Landing:
+                    return "Landing";
+                case AnimationEnum.WallSlideInit:
+                    return "WallSlideInit";
+                case AnimationEnum.WallSlide:
+                    return "WallSlide";
+                case AnimationEnum.WallSlideLanding:
+                    return "WallSlideLanding";
+                default:
+                    Debug.Log("What is that : " + parameter);
+                    return "";
+            }
+        }
+        
+        private void ChangeAnimationState(AnimationEnum newState, float time = 0)
+        {
+            if (_curAnimationState == newState) return;
+            
+            if (_animationTime <= 0)
+            {
+                if (time != 0)
+                {
+                    _animationTime = time;
+                }
+                
+                _animator.Play(GetEnumName(newState));
+                
+                _curAnimationState = newState;
+            }
+        }
+
+        // ReSharper disable Unity.PerformanceAnalysis
+        private void CheckAnimation()
+        {
+            // need order of priority :
+            
+            if (_initWallSliding)
+            {
+                ChangeAnimationState(AnimationEnum.WallSlideInit, 0.30f);
+            }
+            /*else if (_isWallSliding && _isJumping)
+            {
+                ChangeAnimationState(AnimationEnum.WallJump,0.3f);
+            }*/
+            else if (_isWallSliding && _isLanding && !_isGrounded)
+            {
+                ChangeAnimationState(AnimationEnum.WallSlideLanding);
+            }
+            else if (_isWallSliding)
+            {
+                ChangeAnimationState(AnimationEnum.WallSlide);
+            }
+            else if (_isJumping && !_bumpedHead)
+            {
+                if (_numberOfJumpsUsed == 0)
+                {
+                    ChangeAnimationState(AnimationEnum.JumpInit, 0.20f);
+                }
+                else
+                {
+                    ChangeAnimationState(AnimationEnum.MultipleJump, 0.20f);
+                }
+            }
+            else if (_isLanding && !_isGrounded)
+            {
+                ChangeAnimationState(AnimationEnum.Landing);
+            }
+            else if (!_isGrounded)
+            {
+                ChangeAnimationState(AnimationEnum.JumpIdle);
+            }
+            else if (Abs(_rb.linearVelocityX) > 0.1 && InputManager.RunIsHeld)
+            {
+                ChangeAnimationState(AnimationEnum.Run);
+            }
+            else if (Abs(_rb.linearVelocityX) > 0.1)
+            {
+                ChangeAnimationState(AnimationEnum.Walk);
+            }
+            else if (Abs(_rb.linearVelocityX) <= 0.1)
+            {
+                ChangeAnimationState(AnimationEnum.Idle);
+            }
+        }
+        
         #endregion
 
         #region Timer
@@ -874,6 +1003,10 @@ namespace _Scripts.Player.Movement
             {
                 _dashBuffer -= deltaTime;
             }
+            if (_animationTime > 0)
+            {
+                _animationTime -= deltaTime;
+            }
         }
 
         #endregion
@@ -881,222 +1014,3 @@ namespace _Scripts.Player.Movement
 
     }
 }
-
-/*#region Movement
-
-        private void Move(float acceleration, float deceleration, Vector2 moveInput)
-        {
-            _moveVelocity = _rb.linearVelocity;
-
-            if (moveInput != Vector2.zero) // if our player moves
-            {
-
-                TurnCheck(moveInput);//check if he needs to turn around
-
-                Vector2 targetVelocity = Vector2.zero;
-                //For running
-
-                if (InputManager.RunIsHeld) // if the player is holding the run key
-                {
-                    targetVelocity = new Vector2(moveInput.x * MoveStats.MaxRunSpeed, 0f);
-                }
-                else // if the player isn't holding the run key
-                {
-                    targetVelocity = new Vector2(moveInput.x * MoveStats.MaxWalkSpeed, 0f);
-                }
-
-                _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime); // to accelerate
-                // Simply, Lerp is linear interpollation (~ it's taking our current velocity, the objective velocity and it's reaching a
-                // (:like we learned in algo taa)           middle value based on the passed time, to not go max speed instantly) 
-            }
-            else // if the player stopped
-            {
-                _moveVelocity = Vector2.Lerp(_moveVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime); // same as before but to decelerate
-                if (Abs(_moveVelocity.x) < 0.001f) _moveVelocity.x = 0f; // to make it to zero fast
-            }
-
-            _rb.linearVelocity = new Vector2(_moveVelocity.x, _rb.linearVelocity.y); // we change the velocity of the player with new x velocity and current y velocity
-        }
-
-        private float Abs(float num)
-        {
-            return num < 0f ? -num : num;
-        }
-
-        private void TurnCheck(Vector2 moveInput)
-        {
-            if (_isFacingRight && moveInput.x < 0) // moveInput is returning a Vector2 (= 2 value stored together) of x and y 
-                // to understand them imagine a joystick, full left is -1 for the first paramether (x) and 0 for the second (y)
-                // and so on for every direction (like in a circle)
-            {
-                _isFacingRight = false;
-                transform.Rotate(0f, -180f, 0f);
-            }
-            else if (!_isFacingRight && moveInput.x > 0)
-            {
-                _isFacingRight = true;
-                transform.Rotate(0f, 180f, 0f);  // rotating the ~rigidBody, not the sprite (so that walking/... remain positive values to go in front of us)
-            }
-        }
-
-        #endregion
-
-        #region Jump
-
-        private void JumpCheck()
-        {
-            if (InputManager.JumpWasPressed)
-            {
-                _jumpBufferTimer = MoveStats.JumpBufferTime;
-            }
-
-            if (_jumpBufferTimer > 0 && _numberOfJumpsUsed < MoveStats.NumberOfJumpsAllowed && !_isJumping && !_bumpedHead)
-            {
-                _isJumping = true;
-            }
-        
-            if (InputManager.JumpWasReleased && _jumpCancelTimer > 0)
-            {
-                _jumpCancelTimer = 0;
-                _initJumpCanceled = true;
-            }
-        }
-
-        private void Jump()
-        {
-            if (_initJumpCanceled && _jumpCancelMoment <= 0)
-            {
-                _initJumpCanceled = false;
-                _isJumpCanceled = true;
-            }
-
-            if (_isJumping && !_isWallSliding)
-            {
-                _isJumping = false;
-                _jumpBufferTimer = 0;
-                if (_numberOfJumpsUsed == 0)
-                {
-                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, MoveStats.JumpHeight);
-                    _jumpCancelTimer = MoveStats.JumpCancelTime;
-                }
-                else
-                {
-                    _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, MoveStats.JumpHeight * MoveStats.MultipleJumpStrengthPercent);
-                }
-                _numberOfJumpsUsed++;
-            }
-            else if (_isJumping && _isWallSliding)
-            {
-                if (_bodyRightWalled)
-                {
-                    _rb.linearVelocity = new Vector2(-MoveStats.WallJumpStrength, MoveStats.JumpHeight);
-                }
-                else if (_bodyLeftWalled)
-                {
-                    _rb.linearVelocity = new Vector2(MoveStats.WallJumpStrength, MoveStats.JumpHeight);
-                }
-                _numberOfJumpsUsed++;
-                _isJumping = false;
-                _jumpBufferTimer = 0;
-            }
-        }
-
-        #endregion
-
-        #region Dash
-
-        private void DashCheck() // The one in Update
-        {
-            if (InputManager.DashWasPressed)
-            {
-                //Debug.Log("Dash");
-                _dashBuffer = MoveStats.DashBufferTime;
-            }
-
-            if (_dashBuffer > 0 && _canDash && !_isDashing && _dashTimer <= 0)
-            {
-                _initDashing = true;
-            }
-
-            if (_dashDuration <= 0)
-            {
-                _isDashing = false;
-            }
-        }
-
-        private void Dash()
-        {
-            if (_initDashing)
-            {
-                //Debug.Log("Start Dashing");
-                _dashBuffer = 0;
-                _isDashing = true;
-                _dashTimer = MoveStats.DashTimer;
-                _dashDuration = MoveStats.DashDuration;
-                _canDash = false;
-
-                if (InputManager.Movement != Vector2.zero)
-                {
-                    _rb.linearVelocity = InputManager.Movement * (MoveStats.MaxWalkSpeed * MoveStats.DashStrength);
-                }
-                else
-                {
-                    Vector2 direction = new Vector2(1,0); // if he is facing right
-                    if (!_isFacingRight) // if he is facing left 
-                    {
-                        direction = new Vector2(-1, 0);
-                    }
-                    _rb.linearVelocity = direction * (MoveStats.MaxWalkSpeed * MoveStats.DashStrength);
-                }
-
-                _initDashing = false;
-            }
-        }
-
-        #endregion
-
-        #region Gravity
-
-        private void Gravity()
-        {
-            if (!_isGrounded || (_isWallSliding && !_isGrounded)) // _isWallSliding is there so that we can wall jump while being on the ground
-            {
-                float usedGravity = MoveStats.GravityForce;
-                if (_rb.linearVelocity.y <= 0 || _bumpedHead || _isJumpCanceled)
-                {
-                    usedGravity = MoveStats.GravityFallForce; // to make a beautiful jump curve
-                }
-
-                Vector2 targetVelocity = new Vector2(0f, -MoveStats.MaxFallSpeed);
-
-                //Interactions with walls (wall slide)
-
-                if (_isWallSliding && !_isGrounded  && ((_bodyRightWalled && InputManager.Movement == Vector2.right) || (_bodyLeftWalled && InputManager.Movement == Vector2.left))) // we don't want to be stopped in the middle of the wall
-                {
-                    if (_rb.linearVelocityY > 0f) { _rb.linearVelocity = new Vector2(_rb.linearVelocityX, 0f); }
-                    _rb.linearVelocityX = 0f;
-
-                    targetVelocity = new Vector2(0f, -MoveStats.WallSlideMaxSpeed);
-                    _numberOfJumpsUsed = 0;
-                    _isWallSliding = true;
-                }
-                else
-                {
-                    _isWallSliding = false;
-                }
-
-                Vector2 airVelocity = new Vector2(0f, _rb.linearVelocity.y);
-    
-                airVelocity = Vector2.Lerp(airVelocity, targetVelocity, usedGravity * Time.fixedDeltaTime);
-                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, airVelocity.y);
-            }
-
-            else if (_isGrounded)
-            {
-                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0f);
-                _isWallSliding = false;
-            }
-        }
-
-        #endregion*/
-
