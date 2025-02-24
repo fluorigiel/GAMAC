@@ -14,7 +14,7 @@ namespace _Scripts.Player.Weapon
         public float comboTimer = 1.6f;
         private float _curComboTimer;
         
-        public float attackTime = 1f;
+        public float attackTime = 0.20f;
         private float _curAttackTime;
 
         public float bufferAttackTimer = 0.5f;
@@ -22,11 +22,14 @@ namespace _Scripts.Player.Weapon
         
         private PolygonCollider2D _polygonCollider2D;
         private Camera _playerCamera;
+
+        private Animator _animator;
         
         private void Awake()
         {
             _polygonCollider2D = GetComponent<PolygonCollider2D>();
             _playerCamera = transform.parent.Find("Main Camera").GetComponent<Camera>();
+            _animator = transform.Find("SlashAnimation").GetComponent<Animator>();
         }
 
         private void DebugAttack()
@@ -51,7 +54,7 @@ namespace _Scripts.Player.Weapon
         // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
         void Update()
         {
-            DebugAttack();
+            //DebugAttack();
             
             FacingToMouse();
             
@@ -92,18 +95,22 @@ namespace _Scripts.Player.Weapon
             _curAttDelay = attackDelay;
             _curAttackTime = attackTime;
             
+            _animator.Play("SlashDown");
+            
             if (_curComboTimer > 0) // The player is doing a combo
             {
                 _curComboTimer = 0;
+                //_animator.Play("SlashDown");
                 // animation combo
             }
             else // The player can start a combo
             {
                 _curComboTimer = comboTimer;
+                //_animator.Play("SlashUp");
                 // animation not combo
             }
-
-            _polygonCollider2D.enabled = true; // enable the collider for hitBox
+            
+            _polygonCollider2D.enabled = true;
         }
 
         private void DisableCollider() // to disable the collider when the attack is finished
@@ -111,8 +118,23 @@ namespace _Scripts.Player.Weapon
             if (_polygonCollider2D.enabled && _curAttackTime <= 0)
             {
                 _polygonCollider2D.enabled = false;
+                _animator.Play("Passive");
             }
         }
+
+        /*private void Turn(bool on) // enable both the collider and animator when needed
+        {
+            if (on)
+            {
+                _polygonCollider2D.enabled = true;
+                _animator.enabled = true;
+            }
+            else
+            {
+                _polygonCollider2D.enabled = false;
+                _animator.enabled = false;
+            }
+        }*/
         
         private void UpdateTimer()
         {
