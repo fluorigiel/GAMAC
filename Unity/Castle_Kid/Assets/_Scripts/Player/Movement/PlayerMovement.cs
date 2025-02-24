@@ -884,14 +884,16 @@ namespace _Scripts.Player.Movement
                     return "JumpInit";
                 case AnimationEnum.JumpIdle:
                     return "JumpIdle";
+                case AnimationEnum.MultipleJump:
+                    return "MultipleJump";
                 case AnimationEnum.Landing:
                     return "Landing";
                 case AnimationEnum.WallSlideInit:
                     return "WallSlideInit";
                 case AnimationEnum.WallSlide:
                     return "WallSlide";
-                case AnimationEnum.WallJump:
-                    return "WallJump";
+                case AnimationEnum.WallSlideLanding:
+                    return "WallSlideLanding";
                 default:
                     Debug.Log("What is that : " + parameter);
                     return "";
@@ -919,23 +921,33 @@ namespace _Scripts.Player.Movement
         private void CheckAnimation()
         {
             // need order of priority :
-
+            
             if (_initWallSliding)
             {
-                ChangeAnimationState(AnimationEnum.WallSlideInit, 0.35f);
+                ChangeAnimationState(AnimationEnum.WallSlideInit, 0.30f);
             }
             /*else if (_isWallSliding && _isJumping)
             {
                 ChangeAnimationState(AnimationEnum.WallJump,0.3f);
             }*/
+            else if (_isWallSliding && _isLanding && !_isGrounded)
+            {
+                ChangeAnimationState(AnimationEnum.WallSlideLanding);
+            }
             else if (_isWallSliding)
             {
-                ChangeAnimationState(AnimationEnum.WallSlide); // need wallSlideInit but not for now;
+                ChangeAnimationState(AnimationEnum.WallSlide);
             }
             else if (_isJumping && !_bumpedHead)
             {
-                // if we want to do a special animation it's here with numJumpsUsed test
-                ChangeAnimationState(AnimationEnum.JumpInit, 0.15f);
+                if (_numberOfJumpsUsed == 0)
+                {
+                    ChangeAnimationState(AnimationEnum.JumpInit, 0.20f);
+                }
+                else
+                {
+                    ChangeAnimationState(AnimationEnum.MultipleJump, 0.20f);
+                }
             }
             else if (_isLanding && !_isGrounded)
             {

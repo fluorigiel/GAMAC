@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: 0a5abf04db2cb3c4f9aab068ec26d276
+guid: e7f6e8cd22b0af44b9c6394f76269fcc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 807139013275419232
-    second: WallSlide_0
+      213: -7611851912163786562
+    second: Wall slides2_0
   - first:
-      213: 4790224360120944667
-    second: WallSlide_1
+      213: 5011403997658080582
+    second: Wall slides2_1
   - first:
-      213: -6619086115762078173
-    second: WallSlide_2
+      213: 9059436494226335676
+    second: Wall slides2_2
   - first:
-      213: -2429806401226723591
-    second: WallSlide_3
+      213: 5331144853924838892
+    second: Wall slides2_3
   - first:
-      213: 3479852064080105505
-    second: WallSlide_4
+      213: 8513146665516017348
+    second: Wall slides2_4
   - first:
-      213: 8296350251560049184
-    second: WallSlide_5
+      213: -8540896099091419124
+    second: Wall slides2_5
   - first:
-      213: -1474701143310345011
-    second: WallSlide_6
+      213: -7970878441990790265
+    second: Wall slides2_6
   - first:
-      213: 8035503237488745366
-    second: WallSlide_7
+      213: 6200793443028445051
+    second: Wall slides2_7
   - first:
-      213: -2421641157155502932
-    second: WallSlide_8
+      213: 185463636523274294
+    second: Wall slides2_8
   - first:
-      213: -8111470233135376927
-    second: WallSlide_9
+      213: 8884232812415977936
+    second: Wall slides2_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -127,11 +127,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WallSlide_0
+      name: Wall slides2_0
       rect:
         serializedVersion: 2
-        x: 619
-        y: 339
+        x: 298
+        y: 1859
         width: 562
         height: 1022
       alignment: 0
@@ -142,18 +142,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 06204aaf7a8833b00800000000000000
-      internalID: 807139013275419232
+      spriteID: eb08994e3054d5690800000000000000
+      internalID: -7611851912163786562
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WallSlide_1
+      name: Wall slides2_1
       rect:
         serializedVersion: 2
-        x: 2299
-        y: 339
+        x: 1978
+        y: 1859
         width: 562
         height: 982
       alignment: 0
@@ -164,18 +164,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b188e630dab4a7240800000000000000
-      internalID: 4790224360120944667
+      spriteID: 645e16262651c8540800000000000000
+      internalID: 5011403997658080582
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WallSlide_2
+      name: Wall slides2_2
       rect:
         serializedVersion: 2
-        x: 3979
-        y: 339
+        x: 3658
+        y: 1859
         width: 562
         height: 1022
       alignment: 0
@@ -186,18 +186,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 32ef7444f384424a0800000000000000
-      internalID: -6619086115762078173
+      spriteID: cb722971e7599bd70800000000000000
+      internalID: 9059436494226335676
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WallSlide_3
+      name: Wall slides2_3
       rect:
         serializedVersion: 2
-        x: 5659
-        y: 339
+        x: 5338
+        y: 1859
         width: 562
         height: 1022
       alignment: 0
@@ -208,18 +208,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9fe29e5a3f7974ed0800000000000000
-      internalID: -2429806401226723591
+      spriteID: ced7750cff70cf940800000000000000
+      internalID: 5331144853924838892
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WallSlide_4
+      name: Wall slides2_4
       rect:
         serializedVersion: 2
-        x: 7339
-        y: 339
+        x: 7018
+        y: 1859
         width: 562
         height: 1022
       alignment: 0
@@ -230,18 +230,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1209766e30bea4030800000000000000
-      internalID: 3479852064080105505
+      spriteID: 4c622e6a9c5c42670800000000000000
+      internalID: 8513146665516017348
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WallSlide_5
+      name: Wall slides2_5
       rect:
         serializedVersion: 2
-        x: 9039
-        y: 339
+        x: 8658
+        y: 1859
         width: 582
         height: 1022
       alignment: 0
@@ -252,18 +252,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 02a957c099e822370800000000000000
-      internalID: 8296350251560049184
+      spriteID: c00f22edf34a87980800000000000000
+      internalID: -8540896099091419124
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WallSlide_6
+      name: Wall slides2_6
       rect:
         serializedVersion: 2
-        x: 10699
-        y: 339
+        x: 10378
+        y: 1859
         width: 562
         height: 1022
       alignment: 0
@@ -274,18 +274,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dccdf1b9f1fc88be0800000000000000
-      internalID: -1474701143310345011
+      spriteID: 783e15dd940c16190800000000000000
+      internalID: -7970878441990790265
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WallSlide_7
+      name: Wall slides2_7
       rect:
         serializedVersion: 2
-        x: 12379
-        y: 339
+        x: 12058
+        y: 1859
         width: 562
         height: 1022
       alignment: 0
@@ -296,18 +296,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 69b940ede97d38f60800000000000000
-      internalID: 8035503237488745366
+      spriteID: b77284188c4ad0650800000000000000
+      internalID: 6200793443028445051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WallSlide_8
+      name: Wall slides2_8
       rect:
         serializedVersion: 2
-        x: 14059
-        y: 339
+        x: 298
+        y: 179
         width: 562
         height: 1002
       alignment: 0
@@ -318,18 +318,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ca4c74ea23a946ed0800000000000000
-      internalID: -2421641157155502932
+      spriteID: 630d8bdd136e29200800000000000000
+      internalID: 185463636523274294
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WallSlide_9
+      name: Wall slides2_9
       rect:
         serializedVersion: 2
-        x: 15739
-        y: 339
+        x: 1978
+        y: 179
         width: 562
         height: 1022
       alignment: 0
@@ -340,8 +340,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1e59fc3acc44e6f80800000000000000
-      internalID: -8111470233135376927
+      spriteID: 0d98ce51ca22b4b70800000000000000
+      internalID: 8884232812415977936
       vertices: []
       indices: 
       edges: []
@@ -360,16 +360,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WallSlide_0: 807139013275419232
-      WallSlide_1: 4790224360120944667
-      WallSlide_2: -6619086115762078173
-      WallSlide_3: -2429806401226723591
-      WallSlide_4: 3479852064080105505
-      WallSlide_5: 8296350251560049184
-      WallSlide_6: -1474701143310345011
-      WallSlide_7: 8035503237488745366
-      WallSlide_8: -2421641157155502932
-      WallSlide_9: -8111470233135376927
+      Wall slides2_0: -7611851912163786562
+      Wall slides2_1: 5011403997658080582
+      Wall slides2_2: 9059436494226335676
+      Wall slides2_3: 5331144853924838892
+      Wall slides2_4: 8513146665516017348
+      Wall slides2_5: -8540896099091419124
+      Wall slides2_6: -7970878441990790265
+      Wall slides2_7: 6200793443028445051
+      Wall slides2_8: 185463636523274294
+      Wall slides2_9: 8884232812415977936
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -10,6 +10,7 @@ namespace _Scripts.Player.Animation
         Landing,
         WallSlideInit,
         WallSlide,
-        WallJump
+        WallSlideLanding,
+        MultipleJump
     }
 }
