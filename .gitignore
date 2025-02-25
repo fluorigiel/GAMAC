@@ -71,5 +71,3 @@ crashlytics-build.properties
 [Aa]ssets/[Ss]treamingAssets/aa.meta
 [Aa]ssets/[Ss]treamingAssets/aa/*
 
-# Added by us for plastic (Castle_Kid/.plastic/plastic.wktree)
-*.wktree

@@ -119,17 +119,17 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4088624103370237072}
-    - target: {fileID: 151333200135754536, guid: b144be2cd941d39479126828f52cf850, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Join
-      objectReference: {fileID: 0}
     - target: {fileID: 211179722186128842, guid: b144be2cd941d39479126828f52cf850, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4088624103370237072}
-    - target: {fileID: 211179722186128842, guid: b144be2cd941d39479126828f52cf850, type: 3}
+    - target: {fileID: 1040302196013105464, guid: b144be2cd941d39479126828f52cf850, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4088624103370237072}
+    - target: {fileID: 1040302196013105464, guid: b144be2cd941d39479126828f52cf850, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Host
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 1430634312060926900, guid: b144be2cd941d39479126828f52cf850, type: 3}
       propertyPath: m_Pivot.x
@@ -211,19 +211,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3444660872578708472, guid: b144be2cd941d39479126828f52cf850, type: 3}
+    - target: {fileID: 2485785089340310588, guid: b144be2cd941d39479126828f52cf850, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4088624103370237072}
+    - target: {fileID: 2485785089340310588, guid: b144be2cd941d39479126828f52cf850, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Back
+      objectReference: {fileID: 0}
     - target: {fileID: 3843149890007076875, guid: b144be2cd941d39479126828f52cf850, type: 3}
       propertyPath: m_Name
       value: PauseMenuCanva
       objectReference: {fileID: 0}
     - target: {fileID: 6260852801271666860, guid: b144be2cd941d39479126828f52cf850, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 4088624103370237072}
-    - target: {fileID: 6819775306991063259, guid: b144be2cd941d39479126828f52cf850, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4088624103370237072}
