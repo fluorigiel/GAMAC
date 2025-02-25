@@ -97,6 +97,7 @@ namespace _Scripts.Player.Movement
             bodyLeftTrigger.ExitedTrigger += OnBodyLeftTriggerExited;
             
             landingTrigger.EnteredTrigger += OnLandingTriggerEntered;
+            landingTrigger.ExitedTrigger += OnLandingTriggerExited;
             
             _isGrounded = false;
             _bumpedHead = false;
@@ -588,6 +589,11 @@ namespace _Scripts.Player.Movement
         void OnLandingTriggerEntered(Collider2D item)
         {
             _isLanding = true;
+        }
+        
+        void OnLandingTriggerExited(Collider2D item)
+        {
+            _isLanding = false;
         }
         
         #endregion
