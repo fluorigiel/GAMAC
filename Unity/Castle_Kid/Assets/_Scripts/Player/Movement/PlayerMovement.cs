@@ -73,6 +73,9 @@ namespace _Scripts.Player.Movement
         private AnimationEnum _curAnimationState;
         private float _animationTime;
         
+        // To fix child rotation
+        private bool _justRotated;
+        public bool Rotated { private set; get; }
 
         public override void OnNetworkSpawn()
         {
@@ -178,6 +181,8 @@ namespace _Scripts.Player.Movement
             CountTimers();
             
             CheckAnimation();
+
+            UpdateRotated(); // Help for child to rotate at the same time as their parent
         }
         //============================================================================================
     
@@ -242,6 +247,19 @@ namespace _Scripts.Player.Movement
             return num < 0f ? -num : num;
         }
 
+        private void UpdateRotated()
+        {
+            if (_justRotated)
+            {
+                Rotated = true;
+                _justRotated = false;
+            }
+            else if (Rotated)
+            {
+                Rotated = false;
+            }
+        }
+
         private void TurnCheck(Vector2 moveInput)
         {
             FixChildRotation();
@@ -256,13 +274,11 @@ namespace _Scripts.Player.Movement
                 // to understand them imagine a joystick, full left is -1 for the first paramether (x) and 0 for the second (y)
                 // and so on for every direction (like in a circle)
             {
-                _isFacingRight = false;
-                transform.Rotate(0f, -180f, 0f);
+                RotateRight(false);
             }
             else if (!_isFacingRight && moveInput.x > 0)
             {
-                _isFacingRight = true;
-                transform.Rotate(0f, 180f, 0f);  // rotating the ~rigidBody, not the sprite (so that walking/... remain positive values to go in front of us)
+                RotateRight(true);
             }
         }
 
@@ -270,14 +286,28 @@ namespace _Scripts.Player.Movement
         {
             if (_isFacingRight && _isWallSlidingRight)
             {
-                _isFacingRight = false;
-                transform.Rotate(0f, -180f, 0f);
+                RotateRight(false);
             }
-            if (!_isFacingRight && _isWallSlidingLeft)
+            else if (!_isFacingRight && _isWallSlidingLeft)
+            {
+                RotateRight(true);
+            }
+        }
+
+        private void RotateRight(bool on)
+        {
+            if (on)
             {
                 _isFacingRight = true;
                 transform.Rotate(0f, 180f, 0f);
             }
+            else
+            {
+                _isFacingRight = false;
+                transform.Rotate(0f, -180f, 0f); // rotating the ~rigidBody, not the sprite (so that walking/... remain positive values to go in front of us)
+            }
+
+            _justRotated = true;
         }
 
         private void FixChildRotation()
@@ -637,7 +667,7 @@ namespace _Scripts.Player.Movement
         {
             // need order of priority :
             
-            if (_initWallSliding)
+            if (_initWallSliding) // maybe don't need wall slide init
             {
                 ChangeAnimationState(AnimationEnum.WallSlideInit, 0.30f);
             }

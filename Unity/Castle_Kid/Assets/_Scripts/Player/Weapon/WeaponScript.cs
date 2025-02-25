@@ -1,6 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
+using _Scripts.Player.Movement;
+using Unity.Netcode;
 using UnityEngine;
+using Random = System.Random;
 
 namespace _Scripts.Player.Weapon
 {
@@ -26,12 +29,18 @@ namespace _Scripts.Player.Weapon
         private Animator _animator;
         private string _curAnimationState;
         private float _animationTime;
+
+        private PlayerMovement _playerMovement;
+        
+        private float _reqZRotation;
         
         private void Awake()
         {
             _polygonCollider2D = GetComponent<PolygonCollider2D>();
             _playerCamera = transform.parent.Find("Main Camera").GetComponent<Camera>();
             _animator = transform.Find("SlashAnimation").GetComponent<Animator>();
+            _playerMovement = transform.parent.GetComponent<PlayerMovement>();
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
 
         private void DebugAttack()
@@ -56,8 +65,10 @@ namespace _Scripts.Player.Weapon
         // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
         void Update()
         {
-            DebugAttack();
+            //DebugAttack();
             
+            FixRotatingParent();
+
             FacingToMouse();
             
             UpdateTimer();
@@ -67,6 +78,19 @@ namespace _Scripts.Player.Weapon
             DisableCollider();
             
             CheckAnimation();
+
+            if (transform.rotation.y % 180 != 0)
+            {
+                Debug.Log(transform.rotation.y);
+            }
+        }
+
+        private void FixRotatingParent()
+        {
+            if (_playerMovement.Rotated)
+            {
+                transform.rotation = Quaternion.Euler(0f, -1 * transform.rotation.y, transform.rotation.z);
+            }
         }
 
         private void FacingToMouse() // So that it face to the mouse (may need to change it so that it works in multiplayer)
@@ -76,7 +100,8 @@ namespace _Scripts.Player.Weapon
                 // Don't ask me, I don't know : https://youtu.be/bY4Hr2x05p8?t=133
                 Vector3 difference = _playerCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                 float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
+                _reqZRotation = rotZ + offset;
+                transform.rotation = Quaternion.Euler(0f, transform.rotation.y, _reqZRotation);
             }
         }
 
@@ -137,7 +162,7 @@ namespace _Scripts.Player.Weapon
             }
             else if (_curAttackTime > 0 && _curComboTimer > 0)
             {
-                ChangeAnimationState("SlashDown",0.267f);
+                ChangeAnimationState("SlashUp",0.267f);
             }
             else
             {
