@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 3770089270766662972}
   m_Layer: 0
   m_Name: Weapon
-  m_TagString: Untagged
+  m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,8 +137,7 @@ MonoBehaviour:
   offset: -20
   attackDelay: 1.3
   comboTimer: 0.6
-  attackTime: 0.25
-  bufferAttackTimer: 0.1
+  bufferAttackTimer: 0.2
 --- !u!1 &1851507631623712522
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,6 +475,7 @@ GameObject:
   - component: {fileID: 8525260817255763557}
   - component: {fileID: 8455124110308843794}
   - component: {fileID: 9215719977070075989}
+  - component: {fileID: 799762402900797486}
   m_Layer: 0
   m_Name: SlashAnimation
   m_TagString: Untagged
@@ -575,6 +575,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &799762402900797486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3252636824997225483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a17984a881c2ad429c9b8633f681a3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3908118593388261863
 GameObject:
   m_ObjectHideFlags: 0

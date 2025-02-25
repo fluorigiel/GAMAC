@@ -72,10 +72,6 @@ namespace _Scripts.Player.Movement
         private Animator _animator;
         private AnimationEnum _curAnimationState;
         private float _animationTime;
-        
-        // To fix child rotation
-        private bool _justRotated;
-        public bool Rotated { private set; get; }
 
         public override void OnNetworkSpawn()
         {
@@ -181,8 +177,6 @@ namespace _Scripts.Player.Movement
             CountTimers();
             
             CheckAnimation();
-
-            UpdateRotated(); // Help for child to rotate at the same time as their parent
         }
         //============================================================================================
     
@@ -247,19 +241,6 @@ namespace _Scripts.Player.Movement
             return num < 0f ? -num : num;
         }
 
-        private void UpdateRotated()
-        {
-            if (_justRotated)
-            {
-                Rotated = true;
-                _justRotated = false;
-            }
-            else if (Rotated)
-            {
-                Rotated = false;
-            }
-        }
-
         private void TurnCheck(Vector2 moveInput)
         {
             FixChildRotation();
@@ -306,8 +287,6 @@ namespace _Scripts.Player.Movement
                 _isFacingRight = false;
                 transform.Rotate(0f, -180f, 0f); // rotating the ~rigidBody, not the sprite (so that walking/... remain positive values to go in front of us)
             }
-
-            _justRotated = true;
         }
 
         private void FixChildRotation()
@@ -350,7 +329,6 @@ namespace _Scripts.Player.Movement
             if (_isJumping && !_isWallSliding)
             {
                 _isJumping = false;
-                //_wasJumping = true;
                 _jumpBufferTimer = 0;
                 if (_numberOfJumpsUsed == 0)
                 {
@@ -360,6 +338,7 @@ namespace _Scripts.Player.Movement
                 }
                 else
                 {
+                    _isLanding = false;
                     _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, MoveStats.JumpHeight * MoveStats.MultipleJumpStrengthPercent);
                 }
                 _numberOfJumpsUsed++;
