@@ -121,10 +121,10 @@ TextureImporter:
       name: Danse_0
       rect:
         serializedVersion: 2
-        x: 579
-        y: 339
-        width: 602
-        height: 1022
+        x: 0
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,10 +143,10 @@ TextureImporter:
       name: Danse_1
       rect:
         serializedVersion: 2
-        x: 2199
-        y: 419
-        width: 642
-        height: 942
+        x: 1680
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,10 +165,10 @@ TextureImporter:
       name: Danse_2
       rect:
         serializedVersion: 2
-        x: 3899
-        y: 359
-        width: 642
-        height: 1002
+        x: 3360
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,10 +187,10 @@ TextureImporter:
       name: Danse_3
       rect:
         serializedVersion: 2
-        x: 5579
-        y: 379
-        width: 642
-        height: 982
+        x: 5040
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,10 +209,10 @@ TextureImporter:
       name: Danse_4
       rect:
         serializedVersion: 2
-        x: 7239
-        y: 359
-        width: 662
-        height: 1002
+        x: 6720
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,10 +231,10 @@ TextureImporter:
       name: Danse_5
       rect:
         serializedVersion: 2
-        x: 8919
-        y: 339
-        width: 662
-        height: 1022
+        x: 8400
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,10 +253,10 @@ TextureImporter:
       name: Danse_6
       rect:
         serializedVersion: 2
-        x: 10659
-        y: 339
-        width: 602
-        height: 1022
+        x: 10080
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,7 +275,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d060e2c7032edcb4a9c98739517d184c
     internalID: 0
     vertices: []
     indices: 

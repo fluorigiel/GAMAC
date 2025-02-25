@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e7f6e8cd22b0af44b9c6394f76269fcc
+guid: f3deacdc7fe24c64382c7665f6b4ba96
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -130,10 +130,10 @@ TextureImporter:
       name: Wall slides2_0
       rect:
         serializedVersion: 2
-        x: 298
-        y: 1859
-        width: 562
-        height: 1022
+        x: 0
+        y: 1680
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,10 +152,10 @@ TextureImporter:
       name: Wall slides2_1
       rect:
         serializedVersion: 2
-        x: 1978
-        y: 1859
-        width: 562
-        height: 982
+        x: 1680
+        y: 1680
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,10 +174,10 @@ TextureImporter:
       name: Wall slides2_2
       rect:
         serializedVersion: 2
-        x: 3658
-        y: 1859
-        width: 562
-        height: 1022
+        x: 3360
+        y: 1680
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,10 +196,10 @@ TextureImporter:
       name: Wall slides2_3
       rect:
         serializedVersion: 2
-        x: 5338
-        y: 1859
-        width: 562
-        height: 1022
+        x: 5040
+        y: 1680
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,10 +218,10 @@ TextureImporter:
       name: Wall slides2_4
       rect:
         serializedVersion: 2
-        x: 7018
-        y: 1859
-        width: 562
-        height: 1022
+        x: 6720
+        y: 1680
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,10 +240,10 @@ TextureImporter:
       name: Wall slides2_5
       rect:
         serializedVersion: 2
-        x: 8658
-        y: 1859
-        width: 582
-        height: 1022
+        x: 8400
+        y: 1680
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,10 +262,10 @@ TextureImporter:
       name: Wall slides2_6
       rect:
         serializedVersion: 2
-        x: 10378
-        y: 1859
-        width: 562
-        height: 1022
+        x: 10080
+        y: 1680
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,10 +284,10 @@ TextureImporter:
       name: Wall slides2_7
       rect:
         serializedVersion: 2
-        x: 12058
-        y: 1859
-        width: 562
-        height: 1022
+        x: 11760
+        y: 1680
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -306,10 +306,10 @@ TextureImporter:
       name: Wall slides2_8
       rect:
         serializedVersion: 2
-        x: 298
-        y: 179
-        width: 562
-        height: 1002
+        x: 0
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,10 +328,10 @@ TextureImporter:
       name: Wall slides2_9
       rect:
         serializedVersion: 2
-        x: 1978
-        y: 179
-        width: 562
-        height: 1022
+        x: 1680
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -350,7 +350,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 90415a78800187a48ad17da3b89691b3
     internalID: 0
     vertices: []
     indices: 

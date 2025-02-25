@@ -115,10 +115,10 @@ TextureImporter:
       name: Toupie_0
       rect:
         serializedVersion: 2
-        x: 479
-        y: 319
-        width: 702
-        height: 1042
+        x: 0
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,10 +137,10 @@ TextureImporter:
       name: Toupie_1
       rect:
         serializedVersion: 2
-        x: 2139
-        y: 299
-        width: 562
-        height: 1082
+        x: 1680
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,10 +159,10 @@ TextureImporter:
       name: Toupie_2
       rect:
         serializedVersion: 2
-        x: 3859
-        y: 319
-        width: 682
-        height: 1022
+        x: 3360
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +181,10 @@ TextureImporter:
       name: Toupie_3
       rect:
         serializedVersion: 2
-        x: 5599
-        y: 299
-        width: 562
-        height: 1082
+        x: 5040
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +203,10 @@ TextureImporter:
       name: Toupie_4
       rect:
         serializedVersion: 2
-        x: 7219
-        y: 319
-        width: 682
-        height: 1022
+        x: 6720
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 09efe70145652f44ca99077234479d95
     internalID: 0
     vertices: []
     indices: 

@@ -112,111 +112,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: InitWallSlide - Copie_0
+      name: WallSlideInit_0
       rect:
         serializedVersion: 2
-        x: 479
-        y: 280
-        width: 742
-        height: 982
+        x: 0
+        y: 0
+        width: 1654
+        height: 1581
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 12265a7ed49bd97c0800000000000000
-      internalID: -4062887544568323551
+      spriteID: 4e5d7d2a8004b954cb984dda375c5c00
+      internalID: 1642087267
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InitWallSlide - Copie_1
+      name: WallSlideInit_1
       rect:
         serializedVersion: 2
-        x: 2219
-        y: 280
-        width: 542
-        height: 982
+        x: 1654
+        y: 0
+        width: 1654
+        height: 1581
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7c76c7d580742e7f0800000000000000
-      internalID: -584826900350998585
+      spriteID: d06b1e56e2f00534a95cc42a8f787c2f
+      internalID: 568112437
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InitWallSlide - Copie_2
+      name: WallSlideInit_2
       rect:
         serializedVersion: 2
-        x: 3959
-        y: 240
-        width: 602
-        height: 1022
+        x: 3308
+        y: 0
+        width: 1654
+        height: 1581
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 00d9f9eb2b93a7810800000000000000
-      internalID: 1763785643934063872
+      spriteID: a6f5c1c7dcc39c64ebc829dd468aff79
+      internalID: 1435511005
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InitWallSlide - Copie_3
+      name: WallSlideInit_3
       rect:
         serializedVersion: 2
-        x: 5639
-        y: 240
-        width: 542
-        height: 1022
+        x: 4962
+        y: 0
+        width: 1654
+        height: 1581
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0f68bb5351bcef2f0800000000000000
-      internalID: -937088380490250512
+      spriteID: a65a66c9f513c6046aedc547a70dbca2
+      internalID: -1970020919
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InitWallSlide - Copie_4
+      name: WallSlideInit_4
       rect:
         serializedVersion: 2
-        x: 7319
-        y: 240
-        width: 562
-        height: 1022
+        x: 6616
+        y: 0
+        width: 1654
+        height: 1581
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fda530b9587f6c560800000000000000
-      internalID: 7333821196422830815
+      spriteID: b32456eef6a612b48b011021b6981ae8
+      internalID: -223188701
       vertices: []
       indices: 
       edges: []
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6250857468d19394fb3393619fc755cc
     internalID: 0
     vertices: []
     indices: 
@@ -235,11 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      InitWallSlide - Copie_0: -4062887544568323551
-      InitWallSlide - Copie_1: -584826900350998585
-      InitWallSlide - Copie_2: 1763785643934063872
-      InitWallSlide - Copie_3: -937088380490250512
-      InitWallSlide - Copie_4: 7333821196422830815
+      WallSlideInit_0: 1642087267
+      WallSlideInit_1: 568112437
+      WallSlideInit_2: 1435511005
+      WallSlideInit_3: -1970020919
+      WallSlideInit_4: -223188701
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

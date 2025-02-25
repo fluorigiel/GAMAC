@@ -109,12 +109,12 @@ TextureImporter:
       name: WallJump_0
       rect:
         serializedVersion: 2
-        x: 619
-        y: 339
-        width: 562
-        height: 1022
+        x: 0
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -131,12 +131,12 @@ TextureImporter:
       name: WallJump_1
       rect:
         serializedVersion: 2
-        x: 2359
-        y: 339
-        width: 522
-        height: 1022
+        x: 1680
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -153,12 +153,12 @@ TextureImporter:
       name: WallJump_2
       rect:
         serializedVersion: 2
-        x: 3999
-        y: 430
-        width: 628
-        height: 891
+        x: 3360
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

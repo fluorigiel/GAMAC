@@ -115,10 +115,10 @@ TextureImporter:
       name: JumpStart_0
       rect:
         serializedVersion: 2
-        x: 459
-        y: 299
-        width: 562
-        height: 1082
+        x: 0
+        y: 0
+        width: 1679
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,10 +137,10 @@ TextureImporter:
       name: JumpStart_1
       rect:
         serializedVersion: 2
-        x: 2179
-        y: 299
-        width: 562
-        height: 1082
+        x: 1679
+        y: 0
+        width: 1679
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,10 +159,10 @@ TextureImporter:
       name: JumpStart_2
       rect:
         serializedVersion: 2
-        x: 3899
-        y: 299
-        width: 582
-        height: 1022
+        x: 3358
+        y: 0
+        width: 1679
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +181,10 @@ TextureImporter:
       name: JumpStart_3
       rect:
         serializedVersion: 2
-        x: 5559
-        y: 359
-        width: 602
-        height: 962
+        x: 5037
+        y: 0
+        width: 1679
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +203,10 @@ TextureImporter:
       name: JumpStart_4
       rect:
         serializedVersion: 2
-        x: 7239
-        y: 419
-        width: 602
-        height: 902
+        x: 6716
+        y: 0
+        width: 1679
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5b0ca9b044f7f8c4898a6727ea537a46
     internalID: 0
     vertices: []
     indices: 

@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 4ad4fc3877e0d544ebdf61d599cde36c
+guid: 60f61f1bfc14f2847bddaa44883175bb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4360077765675584876
-    second: MultipleJump_0
+      213: -8630815139944387939
+    second: MultipleJump 1_0
   - first:
-      213: 7825659112726818645
-    second: MultipleJump_1
+      213: -296615061857771648
+    second: MultipleJump 1_1
   - first:
-      213: 7156918629906416579
-    second: MultipleJump_2
+      213: 4528776724201830841
+    second: MultipleJump 1_2
   - first:
-      213: 1878071230387211496
-    second: MultipleJump_3
+      213: 8840106750584225134
+    second: MultipleJump 1_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -112,20 +112,20 @@ TextureImporter:
       name: MultipleJump_0
       rect:
         serializedVersion: 2
-        x: 539
-        y: 254
-        width: 602
-        height: 902
+        x: 0
+        y: 0
+        width: 1680
+        height: 1678
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c6d0c2090ab128c30800000000000000
-      internalID: 4360077765675584876
+      spriteID: dc246a5505c728a42bb3488858f1b097
+      internalID: 122542958
       vertices: []
       indices: 
       edges: []
@@ -134,20 +134,20 @@ TextureImporter:
       name: MultipleJump_1
       rect:
         serializedVersion: 2
-        x: 2219
-        y: 254
-        width: 602
-        height: 902
+        x: 1680
+        y: 0
+        width: 1680
+        height: 1678
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 55f616b30835a9c60800000000000000
-      internalID: 7825659112726818645
+      spriteID: 3ffdec23ebc03284399b973209edd1c1
+      internalID: -1454473698
       vertices: []
       indices: 
       edges: []
@@ -156,20 +156,20 @@ TextureImporter:
       name: MultipleJump_2
       rect:
         serializedVersion: 2
-        x: 3919
-        y: 154
-        width: 582
-        height: 1002
+        x: 3360
+        y: 0
+        width: 1680
+        height: 1678
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3c382fd239b725360800000000000000
-      internalID: 7156918629906416579
+      spriteID: cc5a222e7422a494c9940d7940b1c2ea
+      internalID: 2037474275
       vertices: []
       indices: 
       edges: []
@@ -178,20 +178,20 @@ TextureImporter:
       name: MultipleJump_3
       rect:
         serializedVersion: 2
-        x: 5559
-        y: 194
-        width: 602
-        height: 962
+        x: 5040
+        y: 0
+        width: 1680
+        height: 1678
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8ec4c1665df301a10800000000000000
-      internalID: 1878071230387211496
+      spriteID: 0e7f42ca6cdddb94b92f392f7105029e
+      internalID: 1221039590
       vertices: []
       indices: 
       edges: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2d903efc16723ca43b0f1333d1975870
     internalID: 0
     vertices: []
     indices: 
@@ -210,10 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MultipleJump_0: 4360077765675584876
-      MultipleJump_1: 7825659112726818645
-      MultipleJump_2: 7156918629906416579
-      MultipleJump_3: 1878071230387211496
+      MultipleJump_0: 122542958
+      MultipleJump_1: -1454473698
+      MultipleJump_2: 2037474275
+      MultipleJump_3: 1221039590
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

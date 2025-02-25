@@ -24,6 +24,8 @@ namespace _Scripts.Player.Weapon
         private Camera _playerCamera;
 
         private Animator _animator;
+        private string _curAnimationState;
+        private float _animationTime;
         
         private void Awake()
         {
@@ -54,7 +56,7 @@ namespace _Scripts.Player.Weapon
         // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
         void Update()
         {
-            //DebugAttack();
+            DebugAttack();
             
             FacingToMouse();
             
@@ -63,6 +65,8 @@ namespace _Scripts.Player.Weapon
             CheckAttack();
             
             DisableCollider();
+            
+            CheckAnimation();
         }
 
         private void FacingToMouse() // So that it face to the mouse (may need to change it so that it works in multiplayer)
@@ -83,7 +87,7 @@ namespace _Scripts.Player.Weapon
                 _curBufferTimer = bufferAttackTimer;
             }
             
-            if (_curBufferTimer > 0 && (_curAttDelay <= 0 || _curComboTimer > 0)) // check if attack init and if either in a combo or starting a combo
+            if (_curBufferTimer > 0 && _curAttackTime <= 0 && (_curAttDelay <= 0 || _curComboTimer > 0)) // check if attack init and if either in a combo or starting a combo
             {
                 _curBufferTimer = 0;
                 Attack();
@@ -95,20 +99,7 @@ namespace _Scripts.Player.Weapon
             _curAttDelay = attackDelay;
             _curAttackTime = attackTime;
             
-            _animator.Play("SlashDown");
-            
-            if (_curComboTimer > 0) // The player is doing a combo
-            {
-                _curComboTimer = 0;
-                //_animator.Play("SlashDown");
-                // animation combo
-            }
-            else // The player can start a combo
-            {
-                _curComboTimer = comboTimer;
-                //_animator.Play("SlashUp");
-                // animation not combo
-            }
+            _curComboTimer = _curComboTimer > 0 ? 0 : comboTimer; // basically : if he was doing a combo he can't anymore else he can combo
             
             _polygonCollider2D.enabled = true;
         }
@@ -118,28 +109,46 @@ namespace _Scripts.Player.Weapon
             if (_polygonCollider2D.enabled && _curAttackTime <= 0)
             {
                 _polygonCollider2D.enabled = false;
-                _animator.Play("Passive");
+            }
+        }
+        
+        private void ChangeAnimationState(string newState, float time = 0)
+        {
+            if (_curAnimationState == newState) return;
+            
+            if (_animationTime <= 0)
+            {
+                if (time != 0)
+                {
+                    _animationTime = time;
+                }
+                
+                _animator.Play(newState);
+                
+                _curAnimationState = newState;
             }
         }
 
-        /*private void Turn(bool on) // enable both the collider and animator when needed
+        private void CheckAnimation()
         {
-            if (on)
+            if (_curAttackTime > 0 && _curComboTimer <= 0)
             {
-                _polygonCollider2D.enabled = true;
-                _animator.enabled = true;
+                ChangeAnimationState("SlashDown",0.267f); // need to put the time of the animation
+            }
+            else if (_curAttackTime > 0 && _curComboTimer > 0)
+            {
+                ChangeAnimationState("SlashDown",0.267f);
             }
             else
             {
-                _polygonCollider2D.enabled = false;
-                _animator.enabled = false;
+                ChangeAnimationState("Passive");
             }
-        }*/
-        
+        }
+
         private void UpdateTimer()
         {
-            float deltaTime = Time.fixedDeltaTime;
-            
+            float deltaTime = Time.deltaTime;
+
             if (_curAttDelay > 0)
             {
                 _curAttDelay -= deltaTime;
@@ -155,6 +164,10 @@ namespace _Scripts.Player.Weapon
             if (_curBufferTimer > 0)
             {
                 _curBufferTimer -= deltaTime;
+            }
+            if (_animationTime > 0)
+            {
+                _animationTime -= deltaTime;
             }
         }
     }
