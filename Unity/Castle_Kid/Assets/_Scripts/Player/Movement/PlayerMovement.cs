@@ -72,7 +72,6 @@ namespace _Scripts.Player.Movement
         private Animator _animator;
         private AnimationEnum _curAnimationState;
         private float _animationTime;
-        
 
         public override void OnNetworkSpawn()
         {
@@ -256,13 +255,11 @@ namespace _Scripts.Player.Movement
                 // to understand them imagine a joystick, full left is -1 for the first paramether (x) and 0 for the second (y)
                 // and so on for every direction (like in a circle)
             {
-                _isFacingRight = false;
-                transform.Rotate(0f, -180f, 0f);
+                RotateRight(false);
             }
             else if (!_isFacingRight && moveInput.x > 0)
             {
-                _isFacingRight = true;
-                transform.Rotate(0f, 180f, 0f);  // rotating the ~rigidBody, not the sprite (so that walking/... remain positive values to go in front of us)
+                RotateRight(true);
             }
         }
 
@@ -270,13 +267,25 @@ namespace _Scripts.Player.Movement
         {
             if (_isFacingRight && _isWallSlidingRight)
             {
-                _isFacingRight = false;
-                transform.Rotate(0f, -180f, 0f);
+                RotateRight(false);
             }
-            if (!_isFacingRight && _isWallSlidingLeft)
+            else if (!_isFacingRight && _isWallSlidingLeft)
+            {
+                RotateRight(true);
+            }
+        }
+
+        private void RotateRight(bool on)
+        {
+            if (on)
             {
                 _isFacingRight = true;
                 transform.Rotate(0f, 180f, 0f);
+            }
+            else
+            {
+                _isFacingRight = false;
+                transform.Rotate(0f, -180f, 0f); // rotating the ~rigidBody, not the sprite (so that walking/... remain positive values to go in front of us)
             }
         }
 
@@ -320,7 +329,6 @@ namespace _Scripts.Player.Movement
             if (_isJumping && !_isWallSliding)
             {
                 _isJumping = false;
-                //_wasJumping = true;
                 _jumpBufferTimer = 0;
                 if (_numberOfJumpsUsed == 0)
                 {
@@ -330,6 +338,7 @@ namespace _Scripts.Player.Movement
                 }
                 else
                 {
+                    _isLanding = false;
                     _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, MoveStats.JumpHeight * MoveStats.MultipleJumpStrengthPercent);
                 }
                 _numberOfJumpsUsed++;
@@ -637,7 +646,7 @@ namespace _Scripts.Player.Movement
         {
             // need order of priority :
             
-            if (_initWallSliding)
+            if (_initWallSliding) // maybe don't need wall slide init
             {
                 ChangeAnimationState(AnimationEnum.WallSlideInit, 0.30f);
             }

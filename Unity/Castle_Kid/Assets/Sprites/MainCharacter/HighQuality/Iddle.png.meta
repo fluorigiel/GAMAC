@@ -84,7 +84,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -112,111 +112,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: L2-Iddle_0
+      name: Iddle_0
       rect:
         serializedVersion: 2
-        x: 479
-        y: 319
-        width: 702
-        height: 1062
+        x: 0
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 69b597bf656852980800000000000000
-      internalID: -8564291408230786154
+      spriteID: d18af8b5fc53f73439d668de1c546363
+      internalID: -1598805240
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: L2-Iddle_1
+      name: Iddle_1
       rect:
         serializedVersion: 2
-        x: 2159
-        y: 319
-        width: 702
-        height: 1042
+        x: 1680
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9cb8c4a69818f4a70800000000000000
-      internalID: 8813405422981254089
+      spriteID: b62d3b0bb09d5784e868e118d60025f8
+      internalID: 1368182079
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: L2-Iddle_2
+      name: Iddle_2
       rect:
         serializedVersion: 2
-        x: 3839
-        y: 319
-        width: 702
-        height: 1062
+        x: 3360
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 443cf226d991212e0800000000000000
-      internalID: -2156633107809189052
+      spriteID: e7180e126114fa845b9af3a01b776305
+      internalID: -974440080
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: L2-Iddle_3
+      name: Iddle_3
       rect:
         serializedVersion: 2
-        x: 5519
-        y: 319
-        width: 702
-        height: 1042
+        x: 5040
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 89219b69dca849660800000000000000
-      internalID: 7391685504023466648
+      spriteID: 9c394fdfed3180e4e983b2d43649332b
+      internalID: -1898485410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: L2-Iddle_4
+      name: Iddle_4
       rect:
         serializedVersion: 2
-        x: 7199
-        y: 319
-        width: 702
-        height: 1062
+        x: 6720
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0dda81cbd13961600800000000000000
-      internalID: 438699769634270672
+      spriteID: 574553ddeb0b4144d82627a1b94f8b2a
+      internalID: -1098246995
       vertices: []
       indices: 
       edges: []
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 56e9e8a87e9558442b02cf45dc3a2818
     internalID: 0
     vertices: []
     indices: 
@@ -235,11 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      L2-Iddle_0: -8564291408230786154
-      L2-Iddle_1: 8813405422981254089
-      L2-Iddle_2: -2156633107809189052
-      L2-Iddle_3: 7391685504023466648
-      L2-Iddle_4: 438699769634270672
+      Iddle_0: -1598805240
+      Iddle_1: 1368182079
+      Iddle_2: -974440080
+      Iddle_3: -1898485410
+      Iddle_4: -1098246995
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

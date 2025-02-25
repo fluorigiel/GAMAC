@@ -75,7 +75,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -103,45 +103,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: L2-En saut_0
+      name: IdlleAir_0
       rect:
         serializedVersion: 2
-        x: 539
-        y: 419
-        width: 602
-        height: 902
+        x: 0
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3062341e1910b8f30800000000000000
-      internalID: 4578755172213401091
+      spriteID: ad7b7364d7c4e1a4b8ae07f2e99fb782
+      internalID: 1709322774
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: L2-En saut_1
+      name: IdlleAir_1
       rect:
         serializedVersion: 2
-        x: 2219
-        y: 419
-        width: 602
-        height: 902
+        x: 1680
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b874cec17cc9d6780800000000000000
-      internalID: -8688115727130146933
+      spriteID: 714552ed1cf7e52478cb32fc48690c4e
+      internalID: -1907370587
       vertices: []
       indices: 
       edges: []
@@ -150,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 313167f0a71469e4abbcf8de4d6ea134
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      L2-En saut_0: 4578755172213401091
-      L2-En saut_1: -8688115727130146933
+      IdlleAir_0: 1709322774
+      IdlleAir_1: -1907370587
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

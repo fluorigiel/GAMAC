@@ -1,22 +1,34 @@
 fileFormatVersion: 2
-guid: aa676b5204a3a2a46ae1b0378052662c
+guid: 933c3dcd18a0a624187a8e9af28d49b9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4062887544568323551
-    second: InitWallSlide - Copie_0
+      213: -7229220149124856631
+    second: Slash Effect_0
   - first:
-      213: -584826900350998585
-    second: InitWallSlide - Copie_1
+      213: 8806561744824432989
+    second: Slash Effect_1
   - first:
-      213: 1763785643934063872
-    second: InitWallSlide - Copie_2
+      213: -6246675371957094910
+    second: Slash Effect_2
   - first:
-      213: -937088380490250512
-    second: InitWallSlide - Copie_3
+      213: 5989712527177951153
+    second: Slash Effect_3
   - first:
-      213: 7333821196422830815
-    second: InitWallSlide - Copie_4
+      213: 5379926381550770200
+    second: Slash Effect_4
+  - first:
+      213: -4186273098142486107
+    second: Slash Effect_5
+  - first:
+      213: -6598097557103341705
+    second: Slash Effect_6
+  - first:
+      213: 4475434940280343158
+    second: Slash Effect_7
+  - first:
+      213: 3335157376098573144
+    second: Slash Effect_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +75,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -112,13 +124,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: InitWallSlide - Copie_0
+      name: Slash Effect_0
       rect:
         serializedVersion: 2
-        x: 479
-        y: 280
-        width: 742
-        height: 982
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 12265a7ed49bd97c0800000000000000
-      internalID: -4062887544568323551
+      spriteID: 9c401509396acab90800000000000000
+      internalID: -7229220149124856631
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InitWallSlide - Copie_1
+      name: Slash Effect_1
       rect:
         serializedVersion: 2
-        x: 2219
-        y: 280
-        width: 542
-        height: 982
+        x: 64
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7c76c7d580742e7f0800000000000000
-      internalID: -584826900350998585
+      spriteID: d59fdcc6f31373a70800000000000000
+      internalID: 8806561744824432989
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InitWallSlide - Copie_2
+      name: Slash Effect_2
       rect:
         serializedVersion: 2
-        x: 3959
-        y: 240
-        width: 602
-        height: 1022
+        x: 128
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +183,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 00d9f9eb2b93a7810800000000000000
-      internalID: 1763785643934063872
+      spriteID: 206f05378d95f49a0800000000000000
+      internalID: -6246675371957094910
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InitWallSlide - Copie_3
+      name: Slash Effect_3
       rect:
         serializedVersion: 2
-        x: 5639
-        y: 240
-        width: 542
-        height: 1022
+        x: 192
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +205,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0f68bb5351bcef2f0800000000000000
-      internalID: -937088380490250512
+      spriteID: 1b726210fcbbf1350800000000000000
+      internalID: 5989712527177951153
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InitWallSlide - Copie_4
+      name: Slash Effect_4
       rect:
         serializedVersion: 2
-        x: 7319
-        y: 240
-        width: 562
-        height: 1022
+        x: 256
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,8 +227,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fda530b9587f6c560800000000000000
-      internalID: 7333821196422830815
+      spriteID: 818161a3a8659aa40800000000000000
+      internalID: 5379926381550770200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slash Effect_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a1717c0cce57e5c0800000000000000
+      internalID: -4186273098142486107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slash Effect_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77f8b73ea39de64a0800000000000000
+      internalID: -6598097557103341705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slash Effect_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67a08c6cd50fb1e30800000000000000
+      internalID: 4475434940280343158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slash Effect_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85b116096fbd84e20800000000000000
+      internalID: 3335157376098573144
       vertices: []
       indices: 
       edges: []
@@ -225,7 +325,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: becbe48aa9f1b774181835745353276a
     internalID: 0
     vertices: []
     indices: 
@@ -235,11 +335,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      InitWallSlide - Copie_0: -4062887544568323551
-      InitWallSlide - Copie_1: -584826900350998585
-      InitWallSlide - Copie_2: 1763785643934063872
-      InitWallSlide - Copie_3: -937088380490250512
-      InitWallSlide - Copie_4: 7333821196422830815
+      Slash Effect_0: -7229220149124856631
+      Slash Effect_1: 8806561744824432989
+      Slash Effect_2: -6246675371957094910
+      Slash Effect_3: 5989712527177951153
+      Slash Effect_4: 5379926381550770200
+      Slash Effect_5: -4186273098142486107
+      Slash Effect_6: -6598097557103341705
+      Slash Effect_7: 4475434940280343158
+      Slash Effect_8: 3335157376098573144
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 87afffee89b2c3146aab8619a91b8071
+guid: cf004cf4009966442b644e0bb2879fa5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3777257578563802736
-    second: WallSlideLanding_0
+      213: 6928674871623402942
+    second: Atterrissage 2_0
   - first:
-      213: -6320721996224441963
-    second: WallSlideLanding_1
+      213: 6914319941897670388
+    second: Atterrissage 2_1
   - first:
-      213: 6063344127958788054
-    second: WallSlideLanding_2
+      213: 877575925588492001
+    second: Atterrissage 2_2
   - first:
-      213: -6337664851139864040
-    second: WallSlideLanding_3
+      213: 9072262916456456047
+    second: Atterrissage 2_3
   - first:
-      213: 5306297552421700451
-    second: WallSlideLanding_4
+      213: 2463004870511180804
+    second: Atterrissage 2_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -84,7 +84,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -115,20 +115,20 @@ TextureImporter:
       name: WallSlideLanding_0
       rect:
         serializedVersion: 2
-        x: 599
-        y: 284
-        width: 562
-        height: 1022
+        x: 0
+        y: 0
+        width: 1680
+        height: 1678
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 076927341c38b6430800000000000000
-      internalID: 3777257578563802736
+      spriteID: 01f34b55523968449ae9b0ee15c0ef1c
+      internalID: -19489495
       vertices: []
       indices: 
       edges: []
@@ -137,20 +137,20 @@ TextureImporter:
       name: WallSlideLanding_1
       rect:
         serializedVersion: 2
-        x: 2199
-        y: 264
-        width: 642
-        height: 1022
+        x: 1680
+        y: 0
+        width: 1680
+        height: 1678
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5915b0345d84848a0800000000000000
-      internalID: -6320721996224441963
+      spriteID: ea8becf787d01064db6f4d77efc9c078
+      internalID: 78966801
       vertices: []
       indices: 
       edges: []
@@ -159,20 +159,20 @@ TextureImporter:
       name: WallSlideLanding_2
       rect:
         serializedVersion: 2
-        x: 3899
-        y: 264
-        width: 622
-        height: 1042
+        x: 3360
+        y: 0
+        width: 1680
+        height: 1678
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6d72fe10c53552450800000000000000
-      internalID: 6063344127958788054
+      spriteID: 4192785068c46014cb38d98f906e9558
+      internalID: -1697164569
       vertices: []
       indices: 
       edges: []
@@ -181,20 +181,20 @@ TextureImporter:
       name: WallSlideLanding_3
       rect:
         serializedVersion: 2
-        x: 5539
-        y: 264
-        width: 702
-        height: 1062
+        x: 5040
+        y: 0
+        width: 1680
+        height: 1678
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 81a545275671c08a0800000000000000
-      internalID: -6337664851139864040
+      spriteID: dfc1d35eaebc608449e696befadee41a
+      internalID: -1032872184
       vertices: []
       indices: 
       edges: []
@@ -203,20 +203,20 @@ TextureImporter:
       name: WallSlideLanding_4
       rect:
         serializedVersion: 2
-        x: 7199
-        y: 264
-        width: 702
-        height: 1062
+        x: 6720
+        y: 0
+        width: 1680
+        height: 1678
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 363ce9c8281c3a940800000000000000
-      internalID: 5306297552421700451
+      spriteID: 95c7d42aceeba3a46b49c74cccce6765
+      internalID: 816655819
       vertices: []
       indices: 
       edges: []
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2c3c7a279d839ea4a908fec3236fee99
     internalID: 0
     vertices: []
     indices: 
@@ -235,11 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WallSlideLanding_0: 3777257578563802736
-      WallSlideLanding_1: -6320721996224441963
-      WallSlideLanding_2: 6063344127958788054
-      WallSlideLanding_3: -6337664851139864040
-      WallSlideLanding_4: 5306297552421700451
+      WallSlideLanding_0: -19489495
+      WallSlideLanding_1: 78966801
+      WallSlideLanding_2: -1697164569
+      WallSlideLanding_3: -1032872184
+      WallSlideLanding_4: 816655819
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

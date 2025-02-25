@@ -84,7 +84,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -112,111 +112,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IddleAir_0
+      name: JumpIdle_0
       rect:
         serializedVersion: 2
-        x: 379
-        y: 419
-        width: 902
-        height: 942
+        x: 0
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b8469a45e22ea93b0800000000000000
-      internalID: -5504838905890249589
+      spriteID: abf1d6892611f224180a5b65e05e9778
+      internalID: 739811987
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IddleAir_1
+      name: JumpIdle_1
       rect:
         serializedVersion: 2
-        x: 2059
-        y: 439
-        width: 902
-        height: 922
+        x: 1680
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 855565c0f0f646300800000000000000
-      internalID: 244442390207026520
+      spriteID: 54f9052aae85b394cb6da3c8d03ea403
+      internalID: -1635123142
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IddleAir_2
+      name: JumpIdle_2
       rect:
         serializedVersion: 2
-        x: 3739
-        y: 419
-        width: 902
-        height: 942
+        x: 3360
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f43d91cf7e2411f40800000000000000
-      internalID: 5697408567734817615
+      spriteID: 8e1825221d5d5f04b8324295a7b5599d
+      internalID: -1049693300
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IddleAir_3
+      name: JumpIdle_3
       rect:
         serializedVersion: 2
-        x: 5419
-        y: 419
-        width: 902
-        height: 922
+        x: 5040
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 626ea2c0938a6e2d0800000000000000
-      internalID: -3249725118130493914
+      spriteID: 1b097259e6852e34aab7b30c0070a593
+      internalID: -676119111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IddleAir_4
+      name: JumpIdle_4
       rect:
         serializedVersion: 2
-        x: 7099
-        y: 419
-        width: 902
-        height: 942
+        x: 6720
+        y: 0
+        width: 1680
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a688f28abd6480630800000000000000
-      internalID: 3893439787095263338
+      spriteID: b0de394a5b7ebf94aa14181742dc1465
+      internalID: 617704412
       vertices: []
       indices: 
       edges: []
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f29bb14c05cb6554ea2b8e1eb2f65897
     internalID: 0
     vertices: []
     indices: 
@@ -235,11 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IddleAir_0: -5504838905890249589
-      IddleAir_1: 244442390207026520
-      IddleAir_2: 5697408567734817615
-      IddleAir_3: -3249725118130493914
-      IddleAir_4: 3893439787095263338
+      JumpIdle_0: 739811987
+      JumpIdle_1: -1635123142
+      JumpIdle_2: -1049693300
+      JumpIdle_3: -676119111
+      JumpIdle_4: 617704412
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

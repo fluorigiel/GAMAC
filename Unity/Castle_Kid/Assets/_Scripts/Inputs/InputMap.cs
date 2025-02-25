@@ -98,6 +98,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""69486795-873e-49fc-add8-28a4d869d23a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -441,6 +450,17 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""PauseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc811b27-e204-4fcb-a996-c05024956945"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -457,6 +477,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_Player_PowerUp2 = m_Player.FindAction("PowerUp2", throwIfNotFound: true);
         m_Player_PowerUp3 = m_Player.FindAction("PowerUp3", throwIfNotFound: true);
         m_Player_PauseMenu = m_Player.FindAction("PauseMenu", throwIfNotFound: true);
+        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
     }
 
     ~@InputMap()
@@ -531,6 +552,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PowerUp2;
     private readonly InputAction m_Player_PowerUp3;
     private readonly InputAction m_Player_PauseMenu;
+    private readonly InputAction m_Player_Attack;
     public struct PlayerActions
     {
         private @InputMap m_Wrapper;
@@ -543,6 +565,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         public InputAction @PowerUp2 => m_Wrapper.m_Player_PowerUp2;
         public InputAction @PowerUp3 => m_Wrapper.m_Player_PowerUp3;
         public InputAction @PauseMenu => m_Wrapper.m_Player_PauseMenu;
+        public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -576,6 +599,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @PauseMenu.started += instance.OnPauseMenu;
             @PauseMenu.performed += instance.OnPauseMenu;
             @PauseMenu.canceled += instance.OnPauseMenu;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -604,6 +630,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @PauseMenu.started -= instance.OnPauseMenu;
             @PauseMenu.performed -= instance.OnPauseMenu;
             @PauseMenu.canceled -= instance.OnPauseMenu;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -631,5 +660,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         void OnPowerUp2(InputAction.CallbackContext context);
         void OnPowerUp3(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }

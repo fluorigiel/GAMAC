@@ -87,7 +87,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -118,10 +118,10 @@ TextureImporter:
       name: Landing_0
       rect:
         serializedVersion: 2
-        x: 519
-        y: 419
-        width: 602
-        height: 902
+        x: 0
+        y: 0
+        width: 1679
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,10 +140,10 @@ TextureImporter:
       name: Landing_1
       rect:
         serializedVersion: 2
-        x: 2179
-        y: 359
-        width: 622
-        height: 962
+        x: 1679
+        y: 0
+        width: 1679
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,10 +162,10 @@ TextureImporter:
       name: Landing_2
       rect:
         serializedVersion: 2
-        x: 3919
-        y: 299
-        width: 562
-        height: 1022
+        x: 3358
+        y: 0
+        width: 1679
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: Landing_3
       rect:
         serializedVersion: 2
-        x: 5539
-        y: 299
-        width: 602
-        height: 1042
+        x: 5037
+        y: 0
+        width: 1679
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,10 +206,10 @@ TextureImporter:
       name: Landing_4
       rect:
         serializedVersion: 2
-        x: 7219
-        y: 299
-        width: 562
-        height: 1082
+        x: 6716
+        y: 0
+        width: 1679
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,10 +228,10 @@ TextureImporter:
       name: Landing_5
       rect:
         serializedVersion: 2
-        x: 8859
-        y: 299
-        width: 562
-        height: 1082
+        x: 8395
+        y: 0
+        width: 1679
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3699b59aa7f0a9c4e924c6784052d99d
     internalID: 0
     vertices: []
     indices: 
