@@ -127,6 +127,11 @@ namespace _Scripts.Player.Movement
             MoveHandler();
             
             Jump();
+            
+            if (DialogueManager.GetInstance().dialogueIsPlaying)
+            {
+                return; 
+            }
         }
 
         private void DebugCollision()
@@ -178,6 +183,8 @@ namespace _Scripts.Player.Movement
             CountTimers();
             
             CheckAnimation();
+
+            
         }
         //============================================================================================
     

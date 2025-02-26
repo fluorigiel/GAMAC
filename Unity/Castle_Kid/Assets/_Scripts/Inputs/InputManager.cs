@@ -37,6 +37,12 @@ public class InputManager : MonoBehaviour
     private InputAction _pauseMenuAction;
 
     private InputAction _attackAction;
+    
+    private bool submitPressed = false;
+    private bool interactPressed = false;
+    
+    private static InputManager instance;
+    
 
     void Awake()
     {
@@ -54,6 +60,12 @@ public class InputManager : MonoBehaviour
         _pauseMenuAction = PlayerInput.actions["PauseMenu"];
 
         _attackAction = PlayerInput.actions["Attack"];
+        
+        if (instance != null)
+        {
+            Debug.LogError("Found more than one Input Manager in the scene.");
+        }
+        instance = this;
     }
 
     void Update()
@@ -78,5 +90,48 @@ public class InputManager : MonoBehaviour
         PauseMenuWasPressed = _pauseMenuAction.WasPressedThisFrame();
 
         AttackWasPressed = _attackAction.WasPressedThisFrame();
+        
+    }
+    
+    public static InputManager GetInstance() 
+    {
+        return instance;
+    }
+    
+    public void InteractButtonPressed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            interactPressed = true;
+        }
+        else if (context.canceled)
+        {
+            interactPressed = false;
+        } 
+    }
+
+    public void SubmitPressed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            submitPressed = true;
+        }
+        else if (context.canceled)
+        {
+            submitPressed = false;
+        } 
+    }
+
+    public bool GetInteractPressed() 
+    {
+        bool result = interactPressed;
+        interactPressed = false;
+        return result;
+    }
+    
+
+    public void RegisterSubmitPressed() 
+    {
+        submitPressed = false;
     }
 }
