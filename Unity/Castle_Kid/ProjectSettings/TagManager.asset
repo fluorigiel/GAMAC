@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - DeathZone
+  - Shop
+  - Event
   layers:
   - Default
   - TransparentFX
