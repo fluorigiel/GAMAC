@@ -41,40 +41,40 @@ public class PauseMenu : MonoBehaviour
 
     public void Multiplayer()
     {
-        Debug.Log("Multiplayer Pressed");
+        //Debug.Log("Multiplayer Pressed");
         SetPanel(multiplayerMenuUI);
     }
 
     public void Host()
     {
-        Debug.Log("Host Pressed");
-        Debug.Log($"Input: {HostInputField.text}");
+        //Debug.Log("Host Pressed");
+        //Debug.Log($"Input: {HostInputField.text}");
         HostInputField.text = "";
         
     }
 
     public void Join()
     {
-        Debug.Log("Join Pressed");
-        Debug.Log($"Input: {JoinInputField.text}");
+        //Debug.Log("Join Pressed");
+        //Debug.Log($"Input: {JoinInputField.text}");
         JoinInputField.text = "";
     }
 
     public void Options()
     {
-        Debug.Log("Options Pressed");
+        //Debug.Log("Options Pressed");
         SetPanel(optionsMenuUI);
     }
 
     public void Back()
     {
-        Debug.Log("Back Pressed");
+        //Debug.Log("Back Pressed");
         SetPanel(pauseMenuUI);
     }
 
     public void Quit()
     {
-        Debug.Log("Quit Pressed");
+        //Debug.Log("Quit Pressed");
         Application.Quit(); //Doesn't do anything in the Unity editor
     }
 

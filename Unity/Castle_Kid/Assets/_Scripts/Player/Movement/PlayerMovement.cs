@@ -652,15 +652,15 @@ namespace _Scripts.Player.Movement
         {
             // need order of priority :
             
-            if (_initWallSliding) // maybe don't need wall slide init
+            /*if (_initWallSliding) // maybe don't need wall slide init
             {
                 ChangeAnimationState(AnimationEnum.WallSlideInit, 0.30f);
-            }
+            }*/
             /*else if (_isWallSliding && _isJumping)
             {
                 ChangeAnimationState(AnimationEnum.WallJump,0.3f);
             }*/
-            else if (_isWallSliding && _isLanding && !_isGrounded)
+            if (_isWallSliding && _isLanding && !_isGrounded)
             {
                 ChangeAnimationState(AnimationEnum.WallSlideLanding, 0.25f);
             }
