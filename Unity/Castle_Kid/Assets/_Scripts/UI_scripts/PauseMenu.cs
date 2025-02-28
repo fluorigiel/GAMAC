@@ -26,7 +26,6 @@ public class PauseMenu : MonoBehaviour
     {
         //Debug.Log("Pause Pressed");
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
         isPaused = true;
     }
     
@@ -36,7 +35,7 @@ public class PauseMenu : MonoBehaviour
         //Debug.Log("Resume Pressed");
         pauseMenuUI.SetActive(false);
         optionsMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+        multiplayerMenuUI.SetActive(false);
         isPaused = false;
     }
 

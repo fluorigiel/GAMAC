@@ -58,25 +58,28 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        Movement = _moveAction.ReadValue<Vector2>();
-
-        JumpWasPressed = _jumpAction.WasPressedThisFrame();
-        JumpIsHeld = _jumpAction.IsPressed();
-        JumpWasReleased = _jumpAction.WasReleasedThisFrame();
-
-        RunIsHeld = _runAction.IsPressed();
-
-        DashWasPressed = _dashAction.WasPressedThisFrame();
-
-        PowerUp1WasPressed = _power1Action.WasPressedThisFrame();
-        PowerUp1WasReleased = _power1Action.WasReleasedThisFrame();
-        PowerUp2WasPressed = _power2Action.WasPressedThisFrame();
-        PowerUp2WasReleased = _power2Action.WasReleasedThisFrame();
-        PowerUp3WasPressed = _power3Action.WasPressedThisFrame();
-        PowerUp3WasReleased = _power3Action.WasReleasedThisFrame();
-
         PauseMenuWasPressed = _pauseMenuAction.WasPressedThisFrame();
 
-        AttackWasPressed = _attackAction.WasPressedThisFrame();
+        if (!PauseMenu.isPaused)
+        {
+            Movement = _moveAction.ReadValue<Vector2>();
+
+            JumpWasPressed = _jumpAction.WasPressedThisFrame();
+            JumpIsHeld = _jumpAction.IsPressed();
+            JumpWasReleased = _jumpAction.WasReleasedThisFrame();
+
+            RunIsHeld = _runAction.IsPressed();
+
+            DashWasPressed = _dashAction.WasPressedThisFrame();
+
+            PowerUp1WasPressed = _power1Action.WasPressedThisFrame();
+            PowerUp1WasReleased = _power1Action.WasReleasedThisFrame();
+            PowerUp2WasPressed = _power2Action.WasPressedThisFrame();
+            PowerUp2WasReleased = _power2Action.WasReleasedThisFrame();
+            PowerUp3WasPressed = _power3Action.WasPressedThisFrame();
+            PowerUp3WasReleased = _power3Action.WasReleasedThisFrame();
+
+            AttackWasPressed = _attackAction.WasPressedThisFrame();
+        }
     }
 }
