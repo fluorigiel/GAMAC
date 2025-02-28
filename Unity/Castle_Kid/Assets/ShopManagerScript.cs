@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ShopManagerScript : MonoBehaviour
 {
-    public int[,] shopItems = new int[8,8];
+    public int[,] shopItems = new int[13,13];
     public float coins; //remplacer avec le systeme deja fait par Alexandre et Adrien
     public Text CoinsTxt;
     
@@ -23,6 +23,10 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[1, 6] = 6;
         shopItems[1, 7] = 7;
         shopItems[1, 8] = 8;
+        shopItems[1, 9] = 9;
+        shopItems[1, 10] = 10;
+        shopItems[1, 11] = 11;
+        shopItems[1, 12] = 12;
         
         //Price
         shopItems[2, 1] = 10;
@@ -33,6 +37,10 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[2, 6] = 60;
         shopItems[2, 7] = 70;
         shopItems[2, 8] = 80;
+        shopItems[2, 9] = 90;
+        shopItems[2, 10] = 100;
+        shopItems[2, 11] = 110;
+        shopItems[2, 12] = 120;
         
         //Quantity
         shopItems[3, 1] = 10;
@@ -43,6 +51,10 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[3, 6] = 0;
         shopItems[3, 7] = 0;
         shopItems[3, 8] = 0;
+        shopItems[3, 9] = 0;
+        shopItems[3, 10] = 0;
+        shopItems[3, 11] = 0;
+        shopItems[3, 12] = 0;
     }
 
     public void Buy()

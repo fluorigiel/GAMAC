@@ -6,12 +6,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+
 public class ButtonInfo : MonoBehaviour
 {
     public int ItemID;
     public Text PriceTxt;
     public Text QuantityTxt;
     public GameObject ShopManager;
+    
     
     void Update()
     {
