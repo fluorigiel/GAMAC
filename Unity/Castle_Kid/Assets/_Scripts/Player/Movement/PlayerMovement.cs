@@ -606,6 +606,8 @@ namespace _Scripts.Player.Movement
             {
                 case AnimationEnum.Idle:
                     return "Idle";
+                case AnimationEnum.IdleSide:
+                    return "IdleSide";
                 case AnimationEnum.Walk:
                     return "Walk";
                 case AnimationEnum.Run:
@@ -660,11 +662,11 @@ namespace _Scripts.Player.Movement
             {
                 ChangeAnimationState(AnimationEnum.WallJump,0.3f);
             }*/
-            if (_isWallSliding && _isLanding && !_isGrounded)
+            /*if (_isWallSliding && _isLanding && !_isGrounded)
             {
                 ChangeAnimationState(AnimationEnum.WallSlideLanding, 0.25f);
-            }
-            else if (_isWallSliding)
+            }*/
+            if (_isWallSliding)
             {
                 ChangeAnimationState(AnimationEnum.WallSlide);
             }
@@ -697,7 +699,7 @@ namespace _Scripts.Player.Movement
             }
             else if (Abs(_rb.linearVelocityX) <= 0.1)
             {
-                ChangeAnimationState(AnimationEnum.Idle);
+                ChangeAnimationState(AnimationEnum.IdleSide);
             }
         }
         

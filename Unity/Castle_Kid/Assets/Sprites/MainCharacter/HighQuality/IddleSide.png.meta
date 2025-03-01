@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: cf004cf4009966442b644e0bb2879fa5
+guid: 1d58d4ff5c5948f48a99304e931d92a6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6928674871623402942
-    second: Atterrissage 2_0
+      213: -8514406667413831416
+    second: IddleSide_0
   - first:
-      213: 6914319941897670388
-    second: Atterrissage 2_1
+      213: 6726291113305433678
+    second: IddleSide_1
   - first:
-      213: 877575925588492001
-    second: Atterrissage 2_2
+      213: 360004711927646104
+    second: IddleSide_2
   - first:
-      213: 9072262916456456047
-    second: Atterrissage 2_3
+      213: -1535114021031530714
+    second: IddleSide_3
   - first:
-      213: 2463004870511180804
-    second: Atterrissage 2_4
+      213: 9092941043647597041
+    second: IddleSide_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -65,7 +65,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -84,7 +84,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -112,111 +112,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WallSlideLanding_0
+      name: IddleSide_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 1680
-        height: 1678
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 01f34b55523968449ae9b0ee15c0ef1c
-      internalID: -19489495
+      spriteID: 801c49b4f30c6d980800000000000000
+      internalID: -8514406667413831416
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WallSlideLanding_1
+      name: IddleSide_1
       rect:
         serializedVersion: 2
         x: 1680
         y: 0
         width: 1680
-        height: 1678
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: ea8becf787d01064db6f4d77efc9c078
-      internalID: 78966801
+      spriteID: e46ef605126985d50800000000000000
+      internalID: 6726291113305433678
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WallSlideLanding_2
+      name: IddleSide_2
       rect:
         serializedVersion: 2
         x: 3360
         y: 0
         width: 1680
-        height: 1678
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 4192785068c46014cb38d98f906e9558
-      internalID: -1697164569
+      spriteID: 8970aebc06efef400800000000000000
+      internalID: 360004711927646104
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WallSlideLanding_3
+      name: IddleSide_3
       rect:
         serializedVersion: 2
         x: 5040
         y: 0
         width: 1680
-        height: 1678
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: dfc1d35eaebc608449e696befadee41a
-      internalID: -1032872184
+      spriteID: 62fa1b66eed22bae0800000000000000
+      internalID: -1535114021031530714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WallSlideLanding_4
+      name: IddleSide_4
       rect:
         serializedVersion: 2
         x: 6720
         y: 0
         width: 1680
-        height: 1678
+        height: 1680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 95c7d42aceeba3a46b49c74cccce6765
-      internalID: 816655819
+      spriteID: 1f94f26e3bd903e70800000000000000
+      internalID: 9092941043647597041
       vertices: []
       indices: 
       edges: []
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2c3c7a279d839ea4a908fec3236fee99
+    spriteID: ca0efde372fb71d46a46e615fa76b932
     internalID: 0
     vertices: []
     indices: 
@@ -235,11 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WallSlideLanding_0: -19489495
-      WallSlideLanding_1: 78966801
-      WallSlideLanding_2: -1697164569
-      WallSlideLanding_3: -1032872184
-      WallSlideLanding_4: 816655819
+      IddleSide_0: -8514406667413831416
+      IddleSide_1: 6726291113305433678
+      IddleSide_2: 360004711927646104
+      IddleSide_3: -1535114021031530714
+      IddleSide_4: 9092941043647597041
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
