@@ -39,9 +39,6 @@ AnimatorStateMachine:
     m_State: {fileID: -1894959943457731102}
     m_Position: {x: 140, y: 170, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -4240725235824428200}
-    m_Position: {x: 140, y: 420, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 5799862619475214024}
     m_Position: {x: 140, y: 370, z: 0}
   - serializedVersion: 1
@@ -58,19 +55,16 @@ AnimatorStateMachine:
     m_Position: {x: 140, y: 320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -820979337989726902}
-    m_Position: {x: 140, y: 570, z: 0}
+    m_Position: {x: 140, y: 420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2790590396798461540}
-    m_Position: {x: 140, y: 620, z: 0}
+    m_Position: {x: 140, y: 520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4970315961268866975}
     m_Position: {x: -110, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2451801600407583623}
     m_Position: {x: -110, y: 120, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 8509173936474613327}
-    m_Position: {x: 140, y: 520, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -81,32 +75,6 @@ AnimatorStateMachine:
   m_ExitPosition: {x: -90, y: 310, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 2451801600407583623}
---- !u!1102 &-4240725235824428200
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: WallSlideInit
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0a4f8bf7f5a86d640aee26c07b44ce16, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-2790590396798461540
 AnimatorState:
   serializedVersion: 6
@@ -358,32 +326,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 64986e845e4bbb64a8aa9a1adb154502, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &8509173936474613327
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: WallSlideLanding
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 866db65c822170344854bbb974729064, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
