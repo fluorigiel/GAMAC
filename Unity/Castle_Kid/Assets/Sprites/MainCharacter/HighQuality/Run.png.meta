@@ -3,32 +3,32 @@ guid: 4061ceb2ea74eb0408864886ab562ecb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5045882265206715661
-    second: L2-Run_0
+      213: 4944230376442633554
+    second: Run_0
   - first:
-      213: 3218864398161233004
-    second: L2-Run_1
+      213: -2274363484027164459
+    second: Run_1
   - first:
-      213: -5436918069070552254
-    second: L2-Run_2
+      213: 8284087734974297348
+    second: Run_2
   - first:
-      213: 3070750295547852284
-    second: L2-Run_3
+      213: 5304202850863732263
+    second: Run_3
   - first:
-      213: -709303693361103965
-    second: L2-Run_4
+      213: 2833043080597125133
+    second: Run_4
   - first:
-      213: -9182178302535638655
-    second: L2-Run_5
+      213: -2217414122262695004
+    second: Run_5
   - first:
-      213: -2571309472329288985
-    second: L2-Run_6
+      213: -4440497016933152808
+    second: Run_6
   - first:
-      213: 8789104267599128879
-    second: L2-Run_7
+      213: 8676454946275842879
+    second: Run_7
   - first:
-      213: 3032573212920145236
-    second: L2-Run_8
+      213: -6351944509545543589
+    second: Run_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,7 +96,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -128,9 +128,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 1680
-        height: 1680
+        y: 1280
+        width: 1280
+        height: 1280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,8 +139,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af3dde381ed96804fb50f5c90136d672
-      internalID: 1993118072
+      spriteID: e7eb3b8278de9b544abe86d3603a22fc
+      internalID: 418386739
       vertices: []
       indices: 
       edges: []
@@ -149,10 +149,10 @@ TextureImporter:
       name: Run_1
       rect:
         serializedVersion: 2
-        x: 1680
-        y: 0
-        width: 1680
-        height: 1680
+        x: 1280
+        y: 1280
+        width: 1280
+        height: 1280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0648cd12cbf1c64da546748000f78b1
-      internalID: -429852875
+      spriteID: 579a586aa34ca4641b34354c2681feab
+      internalID: -372291964
       vertices: []
       indices: 
       edges: []
@@ -171,10 +171,10 @@ TextureImporter:
       name: Run_2
       rect:
         serializedVersion: 2
-        x: 3360
-        y: 0
-        width: 1680
-        height: 1680
+        x: 2560
+        y: 1280
+        width: 1280
+        height: 1280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,8 +183,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4f5a5c3468841844876d1d811595ddc
-      internalID: -209189133
+      spriteID: 9e6bf573e056de343837713408db6dce
+      internalID: 1271941228
       vertices: []
       indices: 
       edges: []
@@ -193,10 +193,10 @@ TextureImporter:
       name: Run_3
       rect:
         serializedVersion: 2
-        x: 5040
-        y: 0
-        width: 1680
-        height: 1680
+        x: 3840
+        y: 1280
+        width: 1280
+        height: 1280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,8 +205,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e3e72cc31150e84997b09332da58053
-      internalID: 1906451321
+      spriteID: f61071f469f614943bb0fc8a427ac59c
+      internalID: -1804174530
       vertices: []
       indices: 
       edges: []
@@ -215,10 +215,10 @@ TextureImporter:
       name: Run_4
       rect:
         serializedVersion: 2
-        x: 6720
-        y: 0
-        width: 1680
-        height: 1680
+        x: 5120
+        y: 1280
+        width: 1280
+        height: 1280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,8 +227,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 394507d8815f5d146a6e5acfbc8ad970
-      internalID: 1997410570
+      spriteID: 7f0e0484a2b95a9429e5053ca3785fbb
+      internalID: 1937558025
       vertices: []
       indices: 
       edges: []
@@ -237,10 +237,10 @@ TextureImporter:
       name: Run_5
       rect:
         serializedVersion: 2
-        x: 8400
-        y: 0
-        width: 1680
-        height: 1680
+        x: 6400
+        y: 1280
+        width: 1280
+        height: 1280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -249,8 +249,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01d2d5e8b2e19ed41bc58a2a32e19f54
-      internalID: 1827352085
+      spriteID: 3833ec33b1c219242a9e24fec6c9d1f5
+      internalID: 750412730
       vertices: []
       indices: 
       edges: []
@@ -259,10 +259,10 @@ TextureImporter:
       name: Run_6
       rect:
         serializedVersion: 2
-        x: 10080
-        y: 0
-        width: 1680
-        height: 1680
+        x: 7680
+        y: 1280
+        width: 1280
+        height: 1280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a94d11aff31cadf4da1012ebe6fd86f4
-      internalID: -1575875142
+      spriteID: bb19cd49a4d645c4d941005156054c65
+      internalID: 1388868441
       vertices: []
       indices: 
       edges: []
@@ -281,10 +281,10 @@ TextureImporter:
       name: Run_7
       rect:
         serializedVersion: 2
-        x: 11760
-        y: 0
-        width: 1680
-        height: 1680
+        x: 8960
+        y: 1280
+        width: 1280
+        height: 1280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -293,8 +293,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f531449d5bf3cab42ad29cb19ade4488
-      internalID: 743016245
+      spriteID: 62045c43db570ce43b9938a194c63799
+      internalID: 614528125
       vertices: []
       indices: 
       edges: []
@@ -303,10 +303,10 @@ TextureImporter:
       name: Run_8
       rect:
         serializedVersion: 2
-        x: 13440
+        x: 0
         y: 0
-        width: 1680
-        height: 1680
+        width: 1280
+        height: 1280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -315,8 +315,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab3d8c42820e189449ead78656d236a7
-      internalID: 767003691
+      spriteID: f9099e969caa89f42a228ad0ea4f1e9a
+      internalID: -1997348898
       vertices: []
       indices: 
       edges: []
@@ -325,7 +325,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 42262e343a41335478d69f13ac731a4c
+    spriteID: 56ca5691e1b0a6745b20366af74b776b
     internalID: 0
     vertices: []
     indices: 
@@ -335,15 +335,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Run_0: 1993118072
-      Run_1: -429852875
-      Run_2: -209189133
-      Run_3: 1906451321
-      Run_4: 1997410570
-      Run_5: 1827352085
-      Run_6: -1575875142
-      Run_7: 743016245
-      Run_8: 767003691
+      Run_0: 418386739
+      Run_1: -372291964
+      Run_2: 1271941228
+      Run_3: -1804174530
+      Run_4: 1937558025
+      Run_5: 750412730
+      Run_6: 1388868441
+      Run_7: 614528125
+      Run_8: -1997348898
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

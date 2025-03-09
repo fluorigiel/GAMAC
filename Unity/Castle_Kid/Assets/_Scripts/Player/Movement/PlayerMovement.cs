@@ -618,12 +618,8 @@ namespace _Scripts.Player.Movement
                     return "MultipleJump";
                 case AnimationEnum.Landing:
                     return "Landing";
-                case AnimationEnum.WallSlideInit:
-                    return "WallSlideInit";
                 case AnimationEnum.WallSlide:
                     return "WallSlide";
-                case AnimationEnum.WallSlideLanding:
-                    return "WallSlideLanding";
                 default:
                     Debug.Log("What is that : " + parameter);
                     return "";
@@ -651,20 +647,8 @@ namespace _Scripts.Player.Movement
         private void CheckAnimation()
         {
             // need order of priority :
-            
-            if (_initWallSliding) // maybe don't need wall slide init
-            {
-                ChangeAnimationState(AnimationEnum.WallSlideInit, 0.30f);
-            }
-            /*else if (_isWallSliding && _isJumping)
-            {
-                ChangeAnimationState(AnimationEnum.WallJump,0.3f);
-            }*/
-            else if (_isWallSliding && _isLanding && !_isGrounded)
-            {
-                ChangeAnimationState(AnimationEnum.WallSlideLanding, 0.25f);
-            }
-            else if (_isWallSliding)
+
+            if (_isWallSliding)
             {
                 ChangeAnimationState(AnimationEnum.WallSlide);
             }
