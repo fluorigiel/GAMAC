@@ -373,6 +373,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46057451b2d4914b829a815aa2fe58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &2741549953207343299
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46057451b2d4914b829a815aa2fe58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &3252636824997225483
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,6 +978,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46057451b2d4914b829a815aa2fe58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &7209476586415495971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,6 +1072,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46057451b2d4914b829a815aa2fe58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &7555412443006342803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,6 +1166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46057451b2d4914b829a815aa2fe58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1001 &8123833999287244388
 PrefabInstance:
   m_ObjectHideFlags: 0
