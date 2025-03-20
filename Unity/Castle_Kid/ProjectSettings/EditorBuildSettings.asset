@@ -5,15 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Scene1.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BasicSceneForMovementTest.unity
     guid: 621d0e43308e08d4087a5e11cce453f0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestAnimation.unity
-    guid: 70ecbc7529cef0d498ba6da351c72dc7
+    guid: 79b47d3f0ccc87545bf9e2f81bb43b1c
+  - enabled: 1
+    path: Assets/Scenes/PauseMenuScene.unity
+    guid: c353e50d251895a4c9e518ced5e6f7cc
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 8c37b671069765546a4ad2a998d44531, type: 3}
   m_UseUCBPForAssetBundles: 0
