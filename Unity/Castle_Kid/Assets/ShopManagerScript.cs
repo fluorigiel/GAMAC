@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class ShopManagerScript : MonoBehaviour
 {
     public int[,] shopItems = new int[13,13];
-    public float coins; //remplacer avec le systeme deja fait par Alexandre et Adrien
+    public float coins; //remplacer avec le systeme de configuration d'economie du jeu
     public Text CoinsTxt;
     
     
